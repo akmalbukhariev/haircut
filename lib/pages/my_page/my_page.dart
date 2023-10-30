@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'models/BasicTile.dart';
+import '../../models/BasicTile.dart';
 
 final basicTiles = [
   const BasicTile(
