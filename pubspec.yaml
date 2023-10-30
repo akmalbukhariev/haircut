@@ -70,7 +70,7 @@ flutter:
     - images/userinfo.png
     - images/services.png
     - images/comments.png
-    - images/upload.png
+    - images/logout.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
