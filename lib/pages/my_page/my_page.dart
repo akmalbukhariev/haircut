@@ -34,79 +34,107 @@ final basicTiles = [
 
 Widget MyPage() {
   return Material(
-      child: Container(
-        color: const Color.fromRGBO(240, 244, 249, 1),
-        child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                    padding: const EdgeInsets.only(left: 20, right: 20, top: 45),
-                    child: Stack(
-                      children: [
-                        Row(
+      child: Stack(
+        children: [
+          Container(
+            color: const Color.fromRGBO(240, 244, 249, 1),
+            child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, top: 45),
+                        child: Stack(
                           children: [
-                            Image.asset("images/icon_1.png", width: 30, height: 30,),
-                            const Expanded(child: SizedBox()),
-                            Image.asset("images/share.png", width: 30, height: 30,),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "images/icon_1.png", width: 30, height: 30,),
+                                const Expanded(child: SizedBox()),
+                                Image.asset(
+                                  "images/share.png", width: 30, height: 30,),
+                              ],
+                            ),
+                            Container(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: Center(
+                                  child: Image.asset(
+                                    "images/avatar.png", width: 170,
+                                    height: 170,)
+                                  ,)
+                            ),
                           ],
-                        ),
-                        Container(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Center(
-                              child: Image.asset("images/avatar.png", width: 170, height: 170,)
-                              ,)
-                        ),
-                      ],
-                    )
-                ),
-                const SizedBox(height: 10,),
-                Center(
-                  child: Column(
-                    children: [
-                      const Text("Bukhariev Akmal",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.none)
-                      ),
-                      const SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        )
+                    ),
+                    const SizedBox(height: 10,),
+                    Center(
+                      child: Column(
                         children: [
-                          starImage(im: "images/icon_13.png"),
-                          starImage(im: "images/icon_13.png"),
-                          starImage(im: "images/icon_13.png"),
-                          starImage(im: "images/icon_14.png"),
-                          starImage(im: "images/icon_14.png")
+                          const Text("Bukhariev Akmal",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.none)
+                          ),
+                          const SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              starImage(im: "images/icon_13.png"),
+                              starImage(im: "images/icon_13.png"),
+                              starImage(im: "images/icon_13.png"),
+                              starImage(im: "images/icon_14.png"),
+                              starImage(im: "images/icon_14.png")
+                            ],
+                          ),
+                          const SizedBox(height: 10,),
+                          const Text("ID raqam: 1234567",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  decoration: TextDecoration.none)
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 10,),
-                      const Text("ID raqam: 1234567",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              decoration: TextDecoration.none)
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: createListView(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 30),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: createListView(),
+                      ),
+                    ),
+                  ],
+                )
+            ),
+          ),
+          Container(
+              color: Colors.black.withOpacity(0.5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5)
+                        ), 
+                        width: 100,
+                        height: 100,
+                      )
                   ),
-                ),
-              ],
-            )
-        ),
-      )
-   );
+                  const SizedBox(height: 20,)
+                ],
+              )
+          )
+        ],)
+  );
 }
 
 Widget starImage({String im = ""}){

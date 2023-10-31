@@ -3,34 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'content_views/child_widgets.dart';
 
-Widget MyPhotoAlbumPage() {
+Widget MyLicensePage() {
   return Container(
     color: Colors.white,
     child: Column(
       children: [
-        Stack(
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(left: 15, top: 55),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    "images/icon_1.png", width: 30, height: 30,)
-                  ,)
-            ),
-            const Padding(
-                padding: EdgeInsets.only(top: 60),
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Fotosuratlar",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.none,
-                          color: Color.fromRGBO(20, 137, 178, 1)),
-                    )
-                ))
-          ],),
+        navigationBar(title: "Ruxsatnoma"),
         const SizedBox(height: 20,),
         Expanded(
             child: Container(
@@ -47,16 +25,16 @@ Widget MyPhotoAlbumPage() {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                        child: photoGrid(),
+                        child: rowGridLast(),
                       ),
                       const Divider(height: 1, color: Colors.grey,),
                       Container(
                           padding: const EdgeInsets.all(10),
                           color: const Color.fromRGBO(249, 249, 249, 1),
-                          child: photoNote()
+                          child: licenseNote()
                       ),
                       const Expanded(child: SizedBox()),
-                      saveButton(w: 250, col: Colors.red),
+                      saveButton(w: 250),
                       const SizedBox(height: 20,)
                     ],
                   ),
@@ -82,16 +60,16 @@ Widget photoGrid(){
 }
 
 Widget rowGrid() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        createRowContainer(),
-        const SizedBox(width: 5,),
-        createRowContainer(),
-        const SizedBox(width: 5,),
-        createRowContainer(),
-      ],
-    );
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      createRowContainer(),
+      const SizedBox(width: 5,),
+      createRowContainer(),
+      const SizedBox(width: 5,),
+      createRowContainer(),
+    ],
+  );
 }
 
 Widget rowGridLast() {

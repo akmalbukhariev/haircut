@@ -2,37 +2,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'content_views/child_widgets.dart';
 import 'content_views/clean_button_textfield.dart';
-import 'content_views/save_button.dart';
 
 Widget GeoLocationPage() {
   return Container(
     color: Colors.white,
     child: Column(
       children: [
-        Stack(
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(left: 15, top: 55),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    "images/icon_1.png", width: 30, height: 30,)
-                  ,)
-            ),
-            const Padding(
-                padding: EdgeInsets.only(top: 60),
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Geojoylashuv",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.none,
-                          color: Color.fromRGBO(20, 137, 178, 1)),
-                    )
-                ))
-          ],),
+        navigationBar(title: "Geojoylashuv"),
         const SizedBox(height: 20,),
         Expanded(
             child: Container(
@@ -55,10 +33,10 @@ Widget GeoLocationPage() {
                       Container(
                           padding: const EdgeInsets.all(10),
                           color: const Color.fromRGBO(249, 249, 249, 1),
-                          child: noteText()
+                          child: geolocationNote()
                       ),
                       Expanded(child: SizedBox()),
-                      saveButton(w: 250, col: Colors.red),
+                      saveButton(w: 250,),
                       SizedBox(height: 20,)
                     ],
                   ),
@@ -69,19 +47,4 @@ Widget GeoLocationPage() {
       ],
     ),
   );
-}
-
-Widget noteText() {
-  return const Text("Iltimos, geojoylashuvni to'g'ri "
-      "belgilashda e'tiborli bo'ling. "
-      "Sizning belgilagan geojoylashuvingiz, "
-      "mijozingiz sizni aniq joydan topishga yordam beradi.",
-    textAlign: TextAlign.start,
-    style: TextStyle(
-        decoration: TextDecoration.none,
-        fontWeight: FontWeight.normal,
-        color: Color.fromRGBO(102, 102, 102, 1),
-        fontSize: 15
-    ),
-    softWrap: true,);
 }

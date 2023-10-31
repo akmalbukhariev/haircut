@@ -1,38 +1,16 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/pages/my_page/content_views/child_widgets.dart';
 
 import 'content_views/clean_button_textfield.dart';
-import 'content_views/save_button.dart';
 
 Widget PhonePage() {
   return Container(
     color: Colors.white,
     child: Column(
       children: [
-        Stack(
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(left: 15, top: 55),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    "images/icon_1.png", width: 30, height: 30,)
-                  ,)
-            ),
-            const Padding(
-                padding: EdgeInsets.only(top: 60),
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Telfon raqami",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.none,
-                          color: Color.fromRGBO(20, 137, 178, 1)),
-                    )
-                ))
-          ],),
+        navigationBar(title: "Telfon raqam"),
         const SizedBox(height: 20,),
         Expanded(
             child: Container(
@@ -55,7 +33,7 @@ Widget PhonePage() {
                       Container(
                           padding: const EdgeInsets.all(10),
                           color: const Color.fromRGBO(249, 249, 249, 1),
-                          child: noteText()
+                          child: phoneNote()
                       ),
                       Expanded(child: SizedBox()),
                       saveButton(w: 250, col: Colors.red),
@@ -69,24 +47,5 @@ Widget PhonePage() {
       ],
     ),
   );
-}
-
-Widget noteText() {
-  return const Text("Eslatma: Telefon raqamingizni "
-      "o'zgartirish vaqtida uning to'g'ri "
-      "yozilganiga ishonch hozil qiling. "
-      "Sizga tegishli bo'lmagan telefon "
-      "raqamidan foydalanishga urunishingiz "
-      "O'zbekiston Respublikasi qonunchiligiga "
-      "asosan javobgarlikka tortilishingizga "
-      "sabab bo'lishi mumkin.",
-    textAlign: TextAlign.start,
-    style: TextStyle(
-      decoration: TextDecoration.none,
-      fontWeight: FontWeight.normal,
-      color: Color.fromRGBO(102, 102, 102, 1),
-      fontSize: 15
-    ),
-    softWrap: true,);
 }
 

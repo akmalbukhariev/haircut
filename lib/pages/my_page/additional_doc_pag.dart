@@ -2,35 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'content_views/child_widgets.dart';
+import 'content_views/clean_button_textfield.dart';
 
-Widget MyPhotoAlbumPage() {
+Widget MyAdditioanlDocPage() {
   return Container(
     color: Colors.white,
     child: Column(
       children: [
-        Stack(
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(left: 15, top: 55),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    "images/icon_1.png", width: 30, height: 30,)
-                  ,)
-            ),
-            const Padding(
-                padding: EdgeInsets.only(top: 60),
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Fotosuratlar",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.none,
-                          color: Color.fromRGBO(20, 137, 178, 1)),
-                    )
-                ))
-          ],),
+        navigationBar(title: "Qo'shimcha hudjatlar"),
         const SizedBox(height: 20,),
         Expanded(
             child: Container(
@@ -53,7 +32,7 @@ Widget MyPhotoAlbumPage() {
                       Container(
                           padding: const EdgeInsets.all(10),
                           color: const Color.fromRGBO(249, 249, 249, 1),
-                          child: photoNote()
+                          child: additionalDocNote()
                       ),
                       const Expanded(child: SizedBox()),
                       saveButton(w: 250, col: Colors.red),
@@ -76,22 +55,22 @@ Widget photoGrid(){
       const SizedBox(height: 5,),
       rowGrid(),
       const SizedBox(height: 5,),
-      rowGridLast()
+      rowGrid()
     ],
   );
 }
 
 Widget rowGrid() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        createRowContainer(),
-        const SizedBox(width: 5,),
-        createRowContainer(),
-        const SizedBox(width: 5,),
-        createRowContainer(),
-      ],
-    );
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      createRowContainer(),
+      const SizedBox(width: 5,),
+      createRowContainer(),
+      const SizedBox(width: 5,),
+      createRowContainer(),
+    ],
+  );
 }
 
 Widget rowGridLast() {
