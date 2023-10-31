@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'content_views/clean_button_textfield.dart';
 import 'content_views/save_button.dart';
 
-Widget PhonePage() {
+Widget GeoLocationPage() {
   return Container(
     color: Colors.white,
     child: Column(
@@ -24,7 +24,7 @@ Widget PhonePage() {
                 padding: EdgeInsets.only(top: 60),
                 child: Align(
                     alignment: Alignment.center,
-                    child: Text("Telfon raqami",
+                    child: Text("Geojoylashuv",
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.normal,
@@ -49,7 +49,7 @@ Widget PhonePage() {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
-                        child: const CleanButtonTextField(placeHolder: "Enter your phone number.",),
+                        child: const CleanButtonTextField(),
                       ),
                       const Divider(height: 1, color: Colors.grey,),
                       Container(
@@ -72,21 +72,16 @@ Widget PhonePage() {
 }
 
 Widget noteText() {
-  return const Text("Eslatma: Telefon raqamingizni "
-      "o'zgartirish vaqtida uning to'g'ri "
-      "yozilganiga ishonch hozil qiling. "
-      "Sizga tegishli bo'lmagan telefon "
-      "raqamidan foydalanishga urunishingiz "
-      "O'zbekiston Respublikasi qonunchiligiga "
-      "asosan javobgarlikka tortilishingizga "
-      "sabab bo'lishi mumkin.",
+  return const Text("Iltimos, geojoylashuvni to'g'ri "
+      "belgilashda e'tiborli bo'ling. "
+      "Sizning belgilagan geojoylashuvingiz, "
+      "mijozingiz sizni aniq joydan topishga yordam beradi.",
     textAlign: TextAlign.start,
     style: TextStyle(
-      decoration: TextDecoration.none,
-      fontWeight: FontWeight.normal,
-      color: Color.fromRGBO(102, 102, 102, 1),
-      fontSize: 15
+        decoration: TextDecoration.none,
+        fontWeight: FontWeight.normal,
+        color: Color.fromRGBO(102, 102, 102, 1),
+        fontSize: 15
     ),
     softWrap: true,);
 }
-
