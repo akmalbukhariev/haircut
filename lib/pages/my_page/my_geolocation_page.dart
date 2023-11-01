@@ -36,7 +36,10 @@ Widget GeoLocationPage() {
                           child: geolocationNote()
                       ),
                       Expanded(child: SizedBox()),
-                      saveButton(w: 250,),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: saveButton(),
+                      ),
                       SizedBox(height: 20,)
                     ],
                   ),

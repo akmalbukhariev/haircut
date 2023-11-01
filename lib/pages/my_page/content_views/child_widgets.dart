@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-Widget saveButton({required double w, Color col = Colors.red}) {
+Widget saveButton({Color col = Colors.red}) {
   return SizedBox(
-    width: w,
+    width: double.infinity,
     child: ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(

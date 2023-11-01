@@ -35,7 +35,10 @@ Widget MyAdditioanlDocPage() {
                           child: additionalDocNote()
                       ),
                       const Expanded(child: SizedBox()),
-                      saveButton(w: 250, col: Colors.red),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: saveButton(),
+                      ),
                       const SizedBox(height: 20,)
                     ],
                   ),

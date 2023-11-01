@@ -34,7 +34,10 @@ Widget MyLicensePage() {
                           child: licenseNote()
                       ),
                       const Expanded(child: SizedBox()),
-                      saveButton(w: 250),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: saveButton(),
+                      ),
                       const SizedBox(height: 20,)
                     ],
                   ),
