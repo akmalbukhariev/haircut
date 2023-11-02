@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 
-Widget saveButton({Color col = Colors.red}) {
+Widget saveButton({Color col = Colors.red, VoidCallback? onPressedCallBack,}) {
   return SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressedCallBack,
       style: ElevatedButton.styleFrom(
           backgroundColor: col,
           shape: RoundedRectangleBorder(
@@ -17,19 +17,24 @@ Widget saveButton({Color col = Colors.red}) {
   );
 }
 
-Widget navigationBar({String title = ""}) {
+Widget navigationBar({required BuildContext context,String title = ""}) {
   return Stack(
     children: [
       Padding(
-          padding: const EdgeInsets.only(left: 15, top: 55),
+          padding: const EdgeInsets.only(left: 15, top: 10),
           child: Align(
-            alignment: Alignment.centerLeft,
-            child: Image.asset(
-              "images/icon_1.png", width: 30, height: 30,)
-            ,)
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                      Navigator.pop(context);
+                },
+                child: Image.asset(
+                  "images/icon_1.png", width: 30, height: 30,)
+                ,)
+          )
       ),
       Padding(
-          padding: EdgeInsets.only(top: 60),
+          padding: EdgeInsets.only(top: 10),
           child: Align(
               alignment: Alignment.center,
               child: Text(title,
