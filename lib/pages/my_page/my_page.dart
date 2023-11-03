@@ -3,41 +3,52 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/pages/my_page/additional_doc_page.dart';
 import 'package:haircut/pages/my_page/content_views/child_widgets.dart';
+import 'package:haircut/pages/my_page/license_page.dart';
+import 'package:haircut/pages/my_page/my_address.dart';
+import 'package:haircut/pages/my_page/my_comments_page.dart';
+import 'package:haircut/pages/my_page/my_geolocation_page.dart';
+import 'package:haircut/pages/my_page/my_services_page.dart';
 
-import '../../models/BasicTile.dart';
+import '../../models/basic_tile.dart';
 import 'content_views/date_picker_widget.dart';
 import 'my_phone_page.dart';
+import 'my_photo_album.dart';
 
 final basicTiles = [
   const BasicTile(
       image: "images/userinfo.png",
       title: "Mening ma'lumotlarim",
+      myMenu: MyMenu.my_info,
       tiles: [
-        BasicTile(title: "Kasbim", text: "Sartarosh, Stilist", textColor: Color.fromRGBO(73, 162, 191, 1)),
-        BasicTile(title: "+998 90 999 99 99", titleColor: Color.fromRGBO(73, 162, 191, 1)),
-        BasicTile(title: "Toshkent shaxar", titleColor: Color.fromRGBO(73, 162, 191, 1)),
-        BasicTile(title: "Geojoylashuv"),
-        BasicTile(title: "Ish vaqti", text: "9:00 - 18:00", textColor: Color.fromRGBO(73, 162, 191, 1)),
-        BasicTile(title: "Fotosuratlar"),
-        BasicTile(title: "Ruxsatnomalar"),
-        BasicTile(title: "Qo'shimcha xudjatlar"),
+        BasicTile(title: "Kasbim", text: "Sartarosh, Stilist", myMenu: MyMenu.my_profession, textColor: Color.fromRGBO(73, 162, 191, 1)),
+        BasicTile(title: "+998 90 999 99 99", myMenu:MyMenu.my_phone , titleColor: Color.fromRGBO(73, 162, 191, 1)),
+        BasicTile(title: "Toshkent shaxar", myMenu: MyMenu.my_address, titleColor: Color.fromRGBO(73, 162, 191, 1)),
+        BasicTile(title: "Geojoylashuv", myMenu: MyMenu.my_location),
+        BasicTile(title: "Ish vaqti",myMenu: MyMenu.my_work_time, text: "9:00 - 18:00", textColor: Color.fromRGBO(73, 162, 191, 1)),
+        BasicTile(title: "Fotosuratlar", myMenu: MyMenu.my_photos),
+        BasicTile(title: "Ruxsatnomalar", myMenu: MyMenu.my_license),
+        BasicTile(title: "Qo'shimcha xudjatlar", myMenu: MyMenu.my_addtinional_doc),
       ]),
   const BasicTile(
       image: "images/services.png",
       title: "Mening xizmatlarim",
       text: "4",
+      myMenu: MyMenu.my_services,
       textColor: Color.fromRGBO(73, 162, 191, 1)
   ),
   const BasicTile(
       image: "images/comments.png",
       title: "Men haqimda sharhlar",
       text: "5",
+      myMenu: MyMenu.my_comments,
       textColor: Color.fromRGBO(73, 162, 191, 1)
   ),
   const BasicTile(
       image: "images/logout.png",
       title: "Chiqish",
+      myMenu: MyMenu.log_out,
       textColor: Colors.red
   )
 ];
@@ -179,21 +190,52 @@ class _MyPage extends State<MyPage> {
       if (tile.image == "") {
         return ListTile(
           onTap: () {
+            print(tile.myMenu);
             setState(() {
-              switch (tile.title) {
-                case "Kasbim":
+              switch (tile.myMenu) {
+                case MyMenu.my_profession:
                   _professionVisible = !_professionVisible;
                   break;
-                case "Ish vaqti":
-                  _dateTimeVisible = !_dateTimeVisible;
-                  break;
-                case "+998 90 999 99 99":
-                  //final context = Get.key.currentContext;
+                case MyMenu.my_phone:
                   Navigator.push(
                     context,
                     CupertinoPageRoute(builder: (context) => const PhonePage()),
                   );
                   break;
+                case MyMenu.my_address:
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => const AddressPage()),
+                  );
+                  break;
+                case MyMenu.my_location:
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => const GeoLocationPage()),
+                  );
+                  break;
+                case MyMenu.my_work_time:
+                  _dateTimeVisible = !_dateTimeVisible;
+                  break;
+                case MyMenu.my_photos:
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => const MyPhotoAlbumPage()),
+                  );
+                  break;
+                case MyMenu.my_license:
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => const MyLicensePage()),
+                  );
+                  break;
+                case MyMenu.my_addtinional_doc:
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => const MyAdditioanlDocPage()),
+                  );
+                  break;
+                default: break;
               }
             });
           },
@@ -217,13 +259,24 @@ class _MyPage extends State<MyPage> {
       } else {
         return ListTile(
           onTap: () {
+            print(tile.myMenu);
+
             setState(() {
-              switch (tile.title) {
-                case "Kasbim":
-                  _professionVisible = !_professionVisible;
+              switch (tile.myMenu) {
+                case MyMenu.my_services:
+                  Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => const MyServicesPage()),
+                );
+                break;
+                case MyMenu.my_comments:
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) => const MyCommentsPage()),
+                  );
                   break;
-                case "Ish vaqti":
-                  _dateTimeVisible = !_dateTimeVisible;
+                case MyMenu.log_out:
+                default: break;
                   break;
               }
             });

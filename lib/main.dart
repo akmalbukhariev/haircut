@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:haircut/pages/my_page/additional_doc_pag.dart';
+import 'package:haircut/pages/my_page/additional_doc_page.dart';
 import 'package:haircut/pages/my_page/license_page.dart';
 import 'package:haircut/pages/my_page/my_geolocation_page.dart';
 import 'package:haircut/pages/my_page/my_address.dart';
 import 'package:haircut/pages/my_page/my_page.dart';
 import 'package:haircut/pages/my_page/my_photo_album.dart';
 import 'package:haircut/pages/my_page/my_phone_page.dart';
+import 'package:haircut/pages/my_page/my_services_page.dart';
 
 import 'info_listview_menu.dart';
 
@@ -20,7 +21,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MyPage(),
+        body: MyServicesPage(),
       )
     );
   }

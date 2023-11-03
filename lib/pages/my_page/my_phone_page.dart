@@ -49,7 +49,12 @@ class PhonePage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10,
                                           right: 10),
-                                      child: saveButton(),
+                                      child: saveButton(
+                                        col: Colors.red,
+                                        onPressedCallBack: (){
+                                          Navigator.pop(context);
+                                        }
+                                      ),
                                     ),
                                     const SizedBox(height: 20,)
                                   ],

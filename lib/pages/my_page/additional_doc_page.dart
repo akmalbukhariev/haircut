@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'content_views/child_widgets.dart';
+import 'content_views/clean_button_textfield.dart';
 
-class MyLicensePage extends StatelessWidget {
-  const MyLicensePage({super.key});
+class MyAdditioanlDocPage extends StatelessWidget {
+  const MyAdditioanlDocPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,8 @@ class MyLicensePage extends StatelessWidget {
                   color: Colors.white,
                   child: Column(
                     children: [
-                      navigationBar(context: context, title: "Ruxsatnoma"),
+                      navigationBar(
+                          context: context, title: "Qo'shimcha hudjatlar"),
                       const SizedBox(height: 20,),
                       Expanded(
                           child: Container(
@@ -36,7 +38,7 @@ class MyLicensePage extends StatelessWidget {
                                           right: 10,
                                           top: 10,
                                           bottom: 10),
-                                      child: rowGridLast(),
+                                      child: photoGrid(),
                                     ),
                                     const Divider(
                                       height: 1, color: Colors.grey,),
@@ -44,7 +46,7 @@ class MyLicensePage extends StatelessWidget {
                                         padding: const EdgeInsets.all(10),
                                         color: const Color.fromRGBO(
                                             249, 249, 249, 1),
-                                        child: licenseNote()
+                                        child: additionalDocNote()
                                     ),
                                     const Expanded(child: SizedBox()),
                                     Padding(
@@ -52,7 +54,7 @@ class MyLicensePage extends StatelessWidget {
                                           left: 10, right: 10),
                                       child: saveButton(
                                           col: Colors.red,
-                                          onPressedCallBack: (){
+                                          onPressedCallBack: () {
                                             Navigator.pop(context);
                                           }
                                       ),
@@ -79,7 +81,7 @@ class MyLicensePage extends StatelessWidget {
         const SizedBox(height: 5,),
         rowGrid(),
         const SizedBox(height: 5,),
-        rowGridLast()
+        rowGrid()
       ],
     );
   }
