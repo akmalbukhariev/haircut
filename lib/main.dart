@@ -21,7 +21,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MyServicesPage(),
+        body: MyPage(),
       )
     );
   }
