@@ -218,11 +218,11 @@ class _CustomCalendar extends State<CustomCalendar> {
     }
     else if (info.isSelected) {
       return Container(
-          width: 40,
-          height: 40,
+          width: 45,
+          height: 45,
           decoration: BoxDecoration(
               color: const Color.fromRGBO(250, 154, 147, 1),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(25),
               border: Border.all(width: 1, color: Colors.red)
           ),
           child: info.isBusy ?
@@ -238,7 +238,7 @@ class _CustomCalendar extends State<CustomCalendar> {
             children: [
               Text(
                 info.text, style: TextStyle(color: textColor, fontSize: 20),),
-              //const SizedBox(width: 15, height: 15,),
+              const SizedBox(width: 15, height: 15,),
             ],
           )
       );

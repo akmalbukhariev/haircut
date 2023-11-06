@@ -50,7 +50,7 @@ class MainPage extends StatelessWidget {
               children: [
                 createHeader(),
                 const SizedBox(height: 20,),
-                CustomCalendar(),
+                const CustomCalendar(),
                 Expanded(
                   child: CustomScrollView(
                     slivers: [
@@ -115,22 +115,74 @@ class MainPage extends StatelessWidget {
   }
 
   Widget createBookedItem({required BookedInfo info}) {
-    return Row(
+    return Column(
       children: [
-        Container(
-          color: const Color.fromRGBO(242, 249, 253, 1),
-            child: Center(
-              child: Column(
-                children: [
-                  Text(info.startTime, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 10,),
-                  Text(info.startTime, style: const TextStyle(color: Color.fromRGBO(102, 102, 102, 1), fontWeight: FontWeight.bold),)
-                ],
-              ),
-            )
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+                width: 50,
+                color: const Color.fromRGBO(242, 249, 253, 1),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(info.startTime, style: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),),
+                      const SizedBox(height: 5,),
+                      Text(info.startTime, style: const TextStyle(
+                          color: Color.fromRGBO(102, 102, 102, 1),
+                          fontWeight: FontWeight.bold),),
+                      const SizedBox(height: 15,)
+                    ],
+                  ),
+                )
+            ),
+            createColorBar(info.services),
+            Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(info.name,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Color.fromRGBO(102, 102, 102, 1)),)
+                      ,),
+                    const SizedBox(height: 7,),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(info.strServices,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12,
+                            color: Color.fromRGBO(102, 102, 102, 1)),)
+                      ,),
+                  ],
+                )
+            ),
+            Text(info.phone,
+              textAlign: TextAlign.start,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  color: Color.fromRGBO(102, 102, 102, 1)),)
+          ],
         ),
-
+        Container(height: 2, color: const Color.fromRGBO(241, 241, 241, 1),)
       ],
     );
+  }
+
+  Widget createColorBar(List<Color> colors)
+  {
+    return Row(children: colors.map((item) =>
+        Container(
+          width: 20,
+          color: item,
+        )
+    ).toList());
   }
 }
