@@ -71,6 +71,7 @@ flutter:
     - images/icon_14.png
     - images/icon_15.png
     - images/icon_16.png
+    - images/icon_19.png
     - images/userinfo.png
     - images/services.png
     - images/comments.png
@@ -81,6 +82,10 @@ flutter:
     - images/speech_bubble.png
     - images/visible.png
     - images/love.png
+    - images/notification.png
+    - images/search_gray.png
+    - images/menu2.png
+    - images/icon_18.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

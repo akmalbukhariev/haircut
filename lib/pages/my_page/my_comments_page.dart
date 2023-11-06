@@ -50,8 +50,7 @@ class MyCommentsPage extends StatelessWidget {
                                   ),
                                   Container(
                                     decoration: const BoxDecoration(
-                                        color: const Color.fromRGBO(
-                                            249, 249, 249, 1),
+                                        color: Color.fromRGBO(249, 249, 249, 1),
                                         border: Border(
                                           top: BorderSide(color: Color.fromRGBO(
                                               243, 243, 243, 1)),
@@ -82,26 +81,27 @@ class MyCommentsPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  Expanded(child:
-                                  CustomScrollView(
-                                    slivers:[
-                                      SliverList(
-                                        delegate: SliverChildBuilderDelegate(
-                                              (BuildContext context, int index) {
-                                                final item = commentList[index];
-                                                return createComment(
-                                                    name: item.name,
-                                                    starCount: item.starCount,
-                                                    strDate: item.date,
-                                                    comment: item.comment
-                                                );// Replace with your list item widget
-                                          },
-                                          childCount: commentList.length,
+                                  Expanded(
+                                    child: CustomScrollView(
+                                      slivers: [
+                                        SliverList(
+                                          delegate: SliverChildBuilderDelegate(
+                                                (BuildContext context,
+                                                int index) {
+                                              final item = commentList[index];
+                                              return createComment(
+                                                  name: item.name,
+                                                  starCount: item.starCount,
+                                                  strDate: item.date,
+                                                  comment: item.comment
+                                              ); // Replace with your list item widget
+                                            },
+                                            childCount: commentList.length,
+                                          ),
+                                          //shrinkWrap: true,
                                         ),
-                                        //shrinkWrap: true,
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
                                   )
                                   /*ListView.separated(
                                     shrinkWrap: true,
@@ -320,7 +320,7 @@ class MyCommentsPage extends StatelessWidget {
           ),
           const SizedBox(height: 10,),
           Text(comment, style: const TextStyle(color: Colors.grey),),
-          Divider(color: Colors.grey,)
+          const Divider(color: Colors.grey,)
         ],)
       ,);
   }

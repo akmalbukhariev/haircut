@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haircut/pages/main_page/main_page.dart';
 import 'package:haircut/pages/my_page/additional_doc_page.dart';
 import 'package:haircut/pages/my_page/license_page.dart';
 import 'package:haircut/pages/my_page/my_geolocation_page.dart';
@@ -21,7 +22,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MyPage(),
+        body: MainPage(),
       )
     );
   }
