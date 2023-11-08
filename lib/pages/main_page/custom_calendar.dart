@@ -113,7 +113,7 @@ class _CustomCalendar extends State<CustomCalendar> {
                   day2: DayInfo(text: "16"),
                   day3: DayInfo(text: "17"),
                   day4: DayInfo(text: "18"),
-                  day5: DayInfo(isSelected: true, text: "19"),
+                  day5: DayInfo(text: "19"),
                   day6: DayInfo(isWeekend: true, text: "20"),
                   day7: DayInfo(isWeekend: true, text: "21")),
               Container(

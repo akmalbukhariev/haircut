@@ -49,6 +49,20 @@ Widget navigationBar({required BuildContext context,String title = ""}) {
   );
 }
 
+Widget animateWidget({required Widget widget,required BuildContext context, bool visible = false}) {
+  return AnimatedPositioned(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOut,
+      bottom: visible ? 0 : -MediaQuery
+          .of(context)
+          .size
+          .height,
+      left: 0,
+      right: 0,
+      child: widget
+  );
+}
+
 Widget additionalDocNote(){
   return noteText(text: "Qo'shimcha hujjatlarga, "
       "faxriy yorliq, sovrin va shu kabi boshga "

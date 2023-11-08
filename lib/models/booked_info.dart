@@ -8,7 +8,7 @@ class BookedInfo{
   final String name;
   final String strServices;
   final String phone;
-  final List<Color> services = [];
+  final List<Color> services;
 
   BookedInfo({
     this.startTime = "",
@@ -16,6 +16,6 @@ class BookedInfo{
     this.name = "",
     this.strServices = "",
     this.phone = "",
-    services
-  });
+    List<Color>? services,
+  }): services = services ?? [];
 }

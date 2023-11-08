@@ -1,9 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:haircut/pages/my_page/content_views/child_widgets.dart';
 
-import 'content_views/clean_button_textfield.dart';
+import '../../content_views/child_widgets.dart';
+import '../../content_views/clean_button_textfield.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({super.key});

@@ -4,15 +4,15 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut/pages/my_page/additional_doc_page.dart';
-import 'package:haircut/pages/my_page/content_views/child_widgets.dart';
 import 'package:haircut/pages/my_page/license_page.dart';
 import 'package:haircut/pages/my_page/my_address.dart';
 import 'package:haircut/pages/my_page/my_comments_page.dart';
 import 'package:haircut/pages/my_page/my_geolocation_page.dart';
 import 'package:haircut/pages/my_page/my_services_page.dart';
 
+import '../../content_views/child_widgets.dart';
+import '../../content_views/date_picker_widget.dart';
 import '../../models/basic_tile.dart';
-import 'content_views/date_picker_widget.dart';
 import 'my_phone_page.dart';
 import 'my_photo_album.dart';
 
@@ -67,102 +67,122 @@ class _MyPage extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        child: SafeArea(
-            child: Stack(
-              children: [
-                Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                        color: const Color.fromRGBO(240, 244, 249, 1),
-                        child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Container(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, right: 20, top: 20),
-                                    child: Stack(
-                                      children: [
-                                        Row(
+        child: Material(
+            child: SafeArea(
+                child: Stack(
+                  children: [
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                            color: const Color.fromRGBO(240, 244, 249, 1),
+                            child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, right: 20, top: 20),
+                                        child: Stack(
                                           children: [
-                                            Image.asset(
-                                              "images/icon_1.png", width: 30,
-                                              height: 30,),
-                                            const Expanded(child: SizedBox()),
-                                            Image.asset(
-                                              "images/share.png", width: 30,
-                                              height: 30,),
+                                            Row(
+                                              children: [
+                                                GestureDetector(
+                                                    onTap: (){
+                                                      Navigator.pop(context);
+                                                    },
+                                                child: Image.asset(
+                                                  "images/icon_1.png",
+                                                  width: 30,
+                                                  height: 30,)
+                                                ),
+                                                const Expanded(
+                                                    child: SizedBox()),
+                                                Image.asset(
+                                                  "images/share.png", width: 30,
+                                                  height: 30,),
+                                              ],
+                                            ),
+                                            Container(
+                                                padding: const EdgeInsets.only(
+                                                    top: 15),
+                                                child: Center(
+                                                  child: Image.asset(
+                                                    "images/avatar.png",
+                                                    width: 170,
+                                                    height: 170,)
+                                                  ,)
+                                            ),
                                           ],
-                                        ),
-                                        Container(
-                                            padding: const EdgeInsets.only(
-                                                top: 15),
-                                            child: Center(
-                                              child: Image.asset(
-                                                "images/avatar.png", width: 170,
-                                                height: 170,)
-                                              ,)
-                                        ),
-                                      ],
-                                    )
-                                ),
-                                const SizedBox(height: 10,),
-                                Center(
-                                  child: Column(
-                                    children: [
-                                      const Text("Bukhariev Akmal",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              decoration: TextDecoration.none)
-                                      ),
-                                      const SizedBox(height: 10,),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .center,
+                                        )
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    Center(
+                                      child: Column(
                                         children: [
-                                          starImage(im: "images/icon_13.png"),
-                                          starImage(im: "images/icon_13.png"),
-                                          starImage(im: "images/icon_13.png"),
-                                          starImage(im: "images/icon_14.png"),
-                                          starImage(im: "images/icon_14.png")
+                                          const Text("Bukhariev Akmal",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration: TextDecoration
+                                                      .none)
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              starImage(
+                                                  im: "images/icon_13.png"),
+                                              starImage(
+                                                  im: "images/icon_13.png"),
+                                              starImage(
+                                                  im: "images/icon_13.png"),
+                                              starImage(
+                                                  im: "images/icon_14.png"),
+                                              starImage(
+                                                  im: "images/icon_14.png")
+                                            ],
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          const Text("ID raqam: 1234567",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  decoration: TextDecoration
+                                                      .none)
+                                          ),
                                         ],
                                       ),
-                                      const SizedBox(height: 10,),
-                                      const Text("ID raqam: 1234567",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                              decoration: TextDecoration.none)
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20, right: 20, top: 30),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    child: createListView(),
-                                  ),
-                                ),
-                              ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 20, top: 30),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              10),
+                                        ),
+                                        child: createListView(),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             )
                         )
-                    )
-                ),
-                animateWidget(
-                    widget: createDateTime(), visible: _dateTimeVisible),
-                animateWidget(
-                    widget: createProfession(), visible: _professionVisible),
-              ],)
+                    ),
+                    animateWidget(
+                        widget: createDateTime(), context: context, visible: _dateTimeVisible),
+                    animateWidget(
+                        widget: createProfession(),
+                        context: context,
+                        visible: _professionVisible),
+                  ],)
+            )
         )
     );
   }
@@ -188,79 +208,86 @@ class _MyPage extends State<MyPage> {
   Widget buildTile(BasicTile tile) {
     if (tile.tiles.isEmpty) {
       if (tile.image == "") {
-        return ListTile(
-          onTap: () {
-            print(tile.myMenu);
-            setState(() {
-              switch (tile.myMenu) {
-                case MyMenu.my_profession:
-                  _professionVisible = !_professionVisible;
-                  break;
-                case MyMenu.my_phone:
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => const PhonePage()),
-                  );
-                  break;
-                case MyMenu.my_address:
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => const AddressPage()),
-                  );
-                  break;
-                case MyMenu.my_location:
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => const GeoLocationPage()),
-                  );
-                  break;
-                case MyMenu.my_work_time:
-                  _dateTimeVisible = !_dateTimeVisible;
-                  break;
-                case MyMenu.my_photos:
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => const MyPhotoAlbumPage()),
-                  );
-                  break;
-                case MyMenu.my_license:
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => const MyLicensePage()),
-                  );
-                  break;
-                case MyMenu.my_addtinional_doc:
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => const MyAdditioanlDocPage()),
-                  );
-                  break;
-                default: break;
-              }
-            });
-          },
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(tile.title, style: TextStyle(color: tile.titleColor),),
-                  const Expanded(child: SizedBox()),
-                  Text(tile.text, style: TextStyle(color: tile.textColor),),
-                ],
-              ),
-              if(tile.title != "Qo'shimcha xudjatlar")
-                Divider(
-                  color: Colors.grey.shade200,
-                  thickness: 1,
+        return Container(
+            color: const Color.fromRGBO(249, 249, 249, 1),
+            child: Column(
+              children: [
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      switch (tile.myMenu) {
+                        case MyMenu.my_profession:
+                          _professionVisible = !_professionVisible;
+                          break;
+                        case MyMenu.my_phone:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(builder: (
+                                context) => const PhonePage()),
+                          );
+                          break;
+                        case MyMenu.my_address:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(builder: (
+                                context) => const AddressPage()),
+                          );
+                          break;
+                        case MyMenu.my_location:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(builder: (
+                                context) => const GeoLocationPage()),
+                          );
+                          break;
+                        case MyMenu.my_work_time:
+                          _dateTimeVisible = !_dateTimeVisible;
+                          break;
+                        case MyMenu.my_photos:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(builder: (
+                                context) => const MyPhotoAlbumPage()),
+                          );
+                          break;
+                        case MyMenu.my_license:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(builder: (
+                                context) => const MyLicensePage()),
+                          );
+                          break;
+                        case MyMenu.my_addtinional_doc:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(builder: (
+                                context) => const MyAdditioanlDocPage()),
+                          );
+                          break;
+                        default:
+                          break;
+                      }
+                    });
+                  },
+                  title: Row(
+                    children: [
+                      Text(tile.title, style: TextStyle(color: tile.titleColor),),
+                      const Expanded(child: SizedBox()),
+                      Text(tile.text, style: TextStyle(color: tile.textColor),),
+                    ],
+                  ),
                 ),
-            ],),
+                if(tile.myMenu != MyMenu.my_addtinional_doc)
+                  Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Divider(
+                        color: Colors.grey.shade200, thickness: 1,))
+              ],
+            )
         );
       } else {
         return ListTile(
           onTap: () {
-            print(tile.myMenu);
-
             setState(() {
               switch (tile.myMenu) {
                 case MyMenu.my_services:
@@ -270,10 +297,10 @@ class _MyPage extends State<MyPage> {
                 );
                 break;
                 case MyMenu.my_comments:
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     CupertinoPageRoute(builder: (context) => const MyCommentsPage()),
-                  );
+                  );*/
                   break;
                 case MyMenu.log_out:
                 default: break;
@@ -294,6 +321,12 @@ class _MyPage extends State<MyPage> {
     }
     else {
       return ExpansionTile(
+        collapsedShape: const RoundedRectangleBorder(
+          side: BorderSide.none,
+        ),
+        shape: const RoundedRectangleBorder(
+          side: BorderSide.none,
+        ),
         title: Row(
           children: [
             Image.asset(tile.image, width: 20, height: 20,),
@@ -305,20 +338,6 @@ class _MyPage extends State<MyPage> {
         children: tile.tiles.map((tile) => buildTile(tile)).toList(),
       );
     }
-  }
-
-  Widget animateWidget({required Widget widget, bool visible = false}) {
-    return AnimatedPositioned(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeOut,
-        bottom: visible ? 0 : -MediaQuery
-            .of(context)
-            .size
-            .height,
-        left: 0,
-        right: 0,
-        child: widget
-    );
   }
 
   Widget createDateTime() {

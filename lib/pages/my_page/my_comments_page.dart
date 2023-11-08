@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:haircut/models/comment_info.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import 'content_views/child_widgets.dart';
+import '../../content_views/child_widgets.dart';
 
 final commentList = [
    CommentInfo(name: "Begzot Nazarov",starCount: 4, date: "05.10.2023", comment: "Axbvxvhsxg hsxhv  ncbxc"),

@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+import '../../content_views/child_widgets.dart';
+import '../../content_views/clean_button_textfield.dart';
 import '../../models/my_service.dart';
-import 'content_views/child_widgets.dart';
-import 'content_views/clean_button_textfield.dart';
 
 final servies = [
   MyService(color: Colors.red, text: "Ukladka(50 000 so'm"),

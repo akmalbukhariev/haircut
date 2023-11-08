@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'content_views/child_widgets.dart';
-import 'content_views/clean_button_textfield.dart';
+import '../../content_views/child_widgets.dart';
 
 class MyAdditioanlDocPage extends StatelessWidget {
   const MyAdditioanlDocPage({super.key});

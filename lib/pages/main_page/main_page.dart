@@ -1,8 +1,7 @@
 
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/pages/my_page/my_page.dart';
 
 import '../../models/booked_info.dart';
 import 'custom_calendar.dart';
@@ -35,41 +34,87 @@ final bookedList = [
       services: [Colors.pink, Colors.deepPurple, Colors.yellow],
       strServices: "Soqol olish, Ukladka, Soqol olish",
       name: "Ibragimov Jasur",
-      phone: "+99897123654")
+      phone: "+99897123654"),
+  BookedInfo(
+      startTime: "14:00",
+      endTime: "15:00",
+      services: [Colors.pink],
+      strServices: "Ukladka",
+      name: "Zokirov Laziz",
+      phone: "+99897123654" ),
+  BookedInfo(
+      startTime: "14:00",
+      endTime: "15:00",
+      services: [Colors.blue],
+      strServices: "Ukladka",
+      name: "Zokirov Laziz",
+      phone: "+99897123654" ),
+  BookedInfo(
+      startTime: "14:00",
+      endTime: "15:00",
+      services: [Colors.black],
+      strServices: "Ukladka",
+      name: "Zokirov Laziz",
+      phone: "+99897123654" ),
+  BookedInfo(
+      startTime: "14:00",
+      endTime: "15:00",
+      services: [Colors.yellow],
+      strServices: "Ukladka",
+      name: "Zokirov Laziz",
+      phone: "+99897123654" ),
+  BookedInfo(
+      startTime: "14:00",
+      endTime: "15:00",
+      services: [Colors.lightBlue],
+      strServices: "Ukladka",
+      name: "Zokirov Laziz",
+      phone: "+99897123654" ),
 ];
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class MainPage extends StatefulWidget{
 
   @override
+  State<StatefulWidget> createState() => _MainPage();
+}
+
+class _MainPage extends State<MainPage> {
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                createHeader(),
-                const SizedBox(height: 20,),
-                const CustomCalendar(),
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                              (BuildContext context,
-                              int index) {
-                            final item = bookedList[index];
-                            return createBookedItem(info: item);
-                          },
-                          childCount: bookedList.length,
-                        ),
-                        //shrinkWrap: true,
+    return CupertinoPageScaffold(
+        child: SafeArea(
+            child: Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    createHeader(),
+                    const SizedBox(height: 20,),
+                    const CustomCalendar(),
+                    Container(height: 2,
+                      color: const Color.fromRGBO(222, 222, 222, 1),),
+                    const SizedBox(height: 2,),
+                    Container(height: 2,
+                      color: const Color.fromRGBO(222, 222, 222, 1),),
+                    Expanded(
+                      child: CustomScrollView(
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                                  (BuildContext context,
+                                  int index) {
+                                final item = bookedList[index];
+                                return createBookedItem(info: item);
+                              },
+                              childCount: bookedList.length,
+                            ),
+                            //shrinkWrap: true,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ]
-              ,)
+                    ),
+                  ]
+                  ,)
+            )
         )
     );
   }
@@ -104,7 +149,15 @@ class MainPage extends StatelessWidget {
             ),
             headerImage(image: "images/notification.png"),
             headerImage(image: "images/search_gray.png"),
-            headerImage(image: "images/avatar.png"),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => const MyPage()),
+                );
+              },
+              child: headerImage(image: "images/avatar.png"),
+            )
           ],
         )
     );
@@ -115,30 +168,71 @@ class MainPage extends StatelessWidget {
   }
 
   Widget createBookedItem({required BookedInfo info}) {
+    Color serviceColor = info.services.isNotEmpty? info.services[0] : Colors.white;
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-                width: 50,
-                color: const Color.fromRGBO(242, 249, 253, 1),
-                child: Center(
+              width: 50,
+              height: 65,
+              color: const Color.fromRGBO(242, 249, 253, 1),
+              child: Column(
+                children: [
+                  const SizedBox(height: 10,),
+                  Text(info.startTime, style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),),
+                  const SizedBox(height: 5,),
+                  Text(info.startTime, style: const TextStyle(
+                      color: Color.fromRGBO(102, 102, 102, 1),
+                      fontWeight: FontWeight.bold),),
+                  const SizedBox(height: 15,)
+                ],
+              ),
+            ),
+            Container(width: 5, height: 65, color: serviceColor,),
+            //createColorBar(info.services),
+            const SizedBox(width: 10,),
+            Expanded(
+                child: SizedBox(
+                  height: 65,
                   child: Column(
                     children: [
-                      Text(info.startTime, style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),),
+                      const SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(info.name,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Color.fromRGBO(102, 102, 102, 1)),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          Text(info.phone,
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Color.fromRGBO(102, 102, 102, 1)),)
+                        ],
+                      ),
                       const SizedBox(height: 5,),
-                      Text(info.startTime, style: const TextStyle(
-                          color: Color.fromRGBO(102, 102, 102, 1),
-                          fontWeight: FontWeight.bold),),
-                      const SizedBox(height: 15,)
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(info.strServices,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12,
+                                color: Color.fromRGBO(102, 102, 102, 1)),)
+                      )
                     ],
                   ),
                 )
             ),
-            createColorBar(info.services),
-            Expanded(
+            const SizedBox(width: 10,)
+            /*Expanded(
                 child: Column(
                   children: [
                     SizedBox(
@@ -168,19 +262,21 @@ class MainPage extends StatelessWidget {
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
-                  color: Color.fromRGBO(102, 102, 102, 1)),)
+                  color: Color.fromRGBO(102, 102, 102, 1)),)*/
           ],
         ),
-        Container(height: 2, color: const Color.fromRGBO(241, 241, 241, 1),)
+        Container(height: 2, color: Colors.white,),
+        Container(height: 2, color: const Color.fromRGBO(241, 241, 241, 1),),
+        Container(height: 2, color: Colors.white,),
       ],
     );
   }
 
-  Widget createColorBar(List<Color> colors)
-  {
-    return Row(children: colors.map((item) =>
+  Widget createColorBar(List<Color> colors) {
+    return Column(
+        children: colors.map((item) =>
         Container(
-          width: 20,
+          width: 5,
           color: item,
         )
     ).toList());

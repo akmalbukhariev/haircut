@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'content_views/child_widgets.dart';
+import '../../content_views/child_widgets.dart';
 
 class MyLicensePage extends StatelessWidget {
   const MyLicensePage({super.key});

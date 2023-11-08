@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'content_views/child_widgets.dart';
-import 'content_views/clean_button_textfield.dart';
+import '../../content_views/child_widgets.dart';
+import '../../content_views/clean_button_textfield.dart';
 
 class GeoLocationPage extends StatelessWidget {
   const GeoLocationPage({super.key});
