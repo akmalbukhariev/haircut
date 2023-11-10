@@ -135,3 +135,40 @@ Widget noteText({required String text}) {
     ),
     softWrap: true,);
 }
+
+Widget createShadowDropBox({required List<String> list, required double w, required double h, double corner = 15}) {
+  String? selectedItem = list.first;
+  final TextEditingController colorController = TextEditingController();
+
+  return Container(
+      width: w,
+      height: h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(corner),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Center(child: DropdownButton<String>(
+        value: selectedItem,
+        //icon: const Icon(Icons.arrow_forward_ios, size: 12),
+        elevation: 0,
+        style: const TextStyle(color: Colors.grey),
+        underline: const SizedBox(),
+        onChanged: (String? newValue) {},
+        items: list.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
+      )
+  );
+}

@@ -253,8 +253,7 @@ class _MyServicesPage extends State<MyServicesPage> {
 
   Widget createText({String text = ""}) {
     return Text(text,
-      style: TextStyle(color: Color.fromRGBO(
-          167, 167, 167, 1)),
+      style: TextStyle(color: Color.fromRGBO(167, 167, 167, 1)),
     );
   }
 
@@ -310,7 +309,7 @@ class _MyServicesPage extends State<MyServicesPage> {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 10,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),

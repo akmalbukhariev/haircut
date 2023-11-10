@@ -102,8 +102,6 @@ class _MenuPage extends State<MenuPage> {
   bool _languageVisible = false;
   bool _notificationVisible = false;
 
-  ScrollController _scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Material(

@@ -15,12 +15,6 @@ enum MenuId{
   contactUs
 }
 
-class C {
-  int x;
-
-  C(this.x);
-}
-
 class MenuItem{
   final String image;
   final String title;
