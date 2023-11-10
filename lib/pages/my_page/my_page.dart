@@ -178,9 +178,7 @@ class _MyPage extends State<MyPage> {
                     animateWidget(
                         widget: createDateTime(), context: context, visible: _dateTimeVisible),
                     animateWidget(
-                        widget: createProfession(),
-                        context: context,
-                        visible: _professionVisible),
+                        widget: createProfession(), context: context, visible: _professionVisible),
                   ],)
             )
         )
@@ -297,10 +295,10 @@ class _MyPage extends State<MyPage> {
                 );
                 break;
                 case MyMenu.my_comments:
-                  /*Navigator.push(
+                  Navigator.push(
                     context,
                     CupertinoPageRoute(builder: (context) => const MyCommentsPage()),
-                  );*/
+                  );
                   break;
                 case MyMenu.log_out:
                 default: break;
@@ -357,7 +355,6 @@ class _MyPage extends State<MyPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  //width: 250,
                   height: 350,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -402,8 +399,7 @@ class _MyPage extends State<MyPage> {
                             ),
                             Expanded(
                               child: Container(
-                                child: const DatePickerWidget(
-                                    title: 'Gacha'),
+                                child: const DatePickerWidget(title: 'Gacha'),
                               ),
                             ),
                           ],

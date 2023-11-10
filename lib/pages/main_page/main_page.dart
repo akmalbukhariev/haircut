@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/pages/custom_page_route.dart';
+import 'package:haircut/pages/main_page/menu_page.dart';
 import 'package:haircut/pages/my_page/my_page.dart';
 
 import '../../models/booked_info.dart';
@@ -127,7 +129,17 @@ class _MainPage extends State<MainPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            headerImage(image: "images/menu2.png"),
+            GestureDetector(
+              onTap: (){
+                Navigator.of(context).push(
+                  CustomPageRoute(child: const MenuPage())
+                  /*CupertinoPageRoute(
+                    builder: (context) => const MenuPage(),
+                  ),*/
+                );
+              },
+              child: headerImage(image: "images/menu2.png"),
+            ),
             Row(
               children: [
                 Text(strMonth,
