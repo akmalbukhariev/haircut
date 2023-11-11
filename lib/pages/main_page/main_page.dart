@@ -244,37 +244,6 @@ class _MainPage extends State<MainPage> {
                 )
             ),
             const SizedBox(width: 10,)
-            /*Expanded(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(info.name,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Color.fromRGBO(102, 102, 102, 1)),)
-                      ,),
-                    const SizedBox(height: 7,),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(info.strServices,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 12,
-                            color: Color.fromRGBO(102, 102, 102, 1)),)
-                      ,),
-                  ],
-                )
-            ),
-            Text(info.phone,
-              textAlign: TextAlign.start,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color.fromRGBO(102, 102, 102, 1)),)*/
           ],
         ),
         Container(height: 2, color: Colors.white,),

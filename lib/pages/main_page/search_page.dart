@@ -70,7 +70,6 @@ class _SearchPage extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-
     for (var sInfo in searchInfoList) {
       groupedSearchMap.putIfAbsent(sInfo.date, () => []);
       groupedSearchMap[sInfo.date]!.add(sInfo);
@@ -154,39 +153,126 @@ class _SearchPage extends State<SearchPage> {
   }
 
   Widget createGrouppedList() {
-    return Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-        child: ListView.builder(
-            itemCount: groupedSearchMap.length,
-            itemBuilder: (context, index) {
-              String groupID = groupedSearchMap.keys.elementAt(index);
-              List<SearchInfo>? infoList = groupedSearchMap[groupID];
-              return Column(
-                children: [
-                  Container(
-                    color: const Color.fromRGBO(17, 138, 178, 1),
-                    child: Text(
-                      groupID, style: const TextStyle(color: Colors.white),),
-                  ),
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)
+    return Expanded(
+        child: Padding(padding: const EdgeInsets.only(left: 10, right: 10),
+            child: ListView.builder(
+                itemCount: groupedSearchMap.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String groupID = groupedSearchMap.keys.elementAt(index);
+                  List<SearchInfo>? infoList = groupedSearchMap[groupID];
+
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(children: [
+                        Container(
+                            height: 30,
+                            color: const Color.fromRGBO(17, 138, 178, 1),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5, right: 5, top: 5),
+                              child: Text(
+                                groupID,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            )
+                        ),
+                        const Expanded(child: SizedBox())
+                      ],),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: infoList?.length ?? 0,
+                            itemBuilder: (BuildContext context, int index) {
+                              return grouppedItem(info: infoList![index]);
+                            }
+                        ),
+
                       ),
-                      child: ListView.builder(
-                          itemCount: infoList?.length,
-                          itemBuilder: (context, index) {
-                            SearchInfo item = infoList![index];
-                            return grouppedItem(info: item);
-                          }
-                      ))
-                ],);
-            }
+                      const SizedBox(height: 25,)
+                    ],
+                  );
+                }
+            )
         )
     );
   }
 
   Widget grouppedItem({required SearchInfo info}){
-      return Container();
+    Color serviceColor = info.services.isNotEmpty? info.services[0] : Colors.white;
+      return Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 50,
+                height: 65,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10,),
+                    Text(info.startTime, style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 5,),
+                    Text(info.startTime, style: const TextStyle(
+                        color: Color.fromRGBO(102, 102, 102, 1),
+                        fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 15,)
+                  ],
+                ),
+              ),
+              Container(width: 5, height: 65, color: serviceColor,),
+              //createColorBar(info.services),
+              const SizedBox(width: 10,),
+              Expanded(
+                  child: SizedBox(
+                    height: 65,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(info.name,
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Color.fromRGBO(102, 102, 102, 1)),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(info.phone,
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Color.fromRGBO(102, 102, 102, 1)),)
+                          ],
+                        ),
+                        const SizedBox(height: 5,),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(info.strServices,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(102, 102, 102, 1)),)
+                        )
+                      ],
+                    ),
+                  )
+              ),
+              const SizedBox(width: 10,)
+            ],
+          ),
+          Container(height: 2, color: Colors.white,),
+          Container(height: 2, color: const Color.fromRGBO(241, 241, 241, 1),),
+          Container(height: 2, color: Colors.white,),
+        ],
+      );
   }
 }
