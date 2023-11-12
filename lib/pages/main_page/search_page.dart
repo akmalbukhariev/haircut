@@ -110,6 +110,7 @@ class _SearchPage extends State<SearchPage> {
       "Ism (A -Ng)",
       "Ism (Ng - A)"
     ];
+
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Row(
