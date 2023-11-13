@@ -32,17 +32,19 @@ class _AddCustomerPage extends State<AddCustomerPage> {
                       child: Container(
                         color: const Color.fromRGBO(240, 244, 249, 1),
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 20,),
-                              createInfo1(),
-                              const SizedBox(height: 20,),
-                              createInfo2(),
-                              const SizedBox(height: 20,),
-                              createInfo3(),
-                            ],
-                          ),
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 20,),
+                                  createInfo1(),
+                                  const SizedBox(height: 20,),
+                                  createInfo2(),
+                                  const SizedBox(height: 20,),
+                                  createInfo3(),
+                                ],
+                              ),
+                            )
                         ),
                       ),
                     ),

@@ -74,13 +74,13 @@ final bookedList = [
       phone: "+99897123654" ),
 ];
 
-class MainPage extends StatefulWidget{
+class MonthPage extends StatefulWidget{
 
   @override
-  State<StatefulWidget> createState() => _MainPage();
+  State<MonthPage> createState() => _MonthPage();
 }
 
-class _MainPage extends State<MainPage> {
+class _MonthPage extends State<MonthPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
