@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haircut/pages/main_page/create_customer_page.dart';
+import 'package:haircut/pages/main_page/main_page.dart';
 import 'package:haircut/pages/main_page/month_page.dart';
 import 'package:haircut/pages/main_page/menu_page.dart';
 import 'package:haircut/pages/main_page/search_page.dart';
@@ -26,7 +27,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: WeekPage(),
+        body: MainPage(),
       )
     );
   }

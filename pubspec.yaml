@@ -39,7 +39,7 @@ dependencies:
   percent_indicator: ^4.0.1
   adobe_xd: ^2.0.1
   flutter_svg: ^1.1.6
-  calendar_view: ^1.0.4
+  calendar_view: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -97,6 +97,14 @@ flutter:
     - images/settings.png
     - images/online_chat.png
     - images/search_blue.png
+    - images/month_gray.png
+    - images/month_red.png
+    - images/week_gray.png
+    - images/week.png
+    - images/day_gray.png
+    - images/day.png
+    - images/today_gray.png
+    - images/icon_2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

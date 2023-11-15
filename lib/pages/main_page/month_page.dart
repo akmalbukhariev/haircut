@@ -1,4 +1,5 @@
 
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut/pages/custom_page_route.dart';
@@ -6,7 +7,6 @@ import 'package:haircut/pages/main_page/menu_page.dart';
 import 'package:haircut/pages/my_page/my_page.dart';
 
 import '../../models/booked_info.dart';
-import 'custom_calendar.dart';
 
 final bookedList = [
   BookedInfo(
@@ -81,22 +81,22 @@ class MonthPage extends StatefulWidget{
 }
 
 class _MonthPage extends State<MonthPage> {
+
+  EventController controller = EventController();
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         child: SafeArea(
             child: Container(
-                color: Colors.white,
+                color: Color.fromRGBO(250, 250, 250, 1),
                 child: Column(
                   children: [
-                    createHeader(),
-                    const SizedBox(height: 20,),
-                    const CustomCalendar(),
-                    Container(height: 2,
-                      color: const Color.fromRGBO(222, 222, 222, 1),),
+                    const SizedBox(height: 10,),
+                    createCalendar(),
+                    Container(height: 2,color: const Color.fromRGBO(222, 222, 222, 1),),
                     const SizedBox(height: 2,),
-                    Container(height: 2,
-                      color: const Color.fromRGBO(222, 222, 222, 1),),
+                    Container(height: 2, color: const Color.fromRGBO(222, 222, 222, 1),),
                     Expanded(
                       child: CustomScrollView(
                         slivers: [
@@ -121,62 +121,55 @@ class _MonthPage extends State<MonthPage> {
     );
   }
 
-  Widget createHeader() {
-    final String strMonth = "yanvar";
-    final String strYear = "2023";
-    return Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: (){
-                Navigator.of(context).push(
-                  CustomPageRoute(child: const MenuPage())
-                  /*CupertinoPageRoute(
-                    builder: (context) => const MenuPage(),
-                  ),*/
-                );
-              },
-              child: headerImage(image: "images/menu2.png"),
-            ),
-            Row(
-              children: [
-                Text(strMonth,
-                  style: const TextStyle(
-                      color: Color.fromRGBO(17, 138, 138, 1),
+  Widget createCalendar() {
+    return Expanded(
+        child: CalendarControllerProvider(
+            controller: controller,
+            child: Scaffold(
+              body: MonthView(
+                headerStyle: HeaderStyle(
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(250, 250, 250, 1)
+                  ),
+                  //headerMargin: EdgeInsets.only(right: 10),
+                  //headerPadding: EdgeInsets.only(right: 60),
+                  headerTextStyle: TextStyle(
+                      color: Color.fromRGBO(17, 138, 178, 1),
                       fontWeight: FontWeight.bold,
-                      fontSize: 20
-                  ),
+                      fontSize: 0.1),
+                  rightIconVisible: false,
+                  leftIconVisible: false,
+
                 ),
-                const SizedBox(width: 10,),
-                Text(strYear,
-                  style: const TextStyle(
-                      color: Color.fromRGBO(17, 138, 138, 1),
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20
-                  ),
-                ),
-              ],
-            ),
-            headerImage(image: "images/notification.png"),
-            headerImage(image: "images/search_gray.png"),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) => const MyPage()),
-                );
-              },
-              child: headerImage(image: "images/avatar.png"),
+                borderColor: const Color.fromRGBO(220, 220, 220, 1),
+                borderSize: 1,
+                cellAspectRatio: 0.6,
+                onEventTap: (event, date) {
+                  print(event);
+                },
+                weekDayBuilder: (int index) {
+                  final day = [
+                    'Du',
+                    'Se',
+                    'Ch',
+                    'Pa',
+                    'Ju',
+                    'Sh',
+                    'Ya'
+                  ];
+                  return Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(day[index]),
+                  );
+                },
+                headerStringBuilder: (DateTime time,{DateTime? secondaryDate}){
+                  return "";
+                },
+              ),
             )
-          ],
         )
     );
-  }
-
-  Widget headerImage({String image = ""}) {
-    return Image.asset(image, width: 30, height: 30,);
   }
 
   Widget createBookedItem({required BookedInfo info}) {
