@@ -1,13 +1,16 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/pages/main_page/search_page.dart';
 import 'package:haircut/pages/main_page/week_page.dart';
 
 import '../custom_page_route.dart';
 import '../my_page/my_page.dart';
+import 'create_customer_page.dart';
 import 'day_page.dart';
 import 'menu_page.dart';
 import 'month_page.dart';
+import 'notification_page.dart';
 
 class MainPage extends StatefulWidget{
   const MainPage({super.key});
@@ -22,13 +25,21 @@ class _MainPage extends State<MainPage> {
   List<Widget> _widgetOptions = <Widget>[
     MonthPage(),
     WeekPage(),
-    DayPage()
+    DayPage(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void onItemTapped(int index) {
+    if(index != 4 && index != 3) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+    else if(index == 3){
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => AddCustomerPage()),
+      );
+    }
   }
 
   @override
@@ -65,8 +76,7 @@ class _MainPage extends State<MainPage> {
               label: 'Kun',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                "images/icon_2.png", width: 80, height: 80,),
+              icon: Image.asset("images/icon_2.png", width: 50, height: 50,),
               label: '',
             ),
             BottomNavigationBarItem(
@@ -75,7 +85,7 @@ class _MainPage extends State<MainPage> {
             ),
           ],
           currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
+          onTap: onItemTapped,
         )
     );
   }
@@ -119,8 +129,26 @@ class _MainPage extends State<MainPage> {
                 ),
               ],
             ),
-            headerImage(image: "images/notification.png"),
-            headerImage(image: "images/search_gray.png"),
+            GestureDetector(
+              onTap: (){
+                Navigator.of(context).push(
+                    CupertinoPageRoute(builder: (context) => const NotificationPage())
+                );
+              },
+              child: Badge(
+                label: Text("3"),
+                child: headerImage(image: "images/notification_color.png"),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => const SearchPage()),
+                );
+              },
+              child: headerImage(image: "images/search_gray.png"),
+            ),
             GestureDetector(
               onTap: (){
                 Navigator.push(

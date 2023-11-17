@@ -62,10 +62,14 @@ class _AddCustomerPage extends State<AddCustomerPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset("images/icon_1.png", width: 30, height: 30,),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Image.asset("images/icon_1.png", width: 30, height: 30,),
+          ),
           const Expanded(child: SizedBox()),
-          Text("Saqlash",
-            style: TextStyle(color: Colors.red, fontSize: 25),
+          const Text("Saqlash",style: TextStyle(color: Colors.red, fontSize: 25),
           )
         ],
       ),

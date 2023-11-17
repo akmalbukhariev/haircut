@@ -2,13 +2,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:haircut/models/booked_info.dart';
+import 'customer_info.dart';
 
-class SearchInfo extends BookedInfo {
-  String date;
-
+class SearchInfo extends CustomerInfo {
   SearchInfo({
-    this.date = "",
+    String date = "",
     String startTime = "",
     String endTime = "",
     String name = "",
@@ -16,10 +14,12 @@ class SearchInfo extends BookedInfo {
     String phone = "",
     List<Color>? services,
   })
-  :super(startTime: startTime,
-  endTime: endTime,
-  name: name,
-  strServices: strServices,
-  phone: phone,
-  services: services);
+      :super(
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+      name: name,
+      strServices: strServices,
+      phone: phone,
+      services: services);
 }

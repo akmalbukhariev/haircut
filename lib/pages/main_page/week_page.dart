@@ -77,6 +77,7 @@ CalendarEventData<Event> _event = CalendarEventData(
   //endDate: DateTime(2023, 11, 17),
   event: Event(title: "Joe's Birthday"),
   title: "PPPPP",
+  
   description: "Today is project meeting.",
   //startTime: DateTime(_now.year, _now.month, _now.day, 18, 30),
   //endTime: DateTime(_now.year, _now.month, _now.day, 22),
@@ -98,7 +99,7 @@ class _WeekPage extends State<WeekPage> {
           controller: controller,
           child: WeekView(
             initialDay: DateTime(2023, 11, 12),
-            headerStyle: HeaderStyle(
+            headerStyle: const HeaderStyle(
               decoration: BoxDecoration(
                   color: Color.fromRGBO(250, 250, 250, 1)
               ),

@@ -89,31 +89,33 @@ class _MonthPage extends State<MonthPage> {
     return CupertinoPageScaffold(
         child: SafeArea(
             child: Container(
-                color: Color.fromRGBO(250, 250, 250, 1),
+                color: const Color.fromRGBO(250, 250, 250, 1),
                 child: Column(
                   children: [
                     const SizedBox(height: 10,),
                     createCalendar(),
-                    Container(height: 2,color: const Color.fromRGBO(222, 222, 222, 1),),
+                    Container(height: 2, color: const Color.fromRGBO(222, 222, 222, 1),),
                     const SizedBox(height: 2,),
                     Container(height: 2, color: const Color.fromRGBO(222, 222, 222, 1),),
-                    Expanded(
-                      child: CustomScrollView(
-                        slivers: [
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                                  (BuildContext context,
-                                  int index) {
+                    Container(
+                      height: 200,
+                      //child: Expanded(
+                        child: CustomScrollView(
+                          slivers: [
+                            SliverList(
+                              delegate: SliverChildBuilderDelegate((
+                                  BuildContext context, int index) {
                                 final item = bookedList[index];
                                 return createBookedItem(info: item);
                               },
-                              childCount: bookedList.length,
+                                childCount: bookedList.length,
+                              ),
+                              //shrinkWrap: true,
                             ),
-                            //shrinkWrap: true,
-                          ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                      //),
+                    )
                   ]
                   ,)
             )
@@ -127,19 +129,16 @@ class _MonthPage extends State<MonthPage> {
             controller: controller,
             child: Scaffold(
               body: MonthView(
-                headerStyle: HeaderStyle(
+                headerStyle: const HeaderStyle(
                   decoration: BoxDecoration(
                       color: Color.fromRGBO(250, 250, 250, 1)
                   ),
-                  //headerMargin: EdgeInsets.only(right: 10),
-                  //headerPadding: EdgeInsets.only(right: 60),
                   headerTextStyle: TextStyle(
                       color: Color.fromRGBO(17, 138, 178, 1),
                       fontWeight: FontWeight.bold,
-                      fontSize: 0.1),
+                      fontSize: 0.0),
                   rightIconVisible: false,
                   leftIconVisible: false,
-
                 ),
                 borderColor: const Color.fromRGBO(220, 220, 220, 1),
                 borderSize: 1,
@@ -174,36 +173,37 @@ class _MonthPage extends State<MonthPage> {
 
   Widget createBookedItem({required BookedInfo info}) {
     Color serviceColor = info.services.isNotEmpty? info.services[0] : Colors.white;
+    double height = 45;
     return Column(
       children: [
         Row(
           children: [
             Container(
               width: 50,
-              height: 65,
+              height: height,
               color: const Color.fromRGBO(242, 249, 253, 1),
               child: Column(
                 children: [
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 5,),
                   Text(info.startTime, style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 5,),
+                  //const SizedBox(height: 5,),
                   Text(info.startTime, style: const TextStyle(
                       color: Color.fromRGBO(102, 102, 102, 1),
                       fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 15,)
+                  //const SizedBox(height: 15,)
                 ],
               ),
             ),
-            Container(width: 5, height: 65, color: serviceColor,),
+            Container(width: 5, height: height, color: serviceColor,),
             //createColorBar(info.services),
             const SizedBox(width: 10,),
             Expanded(
                 child: SizedBox(
-                  height: 65,
+                  height: height,
                   child: Column(
                     children: [
-                      const SizedBox(height: 10,),
+                      const SizedBox(height: 5,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -223,7 +223,7 @@ class _MonthPage extends State<MonthPage> {
                                 color: Color.fromRGBO(102, 102, 102, 1)),)
                         ],
                       ),
-                      const SizedBox(height: 5,),
+                      //const SizedBox(height: 5,),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text(info.strServices,

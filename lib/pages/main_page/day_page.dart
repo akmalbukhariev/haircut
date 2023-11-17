@@ -20,7 +20,7 @@ class _DayPage extends State<DayPage>{
         child: CalendarControllerProvider(
           controller: controller,
           child: DayView(
-            headerStyle: HeaderStyle(
+            headerStyle: const HeaderStyle(
               decoration: BoxDecoration(
                   color: Color.fromRGBO(250, 250, 250, 1)
               ),
@@ -39,7 +39,7 @@ class _DayPage extends State<DayPage>{
               return "";
             },
             liveTimeIndicatorSettings: const HourIndicatorSettings(color: Colors.red),
-            halfHourIndicatorSettings: HourIndicatorSettings(
+            halfHourIndicatorSettings: const HourIndicatorSettings(
                 color: Color.fromRGBO(240, 240, 240, 1),
             lineStyle: LineStyle.dashed
             ),

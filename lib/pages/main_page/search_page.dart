@@ -70,6 +70,8 @@ class _SearchPage extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    groupedSearchMap.clear();
+
     for (var sInfo in searchInfoList) {
       groupedSearchMap.putIfAbsent(sInfo.date, () => []);
       groupedSearchMap[sInfo.date]!.add(sInfo);
@@ -116,7 +118,12 @@ class _SearchPage extends State<SearchPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset("images/icon_1.png", width: 30, height: 30,),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Image.asset("images/icon_1.png", width: 30, height: 30,),
+          ),
           Row(
             children: [
               Text("Saralash: ",
@@ -155,44 +162,48 @@ class _SearchPage extends State<SearchPage> {
 
   Widget createGrouppedList() {
     return Expanded(
-        child: Padding(padding: const EdgeInsets.only(left: 10, right: 10),
+        child: Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: ListView.builder(
                 itemCount: groupedSearchMap.length,
                 itemBuilder: (BuildContext context, int index) {
                   String groupID = groupedSearchMap.keys.elementAt(index);
                   List<SearchInfo>? infoList = groupedSearchMap[groupID];
-
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Row(children: [
-                        Container(
-                            height: 30,
-                            color: const Color.fromRGBO(17, 138, 178, 1),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 5, right: 5, top: 5),
-                              child: Text(
-                                groupID,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )
-                        ),
-                        const Expanded(child: SizedBox())
-                      ],),
+                      Row(
+                        children: [
+                          Container(
+                              height: 30,
+                              color: const Color.fromRGBO(17, 138, 178, 1),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 5),
+                                child: Text(
+                                  groupID,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              )
+                          ),
+                          const Expanded(child: SizedBox())
+                        ],),
                       Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: infoList?.length ?? 0,
-                            itemBuilder: (BuildContext context, int index) {
-                              return grouppedItem(info: infoList![index]);
-                            }
-                        ),
-
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: SizedBox(
+                            height: 200,
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: infoList?.length ?? 0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return grouppedItem(info: infoList![index]);
+                                }
+                            ),
+                          )
                       ),
                       const SizedBox(height: 25,)
                     ],
@@ -205,36 +216,37 @@ class _SearchPage extends State<SearchPage> {
 
   Widget grouppedItem({required SearchInfo info}){
     Color serviceColor = info.services.isNotEmpty? info.services[0] : Colors.white;
+    double height = 40;
       return Column(
         children: [
           Row(
             children: [
               Container(
                 width: 50,
-                height: 65,
+                height: height,
                 color: Colors.white,
                 child: Column(
                   children: [
-                    const SizedBox(height: 10,),
+                    //const SizedBox(height: 10,),
                     Text(info.startTime, style: const TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),),
-                    const SizedBox(height: 5,),
+                    //const SizedBox(height: 5,),
                     Text(info.startTime, style: const TextStyle(
                         color: Color.fromRGBO(102, 102, 102, 1),
                         fontWeight: FontWeight.bold),),
-                    const SizedBox(height: 15,)
+                    //const SizedBox(height: 15,)
                   ],
                 ),
               ),
-              Container(width: 5, height: 65, color: serviceColor,),
+              Container(width: 5, height: height, color: serviceColor,),
               //createColorBar(info.services),
               const SizedBox(width: 10,),
               Expanded(
                   child: SizedBox(
-                    height: 65,
+                    height: height,
                     child: Column(
                       children: [
-                        const SizedBox(height: 10,),
+                        //const SizedBox(height: 10,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -254,7 +266,7 @@ class _SearchPage extends State<SearchPage> {
                                   color: Color.fromRGBO(102, 102, 102, 1)),)
                           ],
                         ),
-                        const SizedBox(height: 5,),
+                        //const SizedBox(height: 5,),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(info.strServices,

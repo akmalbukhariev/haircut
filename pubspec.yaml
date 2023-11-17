@@ -89,6 +89,7 @@ flutter:
     - images/visible.png
     - images/love.png
     - images/notification.png
+    - images/notification_color.png
     - images/search_gray.png
     - images/menu2.png
     - images/icon_18.png
@@ -105,6 +106,11 @@ flutter:
     - images/day.png
     - images/today_gray.png
     - images/icon_2.png
+    - images/plus.png
+    - images/call_1.png
+    - images/check_1.png
+    - images/edit_1.png
+    - images/delete_1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
