@@ -40,6 +40,7 @@ dependencies:
   adobe_xd: ^2.0.1
   flutter_svg: ^1.1.6
   calendar_view: ^1.0.2
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,7 @@ flutter:
     - images/icon_10.png
     - images/delete.png
     - images/speech_bubble.png
+    - images/speech_bubble_1.png
     - images/visible.png
     - images/love.png
     - images/notification.png
@@ -111,6 +113,19 @@ flutter:
     - images/check_1.png
     - images/edit_1.png
     - images/delete_1.png
+    - images/bell.png
+    - images/avatar_1.png
+    - images/avatar_2.png
+    - images/avatar_3.png
+    - images/avatar_4.png
+    - images/avatar_5.png
+    - images/heart.png
+    - images/comboBox.png
+    - images/back.png
+    - images/heart_2.png
+    - images/share_1.png
+    - images/right.png
+    - images/call.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

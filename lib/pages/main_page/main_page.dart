@@ -46,46 +46,54 @@ class _MainPage extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Column(
-            children: [
-              createHeader(),
-              Expanded(
-                  child: _widgetOptions.elementAt(_selectedIndex)
-              ),
-            ],
-          )
+            child: Column(
+              children: [
+                createHeader(),
+                Expanded(
+                    child: _widgetOptions.elementAt(_selectedIndex)
+                ),
+              ],
+            )
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showUnselectedLabels: true,
-          unselectedItemColor: Colors.black,
-          selectedItemColor: Colors.red,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: createImage(image: "images/month_gray.png"),
-              activeIcon: createImage(image: "images/month_red.png"),
-              label: 'Oy',
-            ),
-            BottomNavigationBarItem(
-              icon: createImage(image: "images/week_gray.png"),
-              activeIcon: createImage(image: "images/week.png"),
-              label: 'Hafta',
-            ),
-            BottomNavigationBarItem(
-              icon: createImage(image: "images/today_gray.png"),
-              activeIcon: createImage(image: "images/week.png"),
-              label: 'Kun',
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset("images/icon_2.png", width: 50, height: 50,),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: createImage(image: "images/day_gray.png"),
-              label: 'Bugun',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: onItemTapped,
+        bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+                border: Border(
+                    top: BorderSide(color: Colors.grey, width: 1.5))),
+            child: BottomNavigationBar(
+              backgroundColor: const Color.fromRGBO(240, 244, 249, 1),
+              type: BottomNavigationBarType.fixed,
+              showUnselectedLabels: true,
+              unselectedItemColor: Colors.black,
+              selectedItemColor: Colors.red,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: createImage(image: "images/month_gray.png"),
+                  activeIcon: createImage(image: "images/month_red.png"),
+                  label: 'Oy',
+                ),
+                BottomNavigationBarItem(
+                  icon: createImage(image: "images/week_gray.png"),
+                  activeIcon: createImage(image: "images/week.png"),
+                  label: 'Hafta',
+                ),
+                BottomNavigationBarItem(
+                  icon: createImage(image: "images/today_gray.png"),
+                  activeIcon: createImage(image: "images/week.png"),
+                  label: 'Kun',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    "images/icon_2.png", width: 50, height: 50,),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: createImage(image: "images/day_gray.png"),
+                  label: 'Bugun',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              onTap: onItemTapped,
+            )
         )
     );
   }

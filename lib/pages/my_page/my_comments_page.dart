@@ -60,8 +60,7 @@ class MyCommentsPage extends StatelessWidget {
                                         )
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         createScore(score: 3),
                                         const SizedBox(width: 45,),
@@ -164,7 +163,7 @@ class MyCommentsPage extends StatelessWidget {
     );
   }
 
-  Widget createScore({int score = 0}) {
+  /*Widget createScore({int score = 0}) {
     return Column(
       children: [
         Text(score.toString(),
@@ -177,9 +176,9 @@ class MyCommentsPage extends StatelessWidget {
         rowStar(score: score)
       ],
     );
-  }
+  }*/
 
-  Widget rowStar({int score = 0}) {
+  /*Widget rowStar({int score = 0}) {
     dynamic row;
     switch (score) {
       case 0:
@@ -250,9 +249,9 @@ class MyCommentsPage extends StatelessWidget {
         break;
     }
     return row;
-  }
+  }*/
 
-  Widget createProgressBar({required BuildContext context, double value = 0}) {
+  /*Widget createProgressBar({required BuildContext context, double value = 0}) {
     return Row(
       children: [
         Text(value.toString(),
@@ -289,18 +288,17 @@ class MyCommentsPage extends StatelessWidget {
         ),
       ]
       ,);
-  }
+  }*/
 
-  Widget starOnImage() {
+  /*Widget starOnImage() {
     return Image.asset("images/icon_16.png", width: 20, height: 20,);
-  }
+  }*/
 
-  Widget starOffImage() {
+  /*Widget starOffImage() {
     return Image.asset("images/icon_15.png", width: 20, height: 20,);
-  }
+  }*/
 
-  Widget createComment(
-      {String name = "", int starCount = 0, String strDate = "", String comment = ""}) {
+  Widget createComment({String name = "", int starCount = 0, String strDate = "", String comment = ""}) {
     return Padding(
       padding: const EdgeInsets.only(left: 10, top: 10),
       child: Column(
@@ -326,7 +324,7 @@ class MyCommentsPage extends StatelessWidget {
   }
 }
 
-class ProgressBar extends StatelessWidget {
+/*class ProgressBar extends StatelessWidget {
   final double max;
   final double current;
   final Color color;
@@ -367,4 +365,4 @@ class ProgressBar extends StatelessWidget {
       },
     );
   }
-}
+}*/

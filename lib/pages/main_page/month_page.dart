@@ -103,8 +103,7 @@ class _MonthPage extends State<MonthPage> {
                         child: CustomScrollView(
                           slivers: [
                             SliverList(
-                              delegate: SliverChildBuilderDelegate((
-                                  BuildContext context, int index) {
+                              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
                                 final item = bookedList[index];
                                 return createBookedItem(info: item);
                               },
