@@ -37,7 +37,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_colorpicker: ^1.0.3
   percent_indicator: ^4.0.1
-  adobe_xd: ^2.0.1
   flutter_svg: ^1.1.6
   calendar_view: ^1.0.2
   carousel_slider: ^4.2.1
@@ -90,6 +89,7 @@ flutter:
     - images/speech_bubble_1.png
     - images/visible.png
     - images/love.png
+    - images/love_red.png
     - images/notification.png
     - images/notification_color.png
     - images/search_gray.png
@@ -126,6 +126,13 @@ flutter:
     - images/share_1.png
     - images/right.png
     - images/call.png
+    - images/email.png
+    - images/logout.png
+    - images/home.png
+    - images/home_red.png
+    - images/clipboard.png
+    - images/clipboard_red.png
+    - images/user.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

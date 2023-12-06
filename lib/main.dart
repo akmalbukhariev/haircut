@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haircut/models/menu_item.dart';
 import 'package:haircut/pages/main_page/create_customer_page.dart';
 import 'package:haircut/pages/main_page/main_page.dart';
 import 'package:haircut/pages/main_page/month_page.dart';
@@ -13,8 +14,15 @@ import 'package:haircut/pages/my_page/my_page.dart';
 import 'package:haircut/pages/my_page/my_photo_album.dart';
 import 'package:haircut/pages/my_page/my_phone_page.dart';
 import 'package:haircut/pages/my_page/my_services_page.dart';
+import 'package:haircut/user_pages/comments_about_hairdresser_page.dart';
+import 'package:haircut/user_pages/favorite_hairdresser_page.dart';
+import 'package:haircut/user_pages/hairdresser_docs_page.dart';
 import 'package:haircut/user_pages/hairdresser_list_page.dart';
 import 'package:haircut/user_pages/hairdresser_page.dart';
+import 'package:haircut/user_pages/make_appointment_page.dart';
+import 'package:haircut/user_pages/my_appointment_history_page.dart';
+import 'package:haircut/user_pages/my_main_page.dart';
+import 'package:haircut/user_pages/my_room_page.dart';
 
 import 'info_listview_menu.dart';
 
@@ -29,7 +37,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: HairdresserPage(),
+        body: MyMainPage(),
       )
     );
   }

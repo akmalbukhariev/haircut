@@ -189,7 +189,6 @@ class _MenuPage extends State<MenuPage> {
             strOnOffImage = "images/icon_6.png";
           }
         }
-
         return Container(
             color: const Color.fromRGBO(249, 249, 249, 1),
             child: Column(
