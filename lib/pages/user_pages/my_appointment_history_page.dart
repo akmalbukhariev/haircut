@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/booked_info.dart';
+import '../../models/booked_info.dart';
 
 final bookedList = [
   BookedInfo(name: "Alisher Ortikov", strServices: "Sartarosh, Stilis", services: [Colors.yellow], date: "01.01.2023",startTime: "9:00",  endTime: "9:30"),

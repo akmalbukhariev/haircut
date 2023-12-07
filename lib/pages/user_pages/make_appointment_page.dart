@@ -2,9 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../content_views/clean_button_textfield.dart';
-import '../content_views/date_picker_widget.dart';
-import '../models/my_service.dart';
+import '../../content_views/clean_button_textfield.dart';
+import '../../models/my_service.dart';
+
 
 final serviceList = [
   MyService(color: Colors.deepPurple, text: "Ukladka", price: "50,000 so'm"),
@@ -13,22 +13,6 @@ final serviceList = [
   MyService(color: Colors.yellow, text: "Soch olish", price: "80,000 so'm"),
   MyService(color: Colors.blueGrey, text: "Soch olish", price: "8,000 so'm"),
   MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-
 ];
 
 class MakeAppointmentPage extends StatefulWidget{

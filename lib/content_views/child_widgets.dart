@@ -180,20 +180,21 @@ Widget createShadowDropBox({required List<String> list, required double w, requi
           ),
         ],
       ),
-      child: Center(child: DropdownButton<String>(
-        value: selectedItem,
-        //icon: const Icon(Icons.arrow_forward_ios, size: 12),
-        elevation: 0,
-        style: const TextStyle(color: Colors.grey),
-        underline: const SizedBox(),
-        onChanged: (String? newValue) {},
-        items: list.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      ),
+      child: Center(
+        child: DropdownButton<String>(
+          value: selectedItem,
+          //icon: const Icon(Icons.arrow_forward_ios, size: 12),
+          elevation: 0,
+          style: const TextStyle(color: Colors.grey),
+          underline: const SizedBox(),
+          onChanged: (String? newValue) {},
+          items: list.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
       )
   );
 }
@@ -234,7 +235,7 @@ Widget createProgressBar({required BuildContext context, double value = 0}) {
         ),
       ),
     ]
-    ,);
+  ,);
 }
 
 Widget createScore({int score = 0}) {

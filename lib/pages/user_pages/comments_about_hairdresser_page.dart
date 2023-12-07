@@ -2,9 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../content_views/child_widgets.dart';
-import '../content_views/tap_animation_widget.dart';
-import '../models/comment_info.dart';
+import '../../content_views/child_widgets.dart';
+import '../../content_views/tap_animation_widget.dart';
+import '../../models/comment_info.dart';
+
+
 
 final commentList = [
   CommentInfo(name: "Begzot Nazarov",starCount: 4, date: "05.10.2023", comment: "Axbvxvhsxg hsxhv  ncbxc"),

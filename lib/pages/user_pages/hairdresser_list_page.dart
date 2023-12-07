@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut/content_views/child_widgets.dart';
 import 'package:haircut/content_views/tap_animation_widget.dart';
+import 'package:haircut/pages/user_pages/hairdresser_page.dart';
+import 'package:haircut/pages/user_pages/my_main_page.dart';
 
-import '../models/hairdresser_info.dart';
+import '../../models/hairdresser_info.dart';
 
 class HairdresserListPage extends StatefulWidget{
   const HairdresserListPage({super.key});
@@ -126,24 +128,20 @@ class _HairdresserListPage extends State<HairdresserListPage> {
                     }).toList(),
                   ),
                   const SizedBox(height: 10,),
-                  /*CustomScrollView(
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate((
-                            BuildContext context, int index) {
-                          return createItem(info: hairdresserInfoList[index]);
-                        },
-                          childCount: hairdresserInfoList.length,
-                        ),
-                      )
-                    ],
-                  )*/
                   Expanded(
                     child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: hairdresserInfoList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return createItem(info: hairdresserInfoList[index]);
+                          return TapAnimationWidget(
+                              tabWidget: createItem(info: hairdresserInfoList[index]),
+                              onPressedCallBack: (){
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(builder: (context) => HairdresserPage()),
+                                );
+                            },
+                          );
                         }
                     ),
                   )

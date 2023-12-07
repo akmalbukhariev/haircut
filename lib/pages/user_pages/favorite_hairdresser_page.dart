@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/hairdresser_info.dart';
+import '../../models/hairdresser_info.dart';
 
 final hairdressList = [
   HairdresserInfo(image: "images/avatar_1.png",name: "Alisher Ortikov", services: "Sartarosh, Stilis"),

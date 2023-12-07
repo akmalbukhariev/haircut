@@ -14,17 +14,12 @@ import 'package:haircut/pages/my_page/my_page.dart';
 import 'package:haircut/pages/my_page/my_photo_album.dart';
 import 'package:haircut/pages/my_page/my_phone_page.dart';
 import 'package:haircut/pages/my_page/my_services_page.dart';
-import 'package:haircut/user_pages/comments_about_hairdresser_page.dart';
-import 'package:haircut/user_pages/favorite_hairdresser_page.dart';
-import 'package:haircut/user_pages/hairdresser_docs_page.dart';
-import 'package:haircut/user_pages/hairdresser_list_page.dart';
-import 'package:haircut/user_pages/hairdresser_page.dart';
-import 'package:haircut/user_pages/make_appointment_page.dart';
-import 'package:haircut/user_pages/my_appointment_history_page.dart';
-import 'package:haircut/user_pages/my_main_page.dart';
-import 'package:haircut/user_pages/my_room_page.dart';
+import 'package:haircut/pages/sign_up/authentication_number_page.dart';
+import 'package:haircut/pages/sign_up/phone_number_page.dart';
+import 'package:haircut/pages/splash_screen.dart';
+import 'package:haircut/pages/user_pages/hairdresser_page.dart';
 
-import 'info_listview_menu.dart';
+import 'pages/choose_service_page.dart';
 
 void main() {
   runApp(const HairCutApp());
@@ -37,7 +32,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MyMainPage(),
+        body: ChooseServicePage(),
       )
     );
   }

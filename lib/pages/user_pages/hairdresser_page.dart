@@ -3,9 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut/content_views/tap_animation_widget.dart';
+import 'package:haircut/pages/user_pages/make_appointment_page.dart';
 
-import '../content_views/child_widgets.dart';
-import '../models/my_service.dart';
+import '../../content_views/child_widgets.dart';
+import '../../models/my_service.dart';
 
 final imageList = [
   "images/avatar_5.png",
@@ -22,22 +23,6 @@ final serviceList = [
   MyService(color: Colors.yellow, text: "Soch olish", price: "80,000 so'm"),
   MyService(color: Colors.blueGrey, text: "Soch olish", price: "8,000 so'm"),
   MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-
 ];
 
 class HairdresserPage extends StatefulWidget{
@@ -51,100 +36,82 @@ class _HairdresserPage extends State<HairdresserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Container(
-            color: const Color.fromRGBO(240, 244, 249, 1),
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    createSwiperImages(),
-                    createHeader()
-                  ],
-                ),
-                createAboutInfo(),
-                //SingleChildScrollView(
-                Expanded(
-                    child: SingleChildScrollView(
-                        child: Column(
+    return CupertinoPageScaffold(
+        child: Material(
+            child: SafeArea(
+                child: Container(
+                    color: const Color.fromRGBO(240, 244, 249, 1),
+                    child: Column(
+                      children: [
+                        Stack(
                           children: [
-                            const SizedBox(height: 15,),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 20),
-                                child: Column(children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        createServices(),
-                                        additionalDoc(),
-                                        createScoreView(),
-                                        createGeoLocation(),
-                                        createCallButton()
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.red,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius
-                                                  .circular(
-                                                  10),
-                                            )
-                                        ),
-                                        onPressed: () {},
-                                        child: const Text("Qabulga yozilish"),
-                                      )
-                                  )
-                                ],)
-                            ),
+                            createSwiperImages(),
+                            createHeader()
                           ],
+                        ),
+                        createAboutInfo(),
+                        Expanded(
+                            child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 15,),
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, right: 20, bottom: 20),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius
+                                                    .circular(10),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  createServices(),
+                                                  additionalDoc(),
+                                                  createScoreView(),
+                                                  createGeoLocation(),
+                                                  createCallButton()
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 10,),
+                                            SizedBox(
+                                                width: double.infinity,
+                                                child: ElevatedButton(
+                                                  style: ElevatedButton
+                                                      .styleFrom(
+                                                      backgroundColor: Colors
+                                                          .red,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius
+                                                            .circular(
+                                                            10),
+                                                      )
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      CupertinoPageRoute(builder: (context) => MakeAppointmentPage()),
+                                                    );
+                                                  },
+                                                  child: const Text(
+                                                      "Qabulga yozilish"),
+                                                )
+                                            )
+                                          ],)
+                                    ),
+                                  ],
+                                )
+                            )
                         )
+                      ],
                     )
                 )
-                //)
-              ],
             )
         )
     );
-    /*SafeArea(
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 200.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                /*centerTitle: true,
-                    title: Text("Collapsing Toolbar",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                        )
-                    ),*/
-                 background: createSwiperImages()
-                /*Image.network(
-                      "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
-                      fit: BoxFit.cover,
-                    )*/
-              ),
-            ),
-          ];
-        },
-        body: Center(
-          child: SizedBox()//createSwiperImages(),
-        ),
-      ),
-    );*/
   }
 
   Widget createHeader() {
@@ -153,7 +120,12 @@ class _HairdresserPage extends State<HairdresserPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset("images/back.png", width: 30, height: 30,),
+          GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Image.asset("images/back.png", width: 30, height: 30,),
+          ),
           Row(
             children: [
               Image.asset("images/heart_2.png", width: 30, height: 30,),
@@ -224,7 +196,8 @@ class _HairdresserPage extends State<HairdresserPage> {
             left: 10, top: 10, right: 15, bottom: 10),
         child: Row(
           children: [
-            SizedBox(width: 150,
+            SizedBox(
+                width: 150,
                 child: Column(
                   children: [
                     Align(
