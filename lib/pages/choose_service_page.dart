@@ -13,12 +13,6 @@ class ChooseServicePage extends StatefulWidget{
   State<ChooseServicePage> createState() => _ChooseServicePage();
 }
 
-/*
-   images/app_logo.png
-   images/i_customer.png
-   images/i_service_provider.png
-*/
-
 enum Department{
   Uzbek,
   Russian,
@@ -28,119 +22,147 @@ enum Department{
 class _ChooseServicePage extends State<ChooseServicePage> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: SafeArea(
-            child: Stack(
-              children: [
-                Container(
-                  color: const Color.fromRGBO(78, 65, 71, 1),),
-                Column(
+    return CupertinoPageScaffold(
+        child: Material(
+            child: SafeArea(
+                child: Stack(
                   children: [
-                    Align(
-                        heightFactor: 1.5,
-                        alignment: Alignment.center,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              "images/app_logo.png", width: 120, height: 120,),
-                            Text("BARBERS",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'RumbleBrave'
-                              ),),
-                            SizedBox(height: 20,),
-                            Container(
-                              color: Colors.grey, width: 180, height: 1,),
-                            SizedBox(height: 20,),
-                            SizedBox(
-                              width: 300,
-                              child: Text(
-                                "Go'zallik uchun xizmat ko'rsatuvchi platformaga",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 17
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("XUSH KELIBSIZ ", style: TextStyle(
-                                color: Colors.white, fontSize: 20),),
-                          ],
-                        )
-                    ),
-                    Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20)
-                              )
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 30, top: 30, right: 30, bottom: 10),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
-                                          border: Border.all(color: Colors.grey)
-                                      ),
-                                      child: ListTile(
-                                        onTap: (){
-                                          _askedToLead();
-                                        },
-                                        dense: true,
-                                        leading: Image.asset("images/uzbekistan.png", width: 30, height: 30,),
-                                        title: Text("O'zbek tilida davom ettirish",
-                                          style: TextStyle(color: Color.fromRGBO(118, 118, 118, 1)),
-                                        ),
-                                        trailing: Image.asset("images/icon_8.png", width: 20, height: 20,),
-                                      )
-                                      )
-                              ),
-                              const SizedBox(height: 20,),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 30, right: 30),
-                                  child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TapAnimationWidget(
-                                        tabWidget: createCard(title: "MEN XIZMAT KO'RSATUVCHIMAN", image: "images/i_service_provider.png"),
-                                        onPressedCallBack: (){
-                                          Navigator.push(
-                                            context,
-                                            CupertinoPageRoute(builder: (context) => MainPage()),
-                                          );
-                                      },
+                    Container(
+                      color: const Color.fromRGBO(78, 65, 71, 1),),
+                    Column(
+                      children: [
+                        Align(
+                            heightFactor: 1.5,
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  "images/app_logo.png", width: 120,
+                                  height: 120,),
+                                Text("BARBERS",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'RumbleBrave'
+                                  ),),
+                                SizedBox(height: 20,),
+                                Container(
+                                  color: Colors.grey, width: 180, height: 1,),
+                                SizedBox(height: 20,),
+                                SizedBox(
+                                  width: 300,
+                                  child: Text(
+                                    "Go'zallik uchun xizmat ko'rsatuvchi platformaga",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 17
                                     ),
-                                    TapAnimationWidget(
-                                        tabWidget: createCard(title: "MEN MIJOZMAN", image: "images/i_customer.png", isCustomer: true),
-                                        onPressedCallBack: (){
-                                          Navigator.push(
-                                            context,
-                                            CupertinoPageRoute(builder: (context) => MyMainPage()),
-                                          );
-                                        },
-                                    )
-                                  ],
-                                )
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+                                Text("XUSH KELIBSIZ ", style: TextStyle(
+                                    color: Colors.white, fontSize: 20),),
+                              ],
+                            )
+                        ),
+                        Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20)
+                                  )
                               ),
-                              const Expanded(child: SizedBox()),
-                              Text("Iltimos dasturdan foydalanish usulingizni tanlang",
-                                style: TextStyle(color: Color.fromRGBO(204, 204, 204, 1)),),
-                              const SizedBox(height: 20,),
-                            ],
-                          ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 30,
+                                          top: 30,
+                                          right: 30,
+                                          bottom: 10),
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius
+                                                  .circular(10),
+                                              border: Border.all(
+                                                  color: Colors.grey)
+                                          ),
+                                          child: ListTile(
+                                            onTap: () {
+                                              _askedToLead();
+                                            },
+                                            dense: true,
+                                            leading: Image.asset(
+                                              "images/uzbekistan.png",
+                                              width: 30, height: 30,),
+                                            title: Text(
+                                              "O'zbek tilida davom ettirish",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      118, 118, 118, 1)),
+                                            ),
+                                            trailing: Image.asset(
+                                              "images/icon_8.png", width: 20,
+                                              height: 20,),
+                                          )
+                                      )
+                                  ),
+                                  const SizedBox(height: 20,),
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 30, right: 30),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          TapAnimationWidget(
+                                            tabWidget: createCard(
+                                                title: "MEN XIZMAT KO'RSATUVCHIMAN",
+                                                image: "images/i_service_provider.png"),
+                                            onPressedCallBack: () {
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                CupertinoPageRoute(builder: (
+                                                    BuildContext context) => MainPage()),
+                                                    (Route<dynamic> route) => false,
+                                              );
+                                            },
+                                          ),
+                                          TapAnimationWidget(
+                                            tabWidget: createCard(
+                                                title: "MEN MIJOZMAN",
+                                                image: "images/i_customer.png",
+                                                isCustomer: true),
+                                            onPressedCallBack: () {
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                CupertinoPageRoute(
+                                                    builder: (context) => MyMainPage()),
+                                                    (Route<dynamic> route) => false,
+                                              );
+                                            },
+                                          )
+                                        ],
+                                      )
+                                  ),
+                                  const Expanded(child: SizedBox()),
+                                  Text(
+                                    "Iltimos dasturdan foydalanish usulingizni tanlang",
+                                    style: TextStyle(color: Color.fromRGBO(
+                                        204, 204, 204, 1)),),
+                                  const SizedBox(height: 20,),
+                                ],
+                              ),
+                            )
                         )
-                    )
-                  ],
-                ),
-              ],)
+                      ],
+                    ),
+                  ],)
+            )
         )
     );
   }

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../content_views/clean_button_textfield.dart';
 import '../../models/my_service.dart';
 
-
 final serviceList = [
   MyService(color: Colors.deepPurple, text: "Ukladka", price: "50,000 so'm"),
   MyService(color: Colors.red, text: "Soch bo'yash", price: "10,000 so'm"),
@@ -233,12 +232,7 @@ class _MakeAppointmentPage extends State<MakeAppointmentPage>{
     );
   }
 
-  Widget createText({
-    required String text,
-    FontWeight fontWeight = FontWeight.normal,
-    Color color = const Color.fromRGBO(
-      102, 102, 102, 1),
-    textOverflow = TextOverflow.ellipsis}) {
+  Widget createText({required String text, FontWeight fontWeight = FontWeight.normal,Color color = const Color.fromRGBO(102, 102, 102, 1),textOverflow = TextOverflow.ellipsis}) {
     return Text(text,
       overflow: textOverflow,
       style: TextStyle(color: color, fontWeight: fontWeight, fontSize: 17),

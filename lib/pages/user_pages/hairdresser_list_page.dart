@@ -25,7 +25,7 @@ final hairdresserInfoList = [
       name: "Akmal Buxariev",
       services: "Soch olish, Stilis",
       address: "Yunus obod",
-      favorate: true),
+      favorate: false),
   HairdresserInfo(
       image: "images/avatar_1.png",
       starCount: 4.6,
@@ -89,64 +89,73 @@ class _HairdresserListPage extends State<HairdresserListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Container(
-            color: const Color.fromRGBO(240, 244, 249, 1),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, top: 20, right: 10),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(child: searchTextField()),
-                      const SizedBox(width: 10,),
-                      Image.asset("images/bell.png", width: 30, height: 30,)
-                    ],
-                  ),
-                  DropdownButton(
-                    value: dropdownValue,
-                    icon: Image.asset(
-                      "images/comboBox.png", width: 15, height: 15,),
-                    //const Icon(Icons.arrow_downward),
-                    elevation: 16,
-                    style: const TextStyle(
-                        color: Color.fromRGBO(17, 138, 178, 1)),
-                    underline: Container(
-                      height: 0,
-                      color: Colors.transparent,
-                    ),
-                    onChanged: (String? value) {
-                      setState(() {
-                        dropdownValue = value!;
-                      });
-                    },
-                    items: list.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 10,),
-                  Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: hairdresserInfoList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return TapAnimationWidget(
-                              tabWidget: createItem(info: hairdresserInfoList[index]),
-                              onPressedCallBack: (){
-                                Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(builder: (context) => HairdresserPage()),
-                                );
+    return CupertinoPageScaffold(
+        child: Material(
+            child: SafeArea(
+                child: Container(
+                    color: const Color.fromRGBO(240, 244, 249, 1),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, top: 20, right: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(child: searchTextField()),
+                              const SizedBox(width: 10,),
+                              Image.asset(
+                                "images/bell.png", width: 30, height: 30,)
+                            ],
+                          ),
+                          DropdownButton(
+                            value: dropdownValue,
+                            icon: Image.asset(
+                              "images/comboBox.png", width: 15, height: 15,),
+                            //const Icon(Icons.arrow_downward),
+                            elevation: 16,
+                            style: const TextStyle(
+                                color: Color.fromRGBO(17, 138, 178, 1)),
+                            underline: Container(
+                              height: 0,
+                              color: Colors.transparent,
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                dropdownValue = value!;
+                              });
                             },
-                          );
-                        }
-                    ),
-                  )
-                ],
-              ),
+                            items: list.map<DropdownMenuItem<String>>((
+                                String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                          const SizedBox(height: 10,),
+                          Expanded(
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: hairdresserInfoList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return TapAnimationWidget(
+                                    tabWidget: createItem(
+                                        info: hairdresserInfoList[index]),
+                                    onPressedCallBack: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(builder: (context) =>
+                                            HairdresserPage()),
+                                      );
+                                    },
+                                  );
+                                }
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                )
             )
         )
     );
