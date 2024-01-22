@@ -3,16 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../content_views/clean_button_textfield.dart';
-import 'authentication_number_page.dart';
 
-class PhoneNumberPage extends StatefulWidget{
-  const PhoneNumberPage({super.key});
+class NamePage extends StatefulWidget{
+  const NamePage({super.key});
 
   @override
-  State<PhoneNumberPage> createState() => _PhoneNumberPage();
+  State<NamePage> createState() => _NamePage();
 }
 
-class _PhoneNumberPage extends State<PhoneNumberPage>{
+class _NamePage extends State<NamePage>{
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -60,6 +59,21 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                                 fontWeight: FontWeight.normal
                             ),),
                           Padding(
+                              padding: EdgeInsets.only(
+                                  left: 20, top: 20, right: 20),
+                              child: Text(
+                                "Siz kiritgan telfon raqamiro'yxatdan o'tmagan"
+                                    "Shu bois, ro'yxatdan o'tish uchun ismingiz va"
+                                    "familiangizni kiriting. Qolgan ma'lumotlar ro'yxatdan"
+                                    "o'tganingizdan so'ng, shaxsiy kabinetingiz orqali"
+                                    "to'ldirishingiz mumkin.",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(128, 128, 128, 1),
+                                    fontSize: 14
+                                ),
+                              )
+                          ),
+                          Padding(
                             padding: EdgeInsets.only(
                                 left: 20, top: 20, right: 20),
                             child: Container(
@@ -71,22 +85,25 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                               child: Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: CleanButtonTextField(
-                                    placeHolder: "Telefon raqamingizni kiriting",)
+                                    placeHolder: "Ismingizni kiriting",)
                               ),
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(
-                                  left: 20, top: 20, right: 20),
-                              child: Text(
-                                "Telefon raqamingizni kiritayotganingizda uning "
-                                    "to'g'riligiga ichonch hoxil qiling. Tasdiqlashingiz uchun biz bu "
-                                    "raqamga maxsus kod yuboramiz.",
-                                style: TextStyle(
-                                    color: Color.fromRGBO(128, 128, 128, 1),
-                                    fontSize: 14
-                                ),
-                              )
+                            padding: EdgeInsets.only(
+                                left: 20, top: 20, right: 20),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: Colors.grey, width: 1)
+                              ),
+                              child: Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: CleanButtonTextField(
+                                    placeHolder: "Familiangizni kiriting",)
+                              ),
+                            ),
                           ),
                           Expanded(child: SizedBox()),
                           Padding(
@@ -104,12 +121,9 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                                         )
                                     ),
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(builder: (context) => AuthenticationNumberPage()),
-                                      );
+
                                     },
-                                    child: const Text("Keyingi"),
+                                    child: const Text("Davom etish"),
                                   )
                               )
                           ),

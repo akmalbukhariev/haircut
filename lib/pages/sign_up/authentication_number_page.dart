@@ -84,13 +84,12 @@ class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
                     padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                     child: SizedBox(
                         width: double.infinity,
+                        height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius
-                                    .circular(
-                                    10),
+                                borderRadius: BorderRadius.circular(10),
                               )
                           ),
                           onPressed: () {},
