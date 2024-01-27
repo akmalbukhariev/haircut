@@ -6,7 +6,9 @@ import '../../content_views/child_widgets.dart';
 import '../../content_views/clean_button_textfield.dart';
 
 class PhonePage extends StatelessWidget {
-  const PhonePage({super.key});
+  const PhonePage({super.key, this.controlTextField});
+
+  final TextEditingController? controlTextField;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +34,12 @@ class PhonePage extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    const Padding(
+                                     Padding(
                                       padding: EdgeInsets.only(left: 10),
                                       child: CleanButtonTextField(
-                                        placeHolder: "Enter your phone number.",),
+                                        controlTextField: this.controlTextField,
+                                        placeHolder: "Enter your phone number.",
+                                      ),
                                     ),
                                     const Divider(
                                       height: 1, color: Colors.grey,),

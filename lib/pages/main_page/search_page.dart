@@ -68,6 +68,8 @@ class SearchPage extends StatefulWidget{
 
 class _SearchPage extends State<SearchPage> {
 
+  late final TextEditingController controlTextField;
+
   @override
   Widget build(BuildContext context) {
     groupedSearchMap.clear();
@@ -153,8 +155,11 @@ class _SearchPage extends State<SearchPage> {
                 "images/search_blue.png", width: 20, height: 20,),
             ),
             const SizedBox(width: 10,),
-            const Expanded(
-                child: CleanButtonTextField(placeHolder: "Type here",)
+            Expanded(
+                child: CleanButtonTextField(
+                  controlTextField: this.controlTextField,
+                  placeHolder: "Type here",
+                )
             )
           ],)
     );

@@ -6,10 +6,13 @@ import '../../content_views/child_widgets.dart';
 import '../../content_views/clean_button_textfield.dart';
 
 class AddressPage extends StatelessWidget {
-  const AddressPage({super.key});
+  const AddressPage({super.key, this.controlTextField});
+
+   final TextEditingController? controlTextField;
 
   @override
   Widget build(BuildContext context) {
+
     return CupertinoPageScaffold(
         child: Material(
             child: SafeArea(
@@ -34,7 +37,8 @@ class AddressPage extends StatelessWidget {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
-                                      child: const CleanButtonTextField(
+                                      child: CleanButtonTextField(
+                                        controlTextField: this.controlTextField,
                                         placeHolder: "Enter your address here.",),
                                     ),
                                     const Divider(

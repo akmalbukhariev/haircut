@@ -87,6 +87,8 @@ final hairdresserInfoList = [
 class _HairdresserListPage extends State<HairdresserListPage> {
   String dropdownValue = list.first;
 
+  late final TextEditingController controlTextField;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -101,7 +103,7 @@ class _HairdresserListPage extends State<HairdresserListPage> {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: searchTextField()),
+                              Expanded(child: searchTextField(controlTextField: controlTextField)),
                               const SizedBox(width: 10,),
                               Image.asset(
                                 "images/bell.png", width: 30, height: 30,)

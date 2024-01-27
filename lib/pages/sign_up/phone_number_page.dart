@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../content_views/clean_button_textfield.dart';
+import '../dialog_box.dart';
 import 'authentication_number_page.dart';
 
 class PhoneNumberPage extends StatefulWidget{
@@ -13,6 +14,9 @@ class PhoneNumberPage extends StatefulWidget{
 }
 
 class _PhoneNumberPage extends State<PhoneNumberPage>{
+
+  late final TextEditingController controlTextField = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -71,6 +75,7 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                               child: Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: CleanButtonTextField(
+                                    controlTextField: this.controlTextField,
                                     placeHolder: "Telefon raqamingizni kiriting",)
                               ),
                             ),
@@ -104,10 +109,17 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                                         )
                                     ),
                                     onPressed: () {
-                                      Navigator.push(
+                                      if(controlTextField.text.isEmpty) {
+                                        AppAlertDialog.showAlert(
+                                          context,
+                                          "Ro'yxatdan o'tish",
+                                          "Iltimos telfon raqamingizni tekshiring",
+                                        );
+                                      }
+                                      /*Navigator.push(
                                         context,
                                         CupertinoPageRoute(builder: (context) => AuthenticationNumberPage()),
-                                      );
+                                      );*/
                                     },
                                     child: const Text("Keyingi"),
                                   )

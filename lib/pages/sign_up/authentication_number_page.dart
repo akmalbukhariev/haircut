@@ -13,6 +13,9 @@ class AuthenticationNumberPage extends StatefulWidget{
 }
 
 class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
+
+  late final TextEditingController controlTextField;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -69,6 +72,7 @@ class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
                               child: Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: CleanButtonTextField(
+                                    controlTextField:controlTextField,
                                     placeHolder: "Maxsus kodni kiriting",)
                               ),
                             ),
@@ -92,7 +96,9 @@ class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
                                 borderRadius: BorderRadius.circular(10),
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            
+                          },
                           child: const Text("Davom etish"),
                         )
                     )

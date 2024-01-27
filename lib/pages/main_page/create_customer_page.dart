@@ -17,6 +17,8 @@ class _AddCustomerPage extends State<AddCustomerPage> {
   DateTime _selectedTime1 = DateTime.now();
   DateTime _selectedTime2 = DateTime.now();
 
+  late final TextEditingController controlTextField;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -88,7 +90,10 @@ class _AddCustomerPage extends State<AddCustomerPage> {
             padding: EdgeInsets.only(left: 15),
             child: Column(
               children: [
-                CleanButtonTextField(placeHolder: "Ism",),
+                CleanButtonTextField(
+                  controlTextField: this.controlTextField,
+                  placeHolder: "Ism",
+                ),
                 Divider(height: 2, color: Colors.grey,)
               ],
             ),
@@ -97,7 +102,10 @@ class _AddCustomerPage extends State<AddCustomerPage> {
             padding: EdgeInsets.only(left: 15),
             child: Column(
               children: [
-                CleanButtonTextField(placeHolder: "Telfon nomer",),
+                CleanButtonTextField(
+                  controlTextField: this.controlTextField,
+                  placeHolder: "Telfon nomer",
+                ),
                 Divider(height: 2, color: Colors.grey,),
                 //const SizedBox(height: 10,)
               ],

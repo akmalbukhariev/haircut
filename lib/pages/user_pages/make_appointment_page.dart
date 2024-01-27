@@ -26,6 +26,8 @@ class _MakeAppointmentPage extends State<MakeAppointmentPage>{
   DateTime _selectedStartTime = DateTime.now();
   DateTime _selectedEndTime = DateTime.now();
 
+  late final TextEditingController controlTextField;
+
   @override
   Widget build(BuildContext context) {
       return CupertinoPageScaffold(
@@ -96,16 +98,21 @@ class _MakeAppointmentPage extends State<MakeAppointmentPage>{
   }
 
   Widget createInfo1() {
+
+
     return Column(
       children: [
         Padding(
             padding: const EdgeInsets.only(left: 15),
             child: Column(
               children: [
-                CleanButtonTextField(placeHolder: "Ismingizni kiriting",),
+                CleanButtonTextField(
+                  controlTextField: this.controlTextField,
+                  placeHolder: "Ismingizni kiriting",),
                 const Divider(
                   height: 0.5, color: Color.fromRGBO(167, 167, 167, 1),),
                 CleanButtonTextField(
+                  controlTextField: this.controlTextField,
                   placeHolder: "Telefon raqamingizni kiriting",),
                 const Divider(
                   height: 0.5, color: Color.fromRGBO(167, 167, 167, 1),),

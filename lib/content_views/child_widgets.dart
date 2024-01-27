@@ -66,7 +66,7 @@ Widget animateWidget({required Widget widget,required BuildContext context, bool
   );
 }
 
-Widget searchTextField() {
+Widget searchTextField({required TextEditingController controlTextField}) {
   return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -81,8 +81,11 @@ Widget searchTextField() {
               "images/search_blue.png", width: 20, height: 20,),
           ),
           const SizedBox(width: 10,),
-          const Expanded(
-              child: CleanButtonTextField(placeHolder: "Type here",)
+          Expanded(
+              child: CleanButtonTextField(
+                controlTextField: controlTextField,
+                placeHolder: "Type here",
+              )
           )
         ],)
   );

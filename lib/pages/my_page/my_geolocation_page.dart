@@ -6,7 +6,9 @@ import '../../content_views/child_widgets.dart';
 import '../../content_views/clean_button_textfield.dart';
 
 class GeoLocationPage extends StatelessWidget {
-  const GeoLocationPage({super.key});
+  const GeoLocationPage({super.key, this.controlTextField});
+
+  final TextEditingController? controlTextField;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class GeoLocationPage extends StatelessWidget {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
-                                      child: const CleanButtonTextField(),
+                                      child: CleanButtonTextField(controlTextField: this.controlTextField),
                                     ),
                                     const Divider(
                                       height: 1, color: Colors.grey,),

@@ -23,6 +23,8 @@ class MyServicesPage extends StatefulWidget{
 class _MyServicesPage extends State<MyServicesPage> {
   bool _colorBoxVisible = false;
 
+  late final TextEditingController controlTextField;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -205,9 +207,10 @@ class _MyServicesPage extends State<MyServicesPage> {
                         const SizedBox(height: 20,),
                         Column(
                           children: [
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: CleanButtonTextField(
+                                controlTextField: this.controlTextField,
                                 placeHolder: "Type service name",),
                             ),
                             const Divider(height: 1,),

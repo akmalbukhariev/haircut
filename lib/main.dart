@@ -33,7 +33,7 @@ class HairCutApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: NamePage(),//ChooseServicePage(),
+        body: PhoneNumberPage(),//ChooseServicePage(),
       )
     );
   }
