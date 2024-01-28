@@ -4,9 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:haircut/content_views/tap_animation_widget.dart';
 
 import '../../content_views/clean_button_textfield.dart';
+import '../../net/http_response/register_user.dart';
+import '../dialog_box.dart';
+import 'name_page.dart';
 
 class AuthenticationNumberPage extends StatefulWidget{
-  const AuthenticationNumberPage({super.key});
+   AuthenticationNumberPage({
+    super.key,
+    required this.registerUser
+  });
+
+  final RegisterUser? registerUser;
 
   @override
   State<AuthenticationNumberPage> createState() => _AuthenticationNumberPage();
@@ -14,7 +22,7 @@ class AuthenticationNumberPage extends StatefulWidget{
 
 class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
 
-  late final TextEditingController controlTextField;
+  late final TextEditingController txtBoxCode = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,7 @@ class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
                       SizedBox(
                           width: 250,
                           child: Text(
-                            "Biz +998 99 88 77 66 telefon raqamiga maxsus kod yubordik",
+                            'Biz ${widget.registerUser?.phone} telefon raqamiga maxsus kod yubordik',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Color.fromRGBO(128, 128, 128, 1)),
@@ -72,7 +80,7 @@ class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
                               child: Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: CleanButtonTextField(
-                                    controlTextField:controlTextField,
+                                    controlTextField:txtBoxCode,
                                     placeHolder: "Maxsus kodni kiriting",)
                               ),
                             ),
@@ -97,7 +105,22 @@ class _AuthenticationNumberPage extends State<AuthenticationNumberPage>{
                               )
                           ),
                           onPressed: () {
-                            
+                            if(txtBoxCode.text.isEmpty) {
+                              AppAlertDialog.showAlert(
+                                context,
+                                "Ro'yxatdan o'tish",
+                                "Iltimos maxsus kodni kiriting",
+                              );
+                              return;
+                            }
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      NamePage(
+                                        registerUser: widget.registerUser,
+                                      )),
+                            );
                           },
                           child: const Text("Davom etish"),
                         )

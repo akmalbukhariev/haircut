@@ -4,10 +4,20 @@ import 'package:flutter/material.dart';
 
 import '../../content_views/child_widgets.dart';
 import '../../content_views/clean_button_textfield.dart';
+import '../../net/Result.dart';
+import '../../net/http_models/response_register.dart';
+import '../../net/http_response/register_user.dart';
+import '../../net/http_service.dart';
+import '../dialog_box.dart';
 import '../loading_overlay.dart';
 
 class NamePage extends StatefulWidget{
-  const NamePage({super.key});
+   NamePage({
+    super.key,
+    required this.registerUser
+  });
+
+  final RegisterUser? registerUser;
 
   @override
   State<NamePage> createState() => _NamePage();
@@ -15,13 +25,13 @@ class NamePage extends StatefulWidget{
 
 class _NamePage extends State<NamePage> {
 
-  late final TextEditingController controlTextField;
+  late final TextEditingController txtBoxLastName = TextEditingController();
+  late final TextEditingController txtBoxFirstName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: SafeArea(
-        //child: LoadingOverlay(
         child: Stack(
             children: [
               Container(
@@ -91,7 +101,7 @@ class _NamePage extends State<NamePage> {
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 10),
                                     child: CleanButtonTextField(
-                                      controlTextField: controlTextField,
+                                      controlTextField: txtBoxFirstName,
                                       placeHolder: "Ismingizni kiriting",)
                                 ),
                               ),
@@ -108,7 +118,7 @@ class _NamePage extends State<NamePage> {
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 10),
                                     child: CleanButtonTextField(
-                                      controlTextField:controlTextField,
+                                      controlTextField:txtBoxLastName,
                                       placeHolder: "Familiangizni kiriting",)
                                 ),
                               ),
@@ -129,11 +139,35 @@ class _NamePage extends State<NamePage> {
                                                 10),
                                           )
                                       ),
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        if(txtBoxFirstName.text.isEmpty ||
+                                            txtBoxLastName.text.isEmpty){
+                                          AppAlertDialog.showAlert(
+                                            context,
+                                            "Ro'yxatdan o'tish",
+                                            "Iltimos ism yoki familiangizni kiriting",
+                                          );
+                                          return;
+                                        }
+
+                                        widget.registerUser?.name = '${txtBoxFirstName.text} ${txtBoxLastName.text}';
                                         LoadingOverlay.show(context);
-                                        Future.delayed(const Duration(seconds: 3), () {
+                                        /*Future.delayed(
+                                            const Duration(seconds: 5), () {
                                           LoadingOverlay.hide();
-                                        });
+                                        });*/
+                                        ResponseRegister? response = await HttpService.register(data: widget.registerUser);
+                                        LoadingOverlay.hide();
+
+                                        if (response != null && response.resultCode != null) {
+                                          if (response.resultCode != Result.SUCCESS_CODE) {
+                                            AppAlertDialog.showAlert(
+                                              context,
+                                              "Ro'yxatdan o'tish",
+                                              response.resultMsg!,
+                                            );
+                                          }
+                                        }
                                       },
                                       child: const Text("Davom etish"),
                                     )
@@ -148,7 +182,6 @@ class _NamePage extends State<NamePage> {
               //showLoading()
             ],
           ),
-        //),
       ),
     );
   }

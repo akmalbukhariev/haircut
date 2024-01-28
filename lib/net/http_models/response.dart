@@ -1,31 +1,27 @@
 import 'package:haircut/net/abstract_model.dart';
 
 class Response extends AbstractModel{
-    bool? result;
-    String? message;
-    int? error_code;
+    String? resultMsg;
+    String? resultCode;
 
     Response({
-      this.result,
-      this.message,
-      this.error_code,
+      this.resultMsg,
+      this.resultCode,
    });
 
     @override
    Map<String, dynamic> toJson() {
      return {
-       'result': result,
-       'message': message,
-       'error_code':error_code
+       'resultMsg': resultMsg,
+       'resultCode': resultCode,
      };
    }
 
     @override
    factory Response.fromJson(Map<String, dynamic> json) {
      return Response(
-       result: json['result'],
-       message: json['message'],
-       error_code: json['error_code'],
+       resultMsg: json['resultMsg'],
+       resultCode: json['resultCode'],
      );
    }
 }

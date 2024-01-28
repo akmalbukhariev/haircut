@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../content_views/clean_button_textfield.dart';
+import '../../net/http_response/register_user.dart';
 import '../dialog_box.dart';
 import 'authentication_number_page.dart';
 
@@ -15,7 +16,7 @@ class PhoneNumberPage extends StatefulWidget{
 
 class _PhoneNumberPage extends State<PhoneNumberPage>{
 
-  late final TextEditingController controlTextField = TextEditingController();
+  late final TextEditingController txtBoxPhone = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                               child: Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: CleanButtonTextField(
-                                    controlTextField: this.controlTextField,
+                                    controlTextField: this.txtBoxPhone,
                                     placeHolder: "Telefon raqamingizni kiriting",)
                               ),
                             ),
@@ -109,17 +110,29 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
                                         )
                                     ),
                                     onPressed: () {
-                                      if(controlTextField.text.isEmpty) {
+                                      if(txtBoxPhone.text.isEmpty) {
                                         AppAlertDialog.showAlert(
                                           context,
                                           "Ro'yxatdan o'tish",
                                           "Iltimos telfon raqamingizni tekshiring",
                                         );
+                                        return;
                                       }
-                                      /*Navigator.push(
+                                      RegisterUser newUser = RegisterUser(
+                                        phone: this.txtBoxPhone.text,
+                                        name: '',
+                                        password: '',
+                                        location: '36.1234,126.45762',
+                                        is_customer: 1,
+                                      );
+                                      Navigator.push(
                                         context,
-                                        CupertinoPageRoute(builder: (context) => AuthenticationNumberPage()),
-                                      );*/
+                                        CupertinoPageRoute(
+                                            builder: (context) =>
+                                                AuthenticationNumberPage(
+                                                  registerUser: newUser,
+                                                )),
+                                      );
                                     },
                                     child: const Text("Keyingi"),
                                   )
