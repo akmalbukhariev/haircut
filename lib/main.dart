@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:haircut/models/menu_item.dart';
-import 'package:haircut/pages/main_page/create_customer_page.dart';
-import 'package:haircut/pages/main_page/main_page.dart';
-import 'package:haircut/pages/main_page/month_page.dart';
-import 'package:haircut/pages/main_page/menu_page.dart';
-import 'package:haircut/pages/main_page/search_page.dart';
-import 'package:haircut/pages/main_page/week_page.dart';
-import 'package:haircut/pages/my_page/additional_doc_page.dart';
-import 'package:haircut/pages/my_page/license_page.dart';
-import 'package:haircut/pages/my_page/my_geolocation_page.dart';
-import 'package:haircut/pages/my_page/my_address.dart';
-import 'package:haircut/pages/my_page/my_page.dart';
-import 'package:haircut/pages/my_page/my_photo_album.dart';
-import 'package:haircut/pages/my_page/my_phone_page.dart';
-import 'package:haircut/pages/my_page/my_services_page.dart';
-import 'package:haircut/pages/sign_up/authentication_number_page.dart';
-import 'package:haircut/pages/sign_up/name_page.dart';
-import 'package:haircut/pages/sign_up/phone_number_page.dart';
-import 'package:haircut/pages/splash_screen.dart';
-import 'package:haircut/pages/user_pages/hairdresser_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haircut/constant/control_app.dart';
+import 'package:haircut/data/models/app_info.dart';
+import 'package:haircut/presentation/pages/choose_service/choose_service_page.dart';
+import 'package:haircut/presentation/pages/user/hairdresser_list/hairdresser_list_cubit.dart';
+import 'package:haircut/presentation/pages/user/hairdresser_page.dart';
+import 'package:haircut/presentation/pages/user/my_main_page.dart';
 
-import 'pages/choose_service_page.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  ControlApp? control = await ControlApp.Instance();
+  control?.GetAppInfo();
 
-void main() {
   runApp(const HairCutApp());
 }
 
@@ -31,74 +20,31 @@ class HairCutApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: PhoneNumberPage(),//ChooseServicePage(),
+    return MultiBlocProvider(
+        providers:[
+          BlocProvider(
+            create: (context) => HairdresserListCubit(),
+          ),
+        ],
+        child: MaterialApp(
+          home: Scaffold(
+            body: selectPage(),
+          )
       )
     );
   }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+Widget selectPage(){
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  Widget widget = ChooseServicePage();
+  AppInfo? appInfo = ControlApp.Instance()?.appInfo;
+  if(appInfo?.isCustomer == "1" && appInfo?.isHairdresser == "0"){
+    widget = MyMainPage();
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  else if(appInfo?.isCustomer == "0" && appInfo?.isHairdresser == "1"){
+    widget = HairdresserPage();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+  return widget;
 }
