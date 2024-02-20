@@ -49,6 +49,11 @@ class ControlApp{
     appInfo?.isHairdresser = prefs?.getString('isHairdresser') ?? '';
   }
 
+  String formatColorForFlutter(String color) {
+    String formattedColor = "0xFF" + color.substring(1);
+    return formattedColor;
+  }
+
   void MoveToPage(BuildContext context, StatefulWidget page){
     Navigator.push(
       context,

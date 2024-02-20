@@ -226,10 +226,10 @@ class _MakeAppointmentPage extends State<MakeAppointmentPage>{
                   ),
                 ),
                 const SizedBox(width: 10,),
-                createText(text: service.text)
+                createText(text: service.text ?? "")
               ],
             ),
-            createText(text: service.price)
+            createText(text: service.price ?? "")
           ],
         ),
         const SizedBox(height: 5,),

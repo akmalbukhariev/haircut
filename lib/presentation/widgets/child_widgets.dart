@@ -241,7 +241,7 @@ Widget createProgressBar({required BuildContext context, double value = 0}) {
   ,);
 }
 
-Widget createScore({int score = 0}) {
+Widget createScore({double score = 0}) {
   return Column(
     children: [
       Text(score.toString(),
@@ -251,7 +251,7 @@ Widget createScore({int score = 0}) {
             fontWeight: FontWeight.normal
         ),
       ),
-      rowStar(score: score)
+      rowStar(score: score.toInt())
     ],
   );
 }

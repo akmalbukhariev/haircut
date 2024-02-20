@@ -171,6 +171,9 @@ class _HairdresserListPage extends State<HairdresserListPage> {
                                                       info: state
                                                           .hairdresserInfoList[index]),
                                                   onPressedCallBack: () {
+                                                     context
+                                                     .read<HairdresserListCubit>()
+                                                     .setSelectItem(index: index);
                                                     Navigator.push(
                                                       context,
                                                       CupertinoPageRoute(
@@ -185,7 +188,6 @@ class _HairdresserListPage extends State<HairdresserListPage> {
                                         if(state.isLoading)
                                           LoadingOverlayWidget()
                                     ],)
-
                                 );
                               }
                           ),
@@ -197,9 +199,6 @@ class _HairdresserListPage extends State<HairdresserListPage> {
         )
     );
   }
-
-  //LoadingOverlay.show(context);
-  //LoadingOverlay.hide();
 
   Widget createItem({required HairdresserInfo info}) {
     return Column(

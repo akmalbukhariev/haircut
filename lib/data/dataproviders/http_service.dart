@@ -4,6 +4,7 @@ import 'package:haircut/data/models/http_response/response_user_info.dart';
 import 'package:haircut/data/models/user_info.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/http_response/response_detail_hairdresser.dart';
 import '../models/http_response/response_hairdresser.dart';
 import '../models/http_response/response_register.dart';
 import '../models/http_models/register_user.dart';
@@ -13,6 +14,7 @@ class HttpService{
    static String URL_REGISTER = "${SERVER_URL}user/register";
    static String URL_GET_USER = "${SERVER_URL}user/getUser/";
    static String URL_GET_ALL_HAIRDRESSER = "${SERVER_URL}hairdresser/getAllHairdresserForUserMainPage";
+   static String URL_GET_DETAIL_HAIRDRESSER = "${SERVER_URL}hairdresser/getHairdresserDetailInfo/";
    static String URL_UPDATE_USER_CUSTOMER = "${SERVER_URL}user/updateUserCustomer";
    static String URL_UPDATE_USER_HAIRDERSSER = "${SERVER_URL}user/updateUserHairdreser";
 
@@ -93,6 +95,20 @@ class HttpService{
       }
       catch(e){
          ResponseHairdresser response = ResponseHairdresser();
+         response.resultMsg = e.toString();
+         return response;
+      }
+   }
+
+   static Future<ResponseDetailHairdresser?> getDetailHairdresserInfo({required String phone}) async {
+      try{
+         var response = await http.get(Uri.parse('$URL_GET_DETAIL_HAIRDRESSER$phone'));
+         if(response.statusCode == 200) {
+            return ResponseDetailHairdresser.fromJson(json.decode(response.body));
+         }
+      }
+      catch(e){
+         ResponseDetailHairdresser response = ResponseDetailHairdresser();
          response.resultMsg = e.toString();
          return response;
       }

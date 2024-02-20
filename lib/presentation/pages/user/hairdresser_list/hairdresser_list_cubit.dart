@@ -2,7 +2,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/dataproviders/http_service.dart';
+import '../../../../data/models/hairdresser_detail_info.dart';
 import '../../../../data/models/hairdresser_info.dart';
+import '../../../../data/models/http_response/response_detail_hairdresser.dart';
 import '../../../../data/models/http_response/response_hairdresser.dart';
 import 'hairdresser_list_state.dart';
 
@@ -26,7 +28,7 @@ class HairdresserListCubit extends Cubit<HairdresserListState>{
 
     ResponseHairdresser? response = await HttpService.getAllHairdresserInfo();
     if (response != null && response.resultData != null) {
-      for (HairdresserItem item in response!.resultData!) {
+      for (HairdresserDetailInfo item in response!.resultData!) {
         tempList.add(
             HairdresserInfo(
                 image: "images/avatar_3.png",
@@ -41,7 +43,19 @@ class HairdresserListCubit extends Cubit<HairdresserListState>{
         );
       }
     }
-
     return tempList;
+  }
+
+  Future<void> getDetailData() async{
+    emit(state.copyWith(isLoading: true));
+    ResponseDetailHairdresser? response = await HttpService.getDetailHairdresserInfo(phone: state.selectedItem?.phone ?? '');
+    if (response != null && response.resultData != null) {
+       emit(state.copyWith(isLoading: false, detailInfo: response.resultData));
+    }
+  }
+
+  void setSelectItem({required int index}){
+    HairdresserInfo item = state.hairdresserInfoList[index];
+    emit(state.copyWith(selectedItem: item));
   }
 }

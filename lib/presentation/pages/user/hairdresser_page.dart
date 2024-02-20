@@ -2,10 +2,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haircut/constant/control_app.dart';
 
 import '../../../data/models/my_service.dart';
 import '../../widgets/child_widgets.dart';
 import '../../widgets/tap_animation_widget.dart';
+import '../loading_overlay.dart';
+import 'hairdresser_list/hairdresser_list_cubit.dart';
+import 'hairdresser_list/hairdresser_list_state.dart';
 import 'make_appointment_page.dart';
 
 final imageList = [
@@ -16,14 +21,14 @@ final imageList = [
 ];
 CarouselController buttonCarouselController = CarouselController();
 
-final serviceList = [
+/*final serviceList = [
   MyService(color: Colors.deepPurple, text: "Ukladka", price: "50,000 so'm"),
   MyService(color: Colors.red, text: "Soch bo'yash", price: "10,000 so'm"),
   MyService(color: Colors.blue, text: "Soqol olish", price: "120,000 so'm"),
   MyService(color: Colors.yellow, text: "Soch olish", price: "80,000 so'm"),
   MyService(color: Colors.blueGrey, text: "Soch olish", price: "8,000 so'm"),
   MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-];
+];*/
 
 class HairdresserPage extends StatefulWidget{
   const HairdresserPage({super.key});
@@ -35,86 +40,113 @@ class HairdresserPage extends StatefulWidget{
 class _HairdresserPage extends State<HairdresserPage> {
 
   @override
+  void initState() {
+    context.read<HairdresserListCubit>().getDetailData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        child: Material(
-            child: SafeArea(
-                child: Container(
-                    color: const Color.fromRGBO(240, 244, 249, 1),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            createSwiperImages(),
-                            createHeader()
-                          ],
-                        ),
-                        createAboutInfo(),
-                        Expanded(
-                            child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    const SizedBox(height: 15,),
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20, bottom: 20),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius
-                                                    .circular(10),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  createServices(),
-                                                  additionalDoc(),
-                                                  createScoreView(),
-                                                  createGeoLocation(),
-                                                  createCallButton()
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(height: 10,),
-                                            SizedBox(
-                                                width: double.infinity,
-                                                child: ElevatedButton(
-                                                  style: ElevatedButton
-                                                      .styleFrom(
-                                                      backgroundColor: Colors
-                                                          .red,
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius
-                                                            .circular(
-                                                            10),
+        child: BlocBuilder<HairdresserListCubit, HairdresserListState>(
+            builder: (context, state) {
+              return Material(
+                  child: SafeArea(
+                      child: Stack(
+                        children: [
+                          Container(
+                              color: const Color.fromRGBO(240, 244, 249, 1),
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      createSwiperImages(state: state),
+                                      createHeader(state: state)
+                                    ],
+                                  ),
+                                  createAboutInfo(state: state),
+                                  Expanded(
+                                      child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(height: 15,),
+                                              Padding(
+                                                  padding: const EdgeInsets
+                                                      .only(
+                                                      left: 20,
+                                                      right: 20,
+                                                      bottom: 20),
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius: BorderRadius
+                                                              .circular(10),
+                                                        ),
+                                                        child: Column(
+                                                          children: [
+                                                            createServices(
+                                                                state: state),
+                                                            additionalDoc(),
+                                                            createScoreView(state: state),
+                                                            createGeoLocation(),
+                                                            createCallButton(
+                                                                state: state)
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,),
+                                                      SizedBox(
+                                                          width: double
+                                                              .infinity,
+                                                          child: ElevatedButton(
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                backgroundColor: Colors
+                                                                    .red,
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius
+                                                                      .circular(
+                                                                      10),
+                                                                )
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.push(
+                                                                context,
+                                                                CupertinoPageRoute(
+                                                                    builder: (
+                                                                        context) =>
+                                                                        MakeAppointmentPage()),
+                                                              );
+                                                            },
+                                                            child: const Text(
+                                                                "Qabulga yozilish"),
+                                                          )
                                                       )
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      CupertinoPageRoute(builder: (context) => MakeAppointmentPage()),
-                                                    );
-                                                  },
-                                                  child: const Text(
-                                                      "Qabulga yozilish"),
-                                                )
-                                            )
-                                          ],)
-                                    ),
-                                  ],
-                                )
-                            )
-                        )
-                      ],
-                    )
-                )
-            )
+                                                    ],
+                                                  )
+                                              ),
+                                            ],
+                                          )
+                                      )
+                                  )
+                                ],
+                              )
+                          ),
+                          if(state.isLoading)
+                            LoadingOverlayWidget()
+                        ],
+                      )
+                  )
+              );
+            }
         )
     );
   }
 
-  Widget createHeader() {
+  Widget createHeader({required HairdresserListState state}) {
     return Padding(
       padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
       child: Row(
@@ -140,7 +172,7 @@ class _HairdresserPage extends State<HairdresserPage> {
 
   int inIndex = 1;
 
-  Widget createSwiperImages() {
+  Widget createSwiperImages({required HairdresserListState state}) {
     return Stack(
       children: [
         CarouselSlider(
@@ -188,7 +220,7 @@ class _HairdresserPage extends State<HairdresserPage> {
     );
   }
 
-  Widget createAboutInfo() {
+  Widget createAboutInfo({required HairdresserListState state}) {
     return Container(
       color: Colors.white,
       child: Padding(
@@ -202,15 +234,16 @@ class _HairdresserPage extends State<HairdresserPage> {
                   children: [
                     Align(
                         alignment: Alignment.centerLeft,
-                        child: createText(text: "Alisher Ortiqov",
+                        child: createText(
+                            text: "${state.detailInfo?.name}",
                             fontWeight: FontWeight.bold,
                             color: Colors.black)),
                     const SizedBox(height: 5,),
                     Align(alignment: Alignment.centerLeft,
-                        child: createText(text: "Sartarosh, Stilis")),
+                        child: createText(text: "${state.detailInfo?.profession}")),
                     const SizedBox(height: 5,),
                     Align(alignment: Alignment.centerLeft,
-                        child: createText(text: "+998975632164"))
+                        child: createText(text: "${state.detailInfo?.phone}"))
                   ],
                 )
             ),
@@ -231,7 +264,7 @@ class _HairdresserPage extends State<HairdresserPage> {
                         )),
                     const SizedBox(height: 15,),
                     Align(alignment: Alignment.centerRight,
-                        child: createText(text: "Ish vaqti 9:00 ~ 18:00",
+                        child: createText(text: "Ish vaqti ${state.detailInfo?.workingHour}",
                             textOverflow: TextOverflow.visible))
                   ],
                 )
@@ -242,16 +275,39 @@ class _HairdresserPage extends State<HairdresserPage> {
     );
   }
 
-  Widget createText({required String text, FontWeight fontWeight = FontWeight
-      .normal, Color color = const Color.fromRGBO(
-      102, 102, 102, 1), textOverflow = TextOverflow.ellipsis}) {
+  Widget createText({
+    required String text,
+    FontWeight fontWeight = FontWeight.normal,
+    Color color = const Color.fromRGBO(
+      102, 102, 102, 1),
+    textOverflow = TextOverflow.ellipsis})
+  {
     return Text(text,
       overflow: textOverflow,
       style: TextStyle(color: color, fontWeight: fontWeight, fontSize: 17),
     );
   }
 
-  Widget createServices() {
+  Widget createServices({required HairdresserListState state}) {
+    List<MyService> serviceList = [];
+    List<String>? strServiceList = state.detailInfo?.services?.split(',');
+    List<String>? strPricesList = state.detailInfo?.prices?.split(',');
+    List<String>? strColorList = state.detailInfo?.serviceColor?.split(',');
+
+    if (strServiceList != null && strPricesList != null && strColorList != null) {
+      for (var i = 0; i < strServiceList.length; i++) {
+        String? strColor = ControlApp.Instance()?.formatColorForFlutter(strColorList[i]);
+        if (strColor != null) {
+          Color color = Color(int.parse(strColor));
+          serviceList.add(MyService(
+            color: color,
+            text: strServiceList[i],
+            price: strPricesList[i],
+          ));
+        }
+      }
+    }
+
     return Padding(
         padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
         child: Column(
@@ -280,43 +336,6 @@ class _HairdresserPage extends State<HairdresserPage> {
           ],
         )
     );
-
-    /*Padding(
-        padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-        child: Column(
-          children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Xizmat turlari",
-                style: TextStyle(
-                    color: Color.fromRGBO(102, 102, 102, 1),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17),),
-            ),
-            const SizedBox(height: 10,),
-            /*CustomScrollView(
-                slivers: [
-                  SliverList(
-                      delegate: SliverChildBuilderDelegate((
-                          BuildContext context, int index) {
-                        return Container(color: Colors.yellow,);//itemService(service: serviceList[index]);
-                      },
-                        childCount: serviceList.length,
-                      )
-                  )
-                ]
-            ),*/
-            ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: serviceList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return itemService(service: serviceList[index]);
-                }
-            )
-          ],
-        )
-    );*/
   }
 
   Widget itemService({required MyService service}) {
@@ -336,10 +355,10 @@ class _HairdresserPage extends State<HairdresserPage> {
                   ),
                 ),
                 const SizedBox(width: 10,),
-                createText(text: service.text)
+                createText(text: service.text ?? "")
               ],
             ),
-            createText(text: service.price)
+            createText(text: service?.price ?? "")
           ],
         ),
         const SizedBox(height: 5,),
@@ -372,7 +391,7 @@ class _HairdresserPage extends State<HairdresserPage> {
     );
   }
 
-  Widget createScoreView() {
+  Widget createScoreView({required HairdresserListState state}) {
     return Container(
         color: const Color.fromRGBO(248, 248, 248, 1),
         child: Column(
@@ -380,7 +399,7 @@ class _HairdresserPage extends State<HairdresserPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                createScore(score: 3),
+                createScore(score: double.parse(state.detailInfo?.averageScore ?? '0.0')),
                 const SizedBox(width: 45,),
                 Column(
                   children: [
@@ -425,7 +444,8 @@ class _HairdresserPage extends State<HairdresserPage> {
             ),
             Container(height: 1, color: Color.fromRGBO(230, 230, 230, 1))
             //const Divider(color: Colors.grey),//Color.fromRGBO(230, 230, 230, 1),),
-          ],)
+          ],
+        )
     );
   }
 
@@ -452,7 +472,7 @@ class _HairdresserPage extends State<HairdresserPage> {
     );
   }
 
-  Widget createCallButton() {
+  Widget createCallButton({required HairdresserListState state}) {
     return Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
         child: TapAnimationWidget(

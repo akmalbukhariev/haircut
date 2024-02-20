@@ -95,7 +95,7 @@ class _MyServicesPage extends State<MyServicesPage> {
                                               backgroundColor: servies[index]
                                                   .color,
                                             ),
-                                            title: Text(servies[index].text,
+                                            title: Text(servies[index].text ?? "",
                                               style: const TextStyle(
                                                   color: Colors.grey),),
                                             trailing: Container(

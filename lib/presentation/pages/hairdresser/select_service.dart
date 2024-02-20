@@ -58,7 +58,7 @@ class _SelectServicePage extends State<SelectServicePage> {
                                           backgroundColor: servies[index]
                                               .color,
                                         ),
-                                        title: Text(servies[index].text,
+                                        title: Text(servies[index].text ?? "",
                                           style: const TextStyle(
                                               color: Colors.grey),),
                                         trailing: createCheckBox(
