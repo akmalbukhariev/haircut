@@ -1,3 +1,5 @@
+import 'package:haircut/data/models/service_info.dart';
+
 class HairdresserDetailInfo {
   String? name;
   String? surname;
@@ -5,15 +7,15 @@ class HairdresserDetailInfo {
   String? address;
   String? workingHour;
   String? scores;
-  String? services;
-  String? prices;
-  String? serviceColor;
+  List<ServiceInfo>? services;
   String? imageUri;
   String? imageName;
   String? document;
   String? awards;
   String? profession;
-  String? averageScore;
+  String? allScores;
+  String? averageScores;
+  String? percentageScore;
 
   HairdresserDetailInfo({
     this.name,
@@ -23,14 +25,14 @@ class HairdresserDetailInfo {
     this.workingHour,
     this.scores,
     this.services,
-    this.prices,
-    this.serviceColor,
     this.imageUri,
     this.imageName,
     this.document,
     this.awards,
     this.profession,
-    this.averageScore
+    this.allScores,
+    this.averageScores,
+    this.percentageScore
   });
 
   Map<String, dynamic> toJson() {
@@ -41,36 +43,35 @@ class HairdresserDetailInfo {
       'address': address,
       'workingHour': workingHour,
       'scores': scores,
-      'services':services,
-      'prices':prices,
-      'serviceColor':serviceColor,
+      'services': services?.map((item) => item.toJson()).toList(),
       'imageUri': imageUri,
       'imageName': imageName,
       'document': document,
       'awards': awards,
       'profession': profession,
-      'averageScore': averageScore,
+      'allScores': allScores,
+      'averageScores': averageScores,
+      'percentageScore': percentageScore,
     };
   }
 
   factory HairdresserDetailInfo.fromJson(Map<String, dynamic> json) {
-    HairdresserDetailInfo temp = HairdresserDetailInfo(
+    return HairdresserDetailInfo(
       name: json['name'] ?? '',
       surname: json['surname'] ?? '',
       phone: json['phone'] ?? '',
       address: json['address'] ?? '',
       workingHour: json['workingHour'] ?? '',
       scores: json['scores'] ?? '',
-      services: json['services'] ?? '',
-      prices: json['prices'] ?? '',
-      serviceColor: json['serviceColor'] ?? '',
+      services: (json['services'] as List<dynamic>?)?.map((item) => ServiceInfo.fromJson(item)).toList(),
       imageUri: json['imageUri'] ?? '',
       imageName: json['imageName'] ?? '',
       document: json['document'] ?? '',
       awards: json['awards'] ?? '',
       profession: json['profession'] ?? '',
-      averageScore: json['averageScore'] ?? '',
+      allScores: json['allScores'] ?? '',
+      averageScores: json['averageScores'] ?? '',
+      percentageScore: json['percentageScore'] ?? '',
     );
-    return temp;
   }
 }

@@ -187,6 +187,7 @@ class _NamePage extends State<NamePage> {
 
               AppInfo appInfo = AppInfo(
                   phone: control?.registerUser?.phone,
+                  name: control?.registerUser?.name,
                   isCustomer: control?.registerUser?.is_customer,
                   isHairdresser: control?.registerUser?.is_hairdresser
               );

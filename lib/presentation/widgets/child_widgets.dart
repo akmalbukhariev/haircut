@@ -202,52 +202,43 @@ Widget createShadowDropBox({required List<String> list, required double w, requi
   );
 }
 
-Widget createProgressBar({required BuildContext context, double value = 0}) {
+Widget createProgressBar({
+  required BuildContext context,
+  required int starCount,
+  double value = 0,
+  String percentage = "0"
+}) {
   return Row(
     children: [
-      Text(value.toString(),
+      Text(starCount.toString(),
         style: const TextStyle(color: Colors.black),),
-      /*Container(
-          margin: const EdgeInsets.symmetric(vertical: 20),
-          width: 200,
-          height: 20,
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            child: LinearProgressIndicator(
-              value: 0.7,
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                  Color.fromRGBO(252, 59, 45, 1)),
-              backgroundColor: const Color(0xffD6D6D6),
-            ),
-          ),
-        )*/
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: LinearPercentIndicator(
-          animation: true,
-          lineHeight: 10.0,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width - 250,
-          animationDuration: 2500,
-          percent: ((value - 1) / 4) == 0 ? 0.1 : (value - 1) / 4,
-          //center: Text("80.0%"),
-          barRadius: const Radius.circular(10),
-          progressColor: const Color.fromRGBO(252, 59, 45, 1),
-        ),
+      LinearPercentIndicator(
+        animation: true,
+        lineHeight: 10.0,
+        width: 140,
+        /*width: MediaQuery
+            .of(context)
+            .size
+            .width - 250,*/
+        animationDuration: 2500,
+        percent: (value/ 100).clamp(0.0, 1.0),
+        barRadius: const Radius.circular(10),
+        progressColor: const Color.fromRGBO(252, 59, 45, 1),
       ),
-    ]
-  ,);
+      Text('$percentage %',
+        style: const TextStyle(color: Colors.black),
+      ),
+    ],
+  );
 }
 
-Widget createScore({double score = 0}) {
+Widget createScore({int score = 0}) {
   return Column(
     children: [
       Text(score.toString(),
         style: const TextStyle(
             color: Colors.black,
-            fontSize: 70,
+            fontSize: 50,
             fontWeight: FontWeight.normal
         ),
       ),

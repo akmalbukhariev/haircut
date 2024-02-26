@@ -28,12 +28,17 @@ class ControlApp{
       if (appInfo.phone != null) {
         await prefs.setString('phone', appInfo.phone!);
       }
+      if (appInfo.name != null) {
+        await prefs.setString('name', appInfo.name!);
+      }
       if (appInfo.isCustomer != null) {
         await prefs.setString('isCustomer', appInfo.isCustomer!);
       }
       if (appInfo.isHairdresser != null) {
         await prefs.setString('isHairdresser', appInfo.isHairdresser!);
       }
+
+      this.appInfo = appInfo;
     }
     catch(e){
       print('Error saving data to device: $e');
@@ -45,6 +50,7 @@ class ControlApp{
 
     appInfo = new AppInfo();
     appInfo?.phone = prefs?.getString('phone') ?? '';
+    appInfo?.name = prefs?.getString('name') ?? '';
     appInfo?.isCustomer = prefs?.getString('isCustomer') ?? '';
     appInfo?.isHairdresser = prefs?.getString('isHairdresser') ?? '';
   }

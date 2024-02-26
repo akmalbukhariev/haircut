@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +19,6 @@ final imageList = [
   "images/avatar_5.png"
 ];
 CarouselController buttonCarouselController = CarouselController();
-
-/*final serviceList = [
-  MyService(color: Colors.deepPurple, text: "Ukladka", price: "50,000 so'm"),
-  MyService(color: Colors.red, text: "Soch bo'yash", price: "10,000 so'm"),
-  MyService(color: Colors.blue, text: "Soqol olish", price: "120,000 so'm"),
-  MyService(color: Colors.yellow, text: "Soch olish", price: "80,000 so'm"),
-  MyService(color: Colors.blueGrey, text: "Soch olish", price: "8,000 so'm"),
-  MyService(color: Colors.grey, text: "Soch olish", price: "5,000 so'm"),
-];*/
 
 class HairdresserPage extends StatefulWidget{
   const HairdresserPage({super.key});
@@ -289,7 +279,7 @@ class _HairdresserPage extends State<HairdresserPage> {
   }
 
   Widget createServices({required HairdresserListState state}) {
-    List<MyService> serviceList = [];
+    /*List<MyService> serviceList = [];
     List<String>? strServiceList = state.detailInfo?.services?.split(',');
     List<String>? strPricesList = state.detailInfo?.prices?.split(',');
     List<String>? strColorList = state.detailInfo?.serviceColor?.split(',');
@@ -306,8 +296,7 @@ class _HairdresserPage extends State<HairdresserPage> {
           ));
         }
       }
-    }
-
+    }*/
     return Padding(
         padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
         child: Column(
@@ -323,13 +312,13 @@ class _HairdresserPage extends State<HairdresserPage> {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 200,
+              height: 150,
               child: ListView.builder(
                 //physics: AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: serviceList.length,
+                itemCount: state.serviceList!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return itemService(service: serviceList[index]);
+                  return itemService(service: state.serviceList![index]);
                 },
               ),
             )
@@ -393,26 +382,54 @@ class _HairdresserPage extends State<HairdresserPage> {
 
   Widget createScoreView({required HairdresserListState state}) {
     return Container(
+      padding: EdgeInsets.only(top: 10),
         color: const Color.fromRGBO(248, 248, 248, 1),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                createScore(score: double.parse(state.detailInfo?.averageScore ?? '0.0')),
-                const SizedBox(width: 45,),
+                createScore(
+                    score: double.parse(state.detailInfo?.averageScores ?? '0.0')
+                        .round()),
+                const SizedBox(width: 25,),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start of the column
                   children: [
                     createProgressBar(
-                        context: context, value: 5),
+                        context: context,
+                        starCount: 5,
+                        value: state.score5 ?? 0.0,
+                        percentage: state.score5!.toInt().toString() ?? ""
+                    ),
+                    const SizedBox(height: 5,),
                     createProgressBar(
-                        context: context, value: 4),
+                        context: context,
+                        starCount: 4,
+                        value: state.score4 ?? 0.0,
+                        percentage: state.score4!.toInt().toString() ?? ""
+                    ),
+                    const SizedBox(height: 5,),
                     createProgressBar(
-                        context: context, value: 3),
+                        context: context,
+                        starCount: 3,
+                        value: state.score3 ?? 0.0,
+                        percentage: state.score3!.toInt().toString() ?? ""
+                    ),
+                    const SizedBox(height: 5,),
                     createProgressBar(
-                        context: context, value: 2),
+                        context: context,
+                        starCount: 2,
+                        value: state.score2 ?? 0.0,
+                        percentage: state.score2!.toInt().toString() ?? ""
+                    ),
+                    const SizedBox(height: 5,),
                     createProgressBar(
-                        context: context, value: 1),
+                        context: context,
+                        starCount: 1,
+                        value: state.score1 ?? 0.0,
+                        percentage: state.score1!.toInt().toString() ?? ""
+                    ),
                   ],
                 )
               ],
@@ -493,7 +510,7 @@ class _HairdresserPage extends State<HairdresserPage> {
                           borderRadius: BorderRadius.horizontal(left: Radius.circular(8), right: Radius.circular(0))
                       ),
                         child: Center(
-                        child: Text("+998 90 000 00 00", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),)
+                        child: Text(state.detailInfo?.phone ?? "", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),)
                     ),
                     )
                   ),

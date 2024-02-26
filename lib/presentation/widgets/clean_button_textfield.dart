@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class CleanButtonTextField extends StatefulWidget{
   const CleanButtonTextField({
     Key? key,
-    required this.controlTextField,
+    this.controlTextField,
     this.placeHolder = "",
+    this.isReadOnly = false
   }) : super(key: key);
 
+  final bool isReadOnly;
   final String placeHolder;
   final TextEditingController? controlTextField;
 
@@ -35,6 +37,7 @@ class _CleanButtonTextField extends State<CleanButtonTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: widget.isReadOnly,
       controller: widget.controlTextField,//_controlTextField,
       onChanged: (text) {
         setState(() {});

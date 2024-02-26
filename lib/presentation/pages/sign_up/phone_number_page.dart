@@ -164,6 +164,7 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
 
       AppInfo appInfo = AppInfo(
         phone: txtBoxPhone.text,
+        name: response?.userInfo?.name,
         isCustomer: control?.registerUser?.is_customer,
         isHairdresser: control?.registerUser?.is_hairdresser
       );

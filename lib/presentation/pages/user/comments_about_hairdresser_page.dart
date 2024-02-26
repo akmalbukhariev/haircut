@@ -71,15 +71,25 @@ class _CommentsAboutHairdresserPage extends State<CommentsAboutHairdresserPage>{
                                          Column(
                                            children: [
                                              createProgressBar(
-                                                 context: context, value: 5),
+                                                 context: context,
+                                                 starCount: 5,
+                                                 value: 5),
                                              createProgressBar(
-                                                 context: context, value: 4),
+                                                 context: context,
+                                                 starCount: 4,
+                                                 value: 4),
                                              createProgressBar(
-                                                 context: context, value: 3),
+                                                 context: context,
+                                                 starCount: 3,
+                                                 value: 3),
                                              createProgressBar(
-                                                 context: context, value: 2),
+                                                 context: context,
+                                                 starCount: 2,
+                                                 value: 2),
                                              createProgressBar(
-                                                 context: context, value: 1),
+                                                 context: context,
+                                                 starCount: 1,
+                                                 value: 1),
                                            ],)
                                        ],
                                      ),

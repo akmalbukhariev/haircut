@@ -6,8 +6,10 @@ import 'package:http/http.dart' as http;
 
 import '../models/http_response/response_detail_hairdresser.dart';
 import '../models/http_response/response_hairdresser.dart';
+import '../models/http_response/response_order_client.dart';
 import '../models/http_response/response_register.dart';
 import '../models/http_models/register_user.dart';
+import '../models/user_booked_info.dart';
 
 class HttpService{
    static String SERVER_URL = "http://localhost:8080/haircut/api/v1/";
@@ -15,6 +17,7 @@ class HttpService{
    static String URL_GET_USER = "${SERVER_URL}user/getUser/";
    static String URL_GET_ALL_HAIRDRESSER = "${SERVER_URL}hairdresser/getAllHairdresserForUserMainPage";
    static String URL_GET_DETAIL_HAIRDRESSER = "${SERVER_URL}hairdresser/getHairdresserDetailInfo/";
+   static String URL_INSERT_BOOKED_CLIENT = "${SERVER_URL}hairdresser/insertBookedClient";
    static String URL_UPDATE_USER_CUSTOMER = "${SERVER_URL}user/updateUserCustomer";
    static String URL_UPDATE_USER_HAIRDERSSER = "${SERVER_URL}user/updateUserHairdreser";
 
@@ -34,6 +37,7 @@ class HttpService{
          response.resultMsg = e.toString();
          return response;
       }
+      return null;
    }
 
    static Future<ResponseUserInfo?> getUserInfo({required String phone}) async {
@@ -48,6 +52,7 @@ class HttpService{
          response.resultMsg = e.toString();
          return response;
       }
+      return null;
    }
 
    static Future<ResponseUserInfo?> updateUserCustomer({required UserInfo? data}) async {
@@ -66,6 +71,7 @@ class HttpService{
          response.resultMsg = e.toString();
          return response;
       }
+      return null;
    }
 
    static Future<ResponseUserInfo?> updateUserHairdresser({required UserInfo? data}) async {
@@ -84,6 +90,7 @@ class HttpService{
          response.resultMsg = e.toString();
          return response;
       }
+      return null;
    }
 
    static Future<ResponseHairdresser?> getAllHairdresserInfo() async {
@@ -98,6 +105,7 @@ class HttpService{
          response.resultMsg = e.toString();
          return response;
       }
+      return null;
    }
 
    static Future<ResponseDetailHairdresser?> getDetailHairdresserInfo({required String phone}) async {
@@ -112,5 +120,25 @@ class HttpService{
          response.resultMsg = e.toString();
          return response;
       }
+      return null;
+   }
+
+   static Future<ResponseOrderClient?> bookClient({required UserBookedInfo? data}) async {
+      try{
+         var response = await http.post(
+             Uri.parse(URL_INSERT_BOOKED_CLIENT),
+             headers: {"Content-Type": "application/json"},
+             body: json.encode(data?.toJson())
+         );
+         if (response.statusCode == 200){
+            return ResponseOrderClient.fromJson(json.decode(response.body));
+         }
+      }
+      catch(e){
+         ResponseOrderClient response = ResponseOrderClient();
+         response.resultMsg = e.toString();
+         return response;
+      }
+      return null;
    }
 }
