@@ -3,13 +3,17 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haircut/data/models/http_response/response_booked_list.dart';
 import 'package:haircut/data/models/service_info.dart';
 
 import '../../../../constant/control_app.dart';
 import '../../../../data/dataproviders/http_service.dart';
+import '../../../../data/models/booked_info.dart';
 import '../../../../data/models/hairdresser_detail_info.dart';
 import '../../../../data/models/hairdresser_info.dart';
+import '../../../../data/models/http_response/response_add_favorite_hairdresser.dart';
 import '../../../../data/models/http_response/response_detail_hairdresser.dart';
+import '../../../../data/models/http_response/response_favorite_hairdresser.dart';
 import '../../../../data/models/http_response/response_hairdresser.dart';
 import '../../../../data/models/http_response/response_order_client.dart';
 import '../../../../data/models/my_service.dart';
@@ -94,8 +98,7 @@ class HairdresserListCubit extends Cubit<HairdresserListState> {
     }
   }
 
-  Future<List<MyService>> initServiceList(
-      {required HairdresserDetailInfo data}) async {
+  Future<List<MyService>> initServiceList({required HairdresserDetailInfo data}) async {
     List<MyService> result = [];
     if (data.services != null) {
       for (var i = 0; i < data.services!.length; i++) {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppAlertDialog {
+class AppAlertDialogYesNo {
   static Future<bool?> showAlert({
     required BuildContext context,
     required String title,

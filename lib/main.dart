@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut/constant/control_app.dart';
 import 'package:haircut/data/models/app_info.dart';
 import 'package:haircut/presentation/pages/choose_service/choose_service_page.dart';
+import 'package:haircut/presentation/pages/user/appointment_list/appointment_list_cubit.dart';
+import 'package:haircut/presentation/pages/user/favorite_list/favorite_hairdresser_cubit.dart';
 import 'package:haircut/presentation/pages/user/hairdresser_list/hairdresser_list_cubit.dart';
 import 'package:haircut/presentation/pages/user/hairdresser_page.dart';
 import 'package:haircut/presentation/pages/user/my_main_page.dart';
+import 'package:haircut/presentation/pages/user/my_room/my_room_page_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +27,15 @@ class HairCutApp extends StatelessWidget{
         providers:[
           BlocProvider(
             create: (context) => HairdresserListCubit(),
+          ),
+          BlocProvider(
+            create: (context) => AppointmentListCubit(),
+          ),
+          BlocProvider(
+            create: (context) => FavoriteHairdresserCubit(),
+          ),
+          BlocProvider(
+            create: (context) => MyRoomPageCubit(),
           ),
         ],
         child: MaterialApp(

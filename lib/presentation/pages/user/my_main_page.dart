@@ -1,11 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/presentation/pages/user/appointment_list/my_appointment_history_page.dart';
 
-import 'favorite_hairdresser_page.dart';
+import 'favorite_list/favorite_hairdresser_page.dart';
 import 'hairdresser_list/hairdresser_list_page.dart';
-import 'my_appointment_history_page.dart';
-import 'my_room_page.dart';
+import 'my_room/my_room_page.dart';
 
 class MyMainPage extends StatefulWidget{
   const MyMainPage({super.key});

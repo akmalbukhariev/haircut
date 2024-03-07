@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../constant/language.dart';
+import '../../constant/notification.dart';
 import 'clean_button_textfield.dart';
 
 Widget saveButton({Color col = Colors.red, VoidCallback? onPressedCallBack,}) {
@@ -150,6 +152,22 @@ Widget phoneNote(){
       "O'zbekiston Respublikasi qonunchiligiga "
       "asosan javobgarlikka tortilishingizga "
       "sabab bo'lishi mumkin.");
+}
+
+Widget nameNote(){
+  return noteText(text: "Eslatma: Ismingizni o'zgartirish vaqtida "
+      "uning to'g'ri yozilganiga ishonch hosil qiling. "
+      "Begona insonning ismini yozishga urunishingiz "
+      "O'zbekiston Respublikasi qonunchiligiga asosan "
+      "javobgarlikka tortilishingizga sabab bo'lishi mumkin.");
+}
+
+Widget surnameNote(){
+  return noteText(text: "Eslatma: Familiyangizni o'zgartirish vaqtida uning "
+      "to'g'ri yozilganiga ishonch hosil qiling. "
+      "Begona insonning familiyasini yozishga urunishingiz "
+      "O'zbekiston Respublikasi qonunchiligiga asosan "
+      "javobgarlikka tortilishingizga sabab bo'lishi mumkin.");
 }
 
 Widget noteText({required String text}) {

@@ -6,63 +6,63 @@ import 'package:flutter/material.dart';
 import '../../../data/models/booked_info.dart';
 
 final bookedList = [
-  BookedInfo(
+  AppointmentInfo(
       startTime: "9:00",
       endTime: "9:30",
       services: [Colors.yellow],
       strServices: "Soqol olish",
       name: "Ibragimov Jasur",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "10:00",
       endTime: "11:00",
       services: [Colors.pink],
       strServices: "Soch olish",
       name: "Qobilov Ikrom",
       phone: "+99897745845" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "14:00",
       endTime: "15:00",
       services: [Colors.blue],
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "15:00",
       endTime: "17:30",
       services: [Colors.pink, Colors.deepPurple, Colors.yellow],
       strServices: "Soqol olish, Ukladka, Soqol olish",
       name: "Ibragimov Jasur",
       phone: "+99897123654"),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "14:00",
       endTime: "15:00",
       services: [Colors.pink],
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "14:00",
       endTime: "15:00",
       services: [Colors.blue],
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "14:00",
       endTime: "15:00",
       services: [Colors.black],
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "14:00",
       endTime: "15:00",
       services: [Colors.yellow],
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       startTime: "14:00",
       endTime: "15:00",
       services: [Colors.lightBlue],
@@ -167,7 +167,7 @@ class _MonthPage extends State<MonthPage> {
     );
   }
 
-  Widget createBookedItem({required BookedInfo info}) {
+  Widget createBookedItem({required AppointmentInfo info}) {
     Color serviceColor = info.services.isNotEmpty? info.services[0] : Colors.white;
     double height = 45;
     return Column(

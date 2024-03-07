@@ -5,19 +5,19 @@ import '../user_info.dart';
 class ResponseUserInfo{
   String? resultMsg;
   String? resultCode;
-  UserInfo? userInfo;
+  UserInfo? resultData;
 
   ResponseUserInfo({
     this.resultMsg,
     this.resultCode,
-    this.userInfo,
+    this.resultData,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'resultMsg': resultMsg,
       'resultCode': resultCode,
-      'userInfo': userInfo?.toJson(), // Convert UserInfo object to JSON
+      'userInfo': resultData?.toJson(), // Convert UserInfo object to JSON
     };
   }
 
@@ -25,7 +25,7 @@ class ResponseUserInfo{
     return ResponseUserInfo(
       resultMsg: json['resultMsg'],
       resultCode: json['resultCode'],
-      userInfo: json['resultData'] != null
+      resultData: json['resultData'] != null
           ? UserInfo.fromJson(json['resultData'])
           : null, // Parse UserInfo from JSON
     );

@@ -7,7 +7,7 @@ import '../../../data/models/booked_info.dart';
 import '../../widgets/tap_animation_widget.dart';
 
 final bookedList = [
-  BookedInfo(
+  AppointmentInfo(
       date: "2023.11.12",
       startTime: "9:00",
       endTime: "9:30",
@@ -15,7 +15,7 @@ final bookedList = [
       strServices: "Soqol olish",
       name: "Ibragimov Jasur",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       date: "2023.11.12",
       startTime: "10:00",
       endTime: "11:00",
@@ -23,7 +23,7 @@ final bookedList = [
       strServices: "Soch olish",
       name: "Qobilov Ikrom",
       phone: "+99897745845" ),
-  BookedInfo(
+  AppointmentInfo(
       date: "2023.11.12",
       startTime: "14:00",
       endTime: "15:00",
@@ -31,7 +31,7 @@ final bookedList = [
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       date: "2023.11.13",
       startTime: "15:00",
       endTime: "17:30",
@@ -39,7 +39,7 @@ final bookedList = [
       strServices: "Soqol olish, Ukladka, Soqol olish",
       name: "Ibragimov Jasur",
       phone: "+99897123654"),
-  BookedInfo(
+  AppointmentInfo(
       date: "2023.11.13",
       startTime: "14:00",
       endTime: "15:00",
@@ -47,7 +47,7 @@ final bookedList = [
       strServices: "Ukladka",
       name: "Zokirov Laziz",
       phone: "+99897123654" ),
-  BookedInfo(
+  AppointmentInfo(
       date: "2023.11.14",
       startTime: "14:00",
       endTime: "15:00",
@@ -66,7 +66,7 @@ class NotificationPage extends StatefulWidget{
 
 class _NotificationPage extends State<NotificationPage> {
 
-  Map<String, List<BookedInfo>> groupedBookedMap = {};
+  Map<String, List<AppointmentInfo>> groupedBookedMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +153,7 @@ class _NotificationPage extends State<NotificationPage> {
               itemCount: groupedBookedMap.length,
               itemBuilder: (BuildContext context, int index) {
                 String groupID = groupedBookedMap.keys.elementAt(index);
-                List<BookedInfo>? infoList = groupedBookedMap[groupID];
+                List<AppointmentInfo>? infoList = groupedBookedMap[groupID];
 
                 return Column(
                   mainAxisSize: MainAxisSize.min,
@@ -199,7 +199,7 @@ class _NotificationPage extends State<NotificationPage> {
     );
   }
 
-  Widget grouppedItem({required BookedInfo info}) {
+  Widget grouppedItem({required AppointmentInfo info}) {
     Color serviceColor = info.services.isNotEmpty ? info.services[0] : Colors
         .white;
     return Padding(

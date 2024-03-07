@@ -1,4 +1,3 @@
-
 import '../../../../data/models/hairdresser_detail_info.dart';
 import '../../../../data/models/hairdresser_info.dart';
 import '../../../../data/models/my_service.dart';

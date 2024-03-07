@@ -1,7 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut/presentation/widgets/language_widget.dart';
+import 'package:haircut/presentation/widgets/notification_widget.dart';
 
+import '../../../constant/language.dart';
+import '../../../constant/notification.dart';
 import '../../../data/models/menu_item.dart';
 import '../../widgets/child_widgets.dart';
 
@@ -71,6 +75,7 @@ var menuList = [
   ),
 ];
 
+/*
 enum LanguageId {
   uzbek_latin,
   uzbek_cyrillic,
@@ -90,6 +95,7 @@ enum NotificationId{
   _1_30_hour,
   _2_hour,
 }
+*/
 
 class MenuPage extends StatefulWidget{
   const MenuPage({super.key});
@@ -149,14 +155,27 @@ class _MenuPage extends State<MenuPage> {
                     ),
                   ),
                   animateWidget(
-                      widget: createLanguage(),
+                      widget: LanguageWidget(
+                        onPressedCallBack: (Language language) {
+                        setState(() {
+                          _languageVisible = !_languageVisible;
+                        });
+                      },),
                       context: context,
                       visible: _languageVisible),
                   animateWidget(
-                      widget: createNotification(),
+                      widget: NotificationWidget(onPressedCallBack: (NotificationId notification){
+                        setState(() {
+                          _notificationVisible =
+                          !_notificationVisible;
+                        }
+                        );
+                      },
+                      ),
                       context: context,
                       visible: _notificationVisible),
-                ])
+                ]
+            )
         )
     );
   }
@@ -345,6 +364,7 @@ class _MenuPage extends State<MenuPage> {
     return Image.asset(strImage, width: 50, height: 50,);
   }
 
+  /*
   Widget createLanguage() {
     return Container(
         color: Colors.black.withOpacity(0.5),
@@ -584,5 +604,6 @@ class _MenuPage extends State<MenuPage> {
       ],
     );
   }
+  */
 }
 

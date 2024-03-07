@@ -117,7 +117,7 @@ class _MakeAppointmentPage extends State<MakeAppointmentPage>{
               ),
             ),
             onPressedCallBack: () async{
-              bool? result = await AppAlertDialog.showAlert(
+              bool? result = await AppAlertDialogYesNo.showAlert(
                 context: context,
                 title: 'Qabulga yozilish',
                 content: 'Davom etishni xohlaysizmi?',

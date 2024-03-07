@@ -31,6 +31,15 @@ class ControlApp{
       if (appInfo.name != null) {
         await prefs.setString('name', appInfo.name!);
       }
+      if (appInfo.surName != null) {
+        await prefs.setString('surName', appInfo.surName!);
+      }
+      if (appInfo.language != null) {
+        await prefs.setString('language', appInfo.language!);
+      }
+      if (appInfo.notification != null) {
+        await prefs.setString('notification', appInfo.notification!);
+      }
       if (appInfo.isCustomer != null) {
         await prefs.setString('isCustomer', appInfo.isCustomer!);
       }
@@ -51,6 +60,9 @@ class ControlApp{
     appInfo = new AppInfo();
     appInfo?.phone = prefs?.getString('phone') ?? '';
     appInfo?.name = prefs?.getString('name') ?? '';
+    appInfo?.surName = prefs?.getString('surName') ?? '';
+    appInfo?.language = prefs?.getString('language') ?? '';
+    appInfo?.notification = prefs?.getString('notification') ?? '';
     appInfo?.isCustomer = prefs?.getString('isCustomer') ?? '';
     appInfo?.isHairdresser = prefs?.getString('isHairdresser') ?? '';
   }

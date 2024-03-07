@@ -22,8 +22,8 @@ import 'customer_info.dart';
   }): services = services ?? [];
 }*/
 
-class BookedInfo extends CustomerInfo {
-  BookedInfo({
+class AppointmentInfo extends CustomerInfo {
+  AppointmentInfo({
     String date = "",
     String startTime = "",
     String endTime = "",

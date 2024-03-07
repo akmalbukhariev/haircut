@@ -197,6 +197,12 @@ class _ChooseServicePage extends State<ChooseServicePage> {
               ),
               SimpleDialogOption(
                 onPressed: () {
+                  Navigator.pop(context, Language.Uzbek_cyrillic);
+                },
+                child: const Text("Узбекча"),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
                   Navigator.pop(context, Language.Russian);
                 },
                 child: const Text("Ruski"),
@@ -215,6 +221,9 @@ class _ChooseServicePage extends State<ChooseServicePage> {
       case Language.Uzbek:
         print("clicked uzbek");
         break;
+      case Language.Uzbek_cyrillic:
+        print("clicked uzbek cyrillic");
+        break;
       case Language.Russian:
         print("clicked russin");
         break;
@@ -232,7 +241,6 @@ class _ChooseServicePage extends State<ChooseServicePage> {
 
     if(control?.appInfo?.phone?.trim() != ""){
       if(isCustomer){
-
         LoadingOverlay.show(context);
         ResponseUserInfo? response = await HttpService.updateUserCustomer(
             data: UserInfo(
@@ -246,7 +254,6 @@ class _ChooseServicePage extends State<ChooseServicePage> {
               (Route<dynamic> route) => false,);
       }
       else{
-
         LoadingOverlay.show(context);
         ResponseUserInfo? response = await HttpService.updateUserHairdresser(
             data: UserInfo(
