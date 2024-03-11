@@ -10,9 +10,9 @@ class HairdresserListState{
   double? score4;
   double? score5;
   String? orderTime;
-  HairdresserInfo? selectedItem;
+  HairdresserInfoForUser? selectedItem;
   HairdresserDetailInfo? detailInfo;
-  List<HairdresserInfo> hairdresserInfoList;
+  List<HairdresserInfoForUser> hairdresserInfoList;
   List<MyService>? serviceList;
 
   HairdresserListState({
@@ -31,9 +31,9 @@ class HairdresserListState{
 
   HairdresserListState copyWith({
     bool? isLoading,
-    HairdresserInfo? selectedItem,
+    HairdresserInfoForUser? selectedItem,
     HairdresserDetailInfo? detailInfo,
-    List<HairdresserInfo>? dataList,
+    List<HairdresserInfoForUser>? dataList,
     List<MyService>? serviceList,
     String? orderTime,
     double? score1,

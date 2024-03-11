@@ -3,14 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut/constant/control_app.dart';
 import 'package:haircut/data/models/app_info.dart';
+import 'package:haircut/data/models/http_response/response_detail_hairdresser.dart';
 
 import '../../../constant/Result.dart';
 import '../../../data/dataproviders/http_service.dart';
+import '../../../data/models/http_response/response_hairdresser_info.dart';
 import '../../../data/models/http_response/response_user_info.dart';
 import '../dialog_box.dart';
 import '../hairdresser/hairdresser_main_page.dart';
 import '../loading_overlay.dart';
-import '../user/my_main_page.dart';
+import '../user/user_main_page.dart';
 import 'authentication_number_page.dart';
 import '../../widgets/clean_button_textfield.dart';
 
@@ -154,43 +156,70 @@ class _PhoneNumberPage extends State<PhoneNumberPage>{
     ControlApp? control = ControlApp.Instance();
     control?.registerUser?.phone = txtBoxPhone.text;
 
-    LoadingOverlay.show(context);
-    ResponseUserInfo? response = await HttpService.getUserInfo(
-        phone: txtBoxPhone.text
-    );
-    LoadingOverlay.hide();
-
-    if(response?.resultCode == Result.USER_EXIST_CODE.toString()){
-
-      AppInfo appInfo = AppInfo(
-        phone: txtBoxPhone.text,
-        name: response?.resultData?.name,
-        surName: response?.resultData?.surname,
-        language: response?.resultData?.language,
-        notification: response?.resultData?.notification,
-        isCustomer: control?.registerUser?.is_customer,
-        isHairdresser: control?.registerUser?.is_hairdresser
+    if(control?.hasCustomerClicked == true) {
+      LoadingOverlay.show(context);
+      ResponseUserInfo? response = await HttpService.getUserInfo(
+          phone: txtBoxPhone.text
       );
-      await control?.SetAppInfo(appInfo: appInfo);
+      LoadingOverlay.hide();
 
-      if(control?.hasCustomerClicked == true){
+      if(response?.resultCode == Result.USER_EXIST_CODE.toString()){
+
+        AppInfo appInfo = AppInfo(
+            phone: txtBoxPhone.text,
+            name: response?.resultData?.name,
+            surName: response?.resultData?.surname,
+            language: response?.resultData?.language,
+            notification: response?.resultData?.notification,
+            isCustomer: control?.registerUser?.is_customer,
+            isHairdresser: control?.registerUser?.is_hairdresser
+        );
+        await control?.SetAppInfo(appInfo: appInfo);
+
         Navigator.pushAndRemoveUntil(context,
-          CupertinoPageRoute(builder: (BuildContext context) => MyMainPage()),
+          CupertinoPageRoute(builder: (BuildContext context) => UserMainPage()),
               (Route<dynamic> route) => false,);
       }
-      else {
+      else{
+        await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  AuthenticationNumberPage()),
+        );
+      }
+    }
+    else{
+      LoadingOverlay.show(context);
+      ResponseHairdresserInfo? response = await HttpService.getHairdresserInfo(
+          phone: txtBoxPhone.text
+      );
+      LoadingOverlay.hide();
+
+      if(response?.resultCode == Result.USER_EXIST_CODE.toString()){
+        AppInfo appInfo = AppInfo(
+            phone: txtBoxPhone.text,
+            name: response?.resultData?.name,
+            surName: response?.resultData?.surname,
+            language: response?.resultData?.language,
+            notification: response?.resultData?.notification,
+            isCustomer: control?.registerUser?.is_customer,
+            isHairdresser: control?.registerUser?.is_hairdresser
+        );
+        await control?.SetAppInfo(appInfo: appInfo);
+
         Navigator.pushAndRemoveUntil(context,
           CupertinoPageRoute(builder: (BuildContext context) => HairdresserMainPage()),
               (Route<dynamic> route) => false,);
       }
-    }
-    else {
-      await Navigator.push(
-        context,
-        CupertinoPageRoute(
-            builder: (context) =>
-                AuthenticationNumberPage()),
-      );
+      else{
+        await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  AuthenticationNumberPage()),
+        );
+      }
     }
   }
 }

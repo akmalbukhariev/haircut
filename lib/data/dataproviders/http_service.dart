@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:haircut/data/models/http_response/response_hairdresser_info.dart';
 import 'package:haircut/data/models/http_response/response_user_info.dart';
 import 'package:haircut/data/models/user_info.dart';
 import 'package:http/http.dart' as http;
@@ -17,8 +18,10 @@ import '../models/user_booked_info.dart';
 
 class HttpService{
    static String SERVER_URL = "http://localhost:8080/haircut/api/v1/";
-   static String URL_REGISTER = "${SERVER_URL}user/register";
+   static String URL_USER_REGISTER = "${SERVER_URL}user/register";
+   static String URL_HAIRDRESSER_REGISTER = "${SERVER_URL}hairdresser/register";
    static String URL_GET_USER = "${SERVER_URL}user/getUser/";
+   static String URL_GET_HAIRDRESSER = "${SERVER_URL}hairdresser/getHairdresser/";
    static String URL_UPDATE_USER_INFO = "${SERVER_URL}user/updateUserInfo";
    static String URL_GET_ALL_HAIRDRESSER = "${SERVER_URL}hairdresser/getAllHairdresserForUserMainPage";
    static String URL_GET_DETAIL_HAIRDRESSER = "${SERVER_URL}hairdresser/getHairdresserDetailInfo/";
@@ -29,10 +32,29 @@ class HttpService{
    static String URL_ADD_FAVORITE_HAIRDRESSER = "${SERVER_URL}user/addFavoriteHairdresser";
    static String URL_GET_FAVORITE_HAIRDRESSER_LIST = "${SERVER_URL}user/getAllFavoriteHairdresser/";
 
-   static Future<ResponseRegister?> register({required RegisterUser? data}) async {
+   static Future<ResponseRegister?> userRegister({required RegisterUser? data}) async {
       try{
          var response = await http.post(
-             Uri.parse(URL_REGISTER),
+             Uri.parse(URL_USER_REGISTER),
+             headers: {"Content-Type": "application/json"},
+             body: json.encode(data?.toJson())
+         );
+         if (response.statusCode == 200){
+            return ResponseRegister.fromJson(json.decode(response.body));
+         }
+      }
+      catch(e){
+         ResponseRegister response = ResponseRegister();
+         response.resultMsg = e.toString();
+         return response;
+      }
+      return null;
+   }
+
+   static Future<ResponseRegister?> hairdresserRegister({required RegisterUser? data}) async {
+      try{
+         var response = await http.post(
+             Uri.parse(URL_HAIRDRESSER_REGISTER),
              headers: {"Content-Type": "application/json"},
              body: json.encode(data?.toJson())
          );
@@ -57,6 +79,21 @@ class HttpService{
       }
       catch(e){
          ResponseUserInfo response = ResponseUserInfo();
+         response.resultMsg = e.toString();
+         return response;
+      }
+      return null;
+   }
+
+   static Future<ResponseHairdresserInfo?> getHairdresserInfo({required String phone}) async {
+      try{
+         var response = await http.get(Uri.parse('$URL_GET_HAIRDRESSER$phone'));
+         if(response.statusCode == 200) {
+            return ResponseHairdresserInfo.fromJson(json.decode(response.body));
+         }
+      }
+      catch(e){
+         ResponseHairdresserInfo response = ResponseHairdresserInfo();
          response.resultMsg = e.toString();
          return response;
       }

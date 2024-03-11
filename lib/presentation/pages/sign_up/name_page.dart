@@ -11,7 +11,7 @@ import '../../widgets/clean_button_textfield.dart';
 import '../dialog_box.dart';
 import '../hairdresser/hairdresser_main_page.dart';
 import '../loading_overlay.dart';
-import '../user/my_main_page.dart';
+import '../user/user_main_page.dart';
 
 class NamePage extends StatefulWidget{
    NamePage({
@@ -174,8 +174,12 @@ class _NamePage extends State<NamePage> {
     ControlApp? control = ControlApp?.Instance();
     control?.registerUser?.name = txtBoxFirstName.text;
     control?.registerUser?.surName = txtBoxLastName.text;
+
     LoadingOverlay.show(context);
-    ResponseRegister? response = await HttpService.register(
+    ResponseRegister? response = control?.hasCustomerClicked == true ?
+    await HttpService.userRegister(
+        data: control?.registerUser) :
+    await HttpService.hairdresserRegister(
         data: control?.registerUser);
     LoadingOverlay.hide();
 
@@ -185,23 +189,26 @@ class _NamePage extends State<NamePage> {
         "Ro'yxatdan o'tish",
         response.resultMsg!, () async {
         if (response.resultCode == Result.SUCCESS_CODE.toString()) {
-          if (control?.hasCustomerClicked == true) {
-            AppInfo appInfo = AppInfo(
-                phone: control?.registerUser?.phone,
-                name: control?.registerUser?.name,
-                surName: control?.registerUser?.surName,
-                isCustomer: control?.registerUser?.is_customer,
-                isHairdresser: control?.registerUser?.is_hairdresser
-            );
-            await control?.SetAppInfo(appInfo: appInfo);
+          AppInfo appInfo = AppInfo(
+              phone: control?.registerUser?.phone,
+              name: control?.registerUser?.name,
+              surName: control?.registerUser?.surName,
+              language: control?.registerUser?.language,
+              notification: control?.registerUser?.notification,
+              isCustomer: control?.registerUser?.is_customer,
+              isHairdresser: control?.registerUser?.is_hairdresser
+          );
+          await control?.SetAppInfo(appInfo: appInfo);
 
+          if (control?.hasCustomerClicked == true) {
             Navigator.pushAndRemoveUntil(
               context,
               CupertinoPageRoute(
-                  builder: (BuildContext context) => MyMainPage()),
+                  builder: (BuildContext context) => UserMainPage()),
                   (Route<dynamic> route) => false,
             );
-          } else {
+          }
+          else {
             Navigator.pushAndRemoveUntil(
               context,
               CupertinoPageRoute(

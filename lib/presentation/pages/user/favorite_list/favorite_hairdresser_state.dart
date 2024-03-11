@@ -2,7 +2,7 @@ import '../../../../data/models/hairdresser_info.dart';
 
 class FavoriteHairdresserState{
   bool isLoading;
-  List<HairdresserInfo> hairdresserInfoList;
+  List<HairdresserInfoForUser> hairdresserInfoList;
 
   FavoriteHairdresserState({
     this.isLoading = false,
@@ -11,7 +11,7 @@ class FavoriteHairdresserState{
 
   FavoriteHairdresserState copyWith({
     bool? isLoading,
-    List<HairdresserInfo>? hairdresserInfoList,
+    List<HairdresserInfoForUser>? hairdresserInfoList,
   }){
     return FavoriteHairdresserState(
       isLoading: isLoading ?? this.isLoading,

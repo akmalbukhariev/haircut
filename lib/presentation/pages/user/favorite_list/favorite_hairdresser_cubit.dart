@@ -11,19 +11,19 @@ class FavoriteHairdresserCubit extends Cubit<FavoriteHairdresserState>{
 
   Future<void> initFavoriteList() async {
     emit(state.copyWith(isLoading: true));
-    List<HairdresserInfo> tempList = [];
-    tempList = await getFavoriteList() as List<HairdresserInfo>;
+    List<HairdresserInfoForUser> tempList = [];
+    tempList = await getFavoriteList() as List<HairdresserInfoForUser>;
     emit(state.copyWith(isLoading: false, hairdresserInfoList: tempList));
   }
 
   Future<void> refreshFavoriteList() async {
-    List<HairdresserInfo> tempList = [];
-    tempList = await getFavoriteList() as List<HairdresserInfo>;
+    List<HairdresserInfoForUser> tempList = [];
+    tempList = await getFavoriteList() as List<HairdresserInfoForUser>;
     emit(state.copyWith(isLoading: false, hairdresserInfoList: tempList));
   }
 
-  Future<List<HairdresserInfo>> getFavoriteList() async {
-    List<HairdresserInfo> tempList = [];
+  Future<List<HairdresserInfoForUser>> getFavoriteList() async {
+    List<HairdresserInfoForUser> tempList = [];
     ResponseFavoriteHairdresser? response = await HttpService.getAllFavoriteHairdresser(
         phone: ControlApp
             .Instance()
@@ -33,7 +33,7 @@ class FavoriteHairdresserCubit extends Cubit<FavoriteHairdresserState>{
     if (response != null && response.resultData != null) {
       for (FavoriteInfo item in response.resultData!) {
         tempList.add(
-            HairdresserInfo(
+            HairdresserInfoForUser(
                 image: "images/avatar_1.png",
                 name: item.name,
                 profession: item.profession

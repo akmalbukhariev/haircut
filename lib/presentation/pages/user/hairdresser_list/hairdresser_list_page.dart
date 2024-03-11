@@ -200,7 +200,7 @@ class _HairdresserListPage extends State<HairdresserListPage> {
     );
   }
 
-  Widget createItem({required HairdresserInfo info}) {
+  Widget createItem({required HairdresserInfoForUser info}) {
     return Column(
         children: [
           Container(

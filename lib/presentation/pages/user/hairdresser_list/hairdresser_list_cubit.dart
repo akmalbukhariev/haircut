@@ -26,24 +26,24 @@ class HairdresserListCubit extends Cubit<HairdresserListState> {
 
   Future<void> initPage() async {
     emit(state.copyWith(isLoading: true));
-    List<HairdresserInfo> tempList = await getData();
+    List<HairdresserInfoForUser> tempList = await getData();
     emit(state.copyWith(isLoading: false, dataList: tempList));
   }
 
   Future<void> refreshList() async {
     emit(state.copyWith(isLoading: false));
-    List<HairdresserInfo> tempList = await getData();
+    List<HairdresserInfoForUser> tempList = await getData();
     emit(state.copyWith(dataList: tempList));
   }
 
-  Future<List<HairdresserInfo>> getData() async {
-    List<HairdresserInfo> tempList = [];
+  Future<List<HairdresserInfoForUser>> getData() async {
+    List<HairdresserInfoForUser> tempList = [];
 
     ResponseHairdresser? response = await HttpService.getAllHairdresserInfo();
     if (response != null && response.resultData != null) {
       for (HairdresserDetailInfo item in response.resultData!) {
         tempList.add(
-            HairdresserInfo(
+            HairdresserInfoForUser(
                 image: "images/avatar_3.png",
                 starCount: double.parse(item.allScores ?? "0.0"),
                 phone: item.phone,
@@ -120,7 +120,7 @@ class HairdresserListCubit extends Cubit<HairdresserListState> {
   }
 
   void setSelectItem({required int index}) {
-    HairdresserInfo item = state.hairdresserInfoList[index];
+    HairdresserInfoForUser item = state.hairdresserInfoList[index];
     emit(state.copyWith(selectedItem: item));
   }
 

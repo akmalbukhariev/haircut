@@ -7,7 +7,7 @@ import 'package:haircut/presentation/pages/user/appointment_list/appointment_lis
 import 'package:haircut/presentation/pages/user/favorite_list/favorite_hairdresser_cubit.dart';
 import 'package:haircut/presentation/pages/user/hairdresser_list/hairdresser_list_cubit.dart';
 import 'package:haircut/presentation/pages/user/hairdresser_page.dart';
-import 'package:haircut/presentation/pages/user/my_main_page.dart';
+import 'package:haircut/presentation/pages/user/user_main_page.dart';
 import 'package:haircut/presentation/pages/user/my_room/my_room_page_cubit.dart';
 
 void main() async {
@@ -52,7 +52,7 @@ Widget selectPage(){
   Widget widget = ChooseServicePage();
   AppInfo? appInfo = ControlApp.Instance()?.appInfo;
   if(appInfo?.isCustomer == "1" && appInfo?.isHairdresser == "0"){
-    widget = MyMainPage();
+    widget = UserMainPage();
   }
   else if(appInfo?.isCustomer == "0" && appInfo?.isHairdresser == "1"){
     widget = HairdresserPage();

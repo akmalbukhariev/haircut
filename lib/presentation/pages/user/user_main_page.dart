@@ -7,14 +7,14 @@ import 'favorite_list/favorite_hairdresser_page.dart';
 import 'hairdresser_list/hairdresser_list_page.dart';
 import 'my_room/my_room_page.dart';
 
-class MyMainPage extends StatefulWidget{
-  const MyMainPage({super.key});
+class UserMainPage extends StatefulWidget{
+  const UserMainPage({super.key});
 
   @override
-  State<MyMainPage> createState() => _MyMainPage();
+  State<UserMainPage> createState() => _MyMainPage();
 }
 
-class _MyMainPage extends State<MyMainPage>{
+class _MyMainPage extends State<UserMainPage>{
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);

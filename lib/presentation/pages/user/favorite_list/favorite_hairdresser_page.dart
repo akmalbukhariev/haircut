@@ -105,7 +105,7 @@ class _FavoriteHairdresserPage extends State<FavoriteHairdresserPage> {
     );
   }
 
-  Widget createItem({required HairdresserInfo info}) {
+  Widget createItem({required HairdresserInfoForUser info}) {
     return Padding(
       padding: const EdgeInsets.only(left: 7, top: 7, bottom: 7),
       child: Row(

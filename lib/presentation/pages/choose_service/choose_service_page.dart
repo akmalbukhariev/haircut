@@ -10,7 +10,7 @@ import '../../widgets/tap_animation_widget.dart';
 import '../hairdresser/hairdresser_main_page.dart';
 import '../loading_overlay.dart';
 import '../sign_up/phone_number_page.dart';
-import '../user/my_main_page.dart';
+import '../user/user_main_page.dart';
 
 class ChooseServicePage extends StatefulWidget{
   const ChooseServicePage({super.key});
@@ -250,7 +250,7 @@ class _ChooseServicePage extends State<ChooseServicePage> {
         LoadingOverlay.hide();
 
         Navigator.pushAndRemoveUntil( context,
-          CupertinoPageRoute(builder: (BuildContext context) => MyMainPage()),
+          CupertinoPageRoute(builder: (BuildContext context) => UserMainPage()),
               (Route<dynamic> route) => false,);
       }
       else{

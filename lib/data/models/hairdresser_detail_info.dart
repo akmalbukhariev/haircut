@@ -5,6 +5,9 @@ class HairdresserDetailInfo {
   String? surname;
   String? phone;
   String? address;
+  String? location;
+  String? language;
+  String? notification;
   String? workingHour;
   String? scores;
   List<ServiceInfo>? services;
@@ -22,6 +25,9 @@ class HairdresserDetailInfo {
     this.surname,
     this.phone,
     this.address,
+    this.location,
+    this.language,
+    this.notification,
     this.workingHour,
     this.scores,
     this.services,
@@ -41,6 +47,9 @@ class HairdresserDetailInfo {
       'surname': surname,
       'phone': phone,
       'address': address,
+      'address': location,
+      'language': language,
+      'notification': notification,
       'workingHour': workingHour,
       'scores': scores,
       'services': services?.map((item) => item.toJson()).toList(),
@@ -61,6 +70,9 @@ class HairdresserDetailInfo {
       surname: json['surname'] ?? '',
       phone: json['phone'] ?? '',
       address: json['address'] ?? '',
+      location: json['location'] ?? '',
+      language: json['language'] ?? '',
+      notification: json['notification'] ?? '',
       workingHour: json['workingHour'] ?? '',
       scores: json['scores'] ?? '',
       services: (json['services'] as List<dynamic>?)?.map((item) => ServiceInfo.fromJson(item)).toList(),
