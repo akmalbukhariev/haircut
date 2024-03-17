@@ -1,75 +1,12 @@
-
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haircut/presentation/pages/hairdresser/main_page/main_page_cubit.dart';
 
-import '../../../data/models/booked_info.dart';
-
-final bookedList = [
-  AppointmentInfo(
-      startTime: "9:00",
-      endTime: "9:30",
-      services: [Colors.yellow],
-      strServices: "Soqol olish",
-      name: "Ibragimov Jasur",
-      phone: "+99897123654" ),
-  AppointmentInfo(
-      startTime: "10:00",
-      endTime: "11:00",
-      services: [Colors.pink],
-      strServices: "Soch olish",
-      name: "Qobilov Ikrom",
-      phone: "+99897745845" ),
-  AppointmentInfo(
-      startTime: "14:00",
-      endTime: "15:00",
-      services: [Colors.blue],
-      strServices: "Ukladka",
-      name: "Zokirov Laziz",
-      phone: "+99897123654" ),
-  AppointmentInfo(
-      startTime: "15:00",
-      endTime: "17:30",
-      services: [Colors.pink, Colors.deepPurple, Colors.yellow],
-      strServices: "Soqol olish, Ukladka, Soqol olish",
-      name: "Ibragimov Jasur",
-      phone: "+99897123654"),
-  AppointmentInfo(
-      startTime: "14:00",
-      endTime: "15:00",
-      services: [Colors.pink],
-      strServices: "Ukladka",
-      name: "Zokirov Laziz",
-      phone: "+99897123654" ),
-  AppointmentInfo(
-      startTime: "14:00",
-      endTime: "15:00",
-      services: [Colors.blue],
-      strServices: "Ukladka",
-      name: "Zokirov Laziz",
-      phone: "+99897123654" ),
-  AppointmentInfo(
-      startTime: "14:00",
-      endTime: "15:00",
-      services: [Colors.black],
-      strServices: "Ukladka",
-      name: "Zokirov Laziz",
-      phone: "+99897123654" ),
-  AppointmentInfo(
-      startTime: "14:00",
-      endTime: "15:00",
-      services: [Colors.yellow],
-      strServices: "Ukladka",
-      name: "Zokirov Laziz",
-      phone: "+99897123654" ),
-  AppointmentInfo(
-      startTime: "14:00",
-      endTime: "15:00",
-      services: [Colors.lightBlue],
-      strServices: "Ukladka",
-      name: "Zokirov Laziz",
-      phone: "+99897123654" ),
-];
+import '../../../../data/models/booked_info.dart';
+import '../../loading_overlay.dart';
+import 'main_page_state.dart';
 
 class MonthPage extends StatefulWidget{
 
@@ -79,42 +16,63 @@ class MonthPage extends StatefulWidget{
 
 class _MonthPage extends State<MonthPage> {
 
-  EventController controller = EventController();
+  EventController controlTextField = EventController();
+
+  @override
+  void initState() {
+    context.read<MainPageCubit>().initMonthPage();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        child: SafeArea(
-            child: Container(
-                color: const Color.fromRGBO(250, 250, 250, 1),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10,),
-                    createCalendar(),
-                    Container(height: 2, color: const Color.fromRGBO(222, 222, 222, 1),),
-                    const SizedBox(height: 2,),
-                    Container(height: 2, color: const Color.fromRGBO(222, 222, 222, 1),),
-                    Container(
-                      height: 200,
-                      //child: Expanded(
-                        child: CustomScrollView(
-                          slivers: [
-                            SliverList(
-                              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                                final item = bookedList[index];
-                                return createBookedItem(info: item);
-                              },
-                                childCount: bookedList.length,
-                              ),
-                              //shrinkWrap: true,
-                            ),
-                          ],
-                        ),
-                      //),
-                    )
-                  ]
-                  ,)
-            )
+        child: BlocBuilder<MainPageCubit, MainPageState>(
+            builder: (context, state) {
+              return SafeArea(
+                  child: Stack(
+                    children: [
+                      Container(
+                          color: const Color.fromRGBO(250, 250, 250, 1),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 10,),
+                              createCalendar(),
+                              Container(height: 2,
+                                color: const Color.fromRGBO(222, 222, 222, 1),),
+                              const SizedBox(height: 2,),
+                              Container(height: 2,
+                                color: const Color.fromRGBO(222, 222, 222, 1),),
+                              Container(
+                                height: 200,
+                                //child: Expanded(
+                                child: CustomScrollView(
+                                  slivers: [
+                                    SliverList(
+                                      delegate: SliverChildBuilderDelegate((
+                                          BuildContext context, int index) {
+                                        final item = state
+                                            .appointmentList![index];
+                                        return createBookedItem(info: item);
+                                      },
+                                        childCount: state.appointmentList
+                                            ?.length,
+                                      ),
+                                      //shrinkWrap: true,
+                                    ),
+                                  ],
+                                ),
+                                //),
+                              )
+                            ]
+                            ,)
+                      ),
+                      if(state.isLoading)
+                        const LoadingOverlayWidget()
+                    ],
+                  )
+              );
+            }
         )
     );
   }
@@ -122,7 +80,7 @@ class _MonthPage extends State<MonthPage> {
   Widget createCalendar() {
     return Expanded(
         child: CalendarControllerProvider(
-            controller: controller,
+            controller: controlTextField,
             child: Scaffold(
               body: MonthView(
                 headerStyle: const HeaderStyle(
@@ -223,6 +181,7 @@ class _MonthPage extends State<MonthPage> {
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text(info.strServices,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 12,

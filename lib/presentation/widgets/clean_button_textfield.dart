@@ -30,7 +30,10 @@ class _CleanButtonTextField extends State<CleanButtonTextField> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    // Dispose of the controller only if it's not provided
+    if (widget.controlTextField == null) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 

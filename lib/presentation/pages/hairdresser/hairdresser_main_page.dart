@@ -2,13 +2,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut/presentation/pages/hairdresser/search_page.dart';
-import 'package:haircut/presentation/pages/hairdresser/week_page.dart';
+import 'package:haircut/presentation/pages/hairdresser/main_page/week_page.dart';
 
 import '../custom_page_route.dart';
-import 'create_customer_page.dart';
-import 'day_page.dart';
+import 'main_page/create_customer_page.dart';
+import 'main_page/day_page.dart';
 import 'menu_page.dart';
-import 'month_page.dart';
+import 'main_page/month_page.dart';
 import 'my_page/customer_my_page.dart';
 import 'notification_page.dart';
 

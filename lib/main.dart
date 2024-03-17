@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut/constant/control_app.dart';
 import 'package:haircut/data/models/app_info.dart';
 import 'package:haircut/presentation/pages/choose_service/choose_service_page.dart';
+import 'package:haircut/presentation/pages/hairdresser/hairdresser_main_page.dart';
+import 'package:haircut/presentation/pages/hairdresser/main_page/main_page_cubit.dart';
 import 'package:haircut/presentation/pages/user/appointment_list/appointment_list_cubit.dart';
 import 'package:haircut/presentation/pages/user/favorite_list/favorite_hairdresser_cubit.dart';
 import 'package:haircut/presentation/pages/user/hairdresser_list/hairdresser_list_cubit.dart';
@@ -37,6 +39,9 @@ class HairCutApp extends StatelessWidget{
           BlocProvider(
             create: (context) => MyRoomPageCubit(),
           ),
+          BlocProvider(
+            create: (context) => MainPageCubit(),
+          )
         ],
         child: MaterialApp(
           home: Scaffold(
@@ -55,7 +60,7 @@ Widget selectPage(){
     widget = UserMainPage();
   }
   else if(appInfo?.isCustomer == "0" && appInfo?.isHairdresser == "1"){
-    widget = HairdresserPage();
+    widget = HairdresserMainPage();
   }
 
   return widget;

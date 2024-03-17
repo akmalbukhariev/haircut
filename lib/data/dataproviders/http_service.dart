@@ -6,11 +6,15 @@ import 'package:haircut/data/models/user_info.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/add_favorite_hairdresser_info.dart';
+import '../models/hairdresser_booked_client_himself.dart';
+import '../models/hairdresser_client_book.dart';
 import '../models/http_response/response_add_favorite_hairdresser.dart';
 import '../models/http_response/response_booked_list.dart';
 import '../models/http_response/response_detail_hairdresser.dart';
 import '../models/http_response/response_favorite_hairdresser.dart';
 import '../models/http_response/response_hairdresser.dart';
+import '../models/http_response/response_hairdresser_booked_clients.dart';
+import '../models/http_response/response_hairdresser_service.dart';
 import '../models/http_response/response_order_client.dart';
 import '../models/http_response/response_register.dart';
 import '../models/http_models/register_user.dart';
@@ -22,13 +26,16 @@ class HttpService{
    static String URL_HAIRDRESSER_REGISTER = "${SERVER_URL}hairdresser/register";
    static String URL_GET_USER = "${SERVER_URL}user/getUser/";
    static String URL_GET_HAIRDRESSER = "${SERVER_URL}hairdresser/getHairdresser/";
+   static String URL_GET_HAIRDRESSER_SERVICES = "${SERVER_URL}hairdresser/getHairdresserServices/";
    static String URL_UPDATE_USER_INFO = "${SERVER_URL}user/updateUserInfo";
    static String URL_GET_ALL_HAIRDRESSER = "${SERVER_URL}hairdresser/getAllHairdresserForUserMainPage";
    static String URL_GET_DETAIL_HAIRDRESSER = "${SERVER_URL}hairdresser/getHairdresserDetailInfo/";
    static String URL_INSERT_BOOKED_CLIENT = "${SERVER_URL}hairdresser/insertBookedClient";
+   static String URL_INSERT_HAIRDREESER_BOOKED_CLIENT = "${SERVER_URL}hairdresser/addHairdresserBookedClient";
    static String URL_UPDATE_USER_CUSTOMER = "${SERVER_URL}user/updateUserCustomer";
    static String URL_UPDATE_USER_HAIRDERSSER = "${SERVER_URL}user/updateUserHairdreser";
    static String URL_GET_USER_BOOKED_LIST = "${SERVER_URL}user/getUserBookedList/";
+   static String URL_GET_HAIRDRESSER_BOOKED_LIST = "${SERVER_URL}hairdresser/getBookedClients/";
    static String URL_ADD_FAVORITE_HAIRDRESSER = "${SERVER_URL}user/addFavoriteHairdresser";
    static String URL_GET_FAVORITE_HAIRDRESSER_LIST = "${SERVER_URL}user/getAllFavoriteHairdresser/";
 
@@ -94,6 +101,21 @@ class HttpService{
       }
       catch(e){
          ResponseHairdresserInfo response = ResponseHairdresserInfo();
+         response.resultMsg = e.toString();
+         return response;
+      }
+      return null;
+   }
+
+   static Future<ResponseHairdresserService?> getHairdresserServices({required String phone}) async {
+      try{
+         var response = await http.get(Uri.parse('$URL_GET_HAIRDRESSER_SERVICES$phone'));
+         if(response.statusCode == 200) {
+            return ResponseHairdresserService.fromJson(json.decode(response.body));
+         }
+      }
+      catch(e){
+         ResponseHairdresserService response = ResponseHairdresserService();
          response.resultMsg = e.toString();
          return response;
       }
@@ -187,6 +209,25 @@ class HttpService{
       return null;
    }
 
+   static Future<ResponseOrderClient?> hairdresserBookClient({required HairdresserBookedClientHimSelf? data}) async {
+      try{
+         var response = await http.post(
+             Uri.parse(URL_INSERT_HAIRDREESER_BOOKED_CLIENT),
+             headers: {"Content-Type": "application/json"},
+             body: json.encode(data?.toJson())
+         );
+         if (response.statusCode == 200){
+            return ResponseOrderClient.fromJson(json.decode(response.body));
+         }
+      }
+      catch(e){
+         ResponseOrderClient response = ResponseOrderClient();
+         response.resultMsg = e.toString();
+         return response;
+      }
+      return null;
+   }
+
    static Future<ResponseBookedList?> getUserBookedList({required String phone}) async {
       try{
          var response = await http.get(Uri.parse('$URL_GET_USER_BOOKED_LIST$phone'));
@@ -255,4 +296,23 @@ class HttpService{
       return null;
    }
 
+   static Future<ResponseHairdresserBookedClient?> getHairdresserBookedList({required HairdresserClientBookInfo? data}) async {
+      try {
+         var response = await http.post(
+             Uri.parse(URL_GET_HAIRDRESSER_BOOKED_LIST),
+             headers: {"Content-Type": "application/json"},
+             body: json.encode(data?.toJson())
+         );
+         if (response.statusCode == 200) {
+            return ResponseHairdresserBookedClient.fromJson(
+                json.decode(response.body));
+         }
+      }
+      catch (e) {
+         ResponseHairdresserBookedClient response = ResponseHairdresserBookedClient();
+         response.resultMsg = e.toString();
+         return response;
+      }
+      return null;
+   }
 }

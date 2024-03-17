@@ -5,6 +5,10 @@ import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'main_page_cubit.dart';
+import 'main_page_state.dart';
 
 @immutable
 class Event {
@@ -87,46 +91,50 @@ class _WeekPage extends State<WeekPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: CalendarControllerProvider(
-          controller: controller,
-          child: WeekView(
-            initialDay: DateTime(2023, 11, 12),
-            headerStyle: HeaderStyle(
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(250, 250, 250, 1)
+    return BlocBuilder<MainPageCubit, MainPageState>(
+      builder: (context, state) {
+        return SafeArea(
+            child: CalendarControllerProvider(
+              controller: controller,
+              child: WeekView(
+                initialDay: DateTime(2023, 11, 12),
+                headerStyle: HeaderStyle(
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(250, 250, 250, 1)
+                  ),
+                  headerTextStyle: TextStyle(
+                      color: Color.fromRGBO(17, 138, 178, 1),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 0.1),
+                  rightIconVisible: false,
+                  leftIconVisible: false,
+                  headerPadding: EdgeInsets.only(top: 1),
+                ),
+                weekDayStringBuilder: (int index) {
+                  final day = [
+                    'Du',
+                    'Se',
+                    'Ch',
+                    'Pa',
+                    'Ju',
+                    'Sh',
+                    'Ya'
+                  ];
+                  return day[index];
+                },
+                timeLineStringBuilder: (DateTime time, {DateTime? secondaryDate}) {
+                  return '${time.hour}:${time.minute.toString().padLeft( 2, '0')}';
+                },
+                headerStringBuilder: (DateTime time,{DateTime? secondaryDate}){
+                  return "";
+                },
+                liveTimeIndicatorSettings: const HourIndicatorSettings(color: Colors.red),
+                showLiveTimeLineInAllDays: true,
+                //heightPerMinute: 1.5,
               ),
-              headerTextStyle: TextStyle(
-                  color: Color.fromRGBO(17, 138, 178, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 0.1),
-              rightIconVisible: false,
-              leftIconVisible: false,
-              headerPadding: EdgeInsets.only(top: 1),
-            ),
-            weekDayStringBuilder: (int index) {
-              final day = [
-                'Du',
-                'Se',
-                'Ch',
-                'Pa',
-                'Ju',
-                'Sh',
-                'Ya'
-              ];
-              return day[index];
-            },
-            timeLineStringBuilder: (DateTime time, {DateTime? secondaryDate}) {
-              return '${time.hour}:${time.minute.toString().padLeft( 2, '0')}';
-            },
-            headerStringBuilder: (DateTime time,{DateTime? secondaryDate}){
-              return "";
-            },
-            liveTimeIndicatorSettings: const HourIndicatorSettings(color: Colors.red),
-            showLiveTimeLineInAllDays: true,
-            //heightPerMinute: 1.5,
-          ),
-        )
+            )
+        );
+      },
     );
   }
 }

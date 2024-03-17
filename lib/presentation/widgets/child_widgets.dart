@@ -22,7 +22,10 @@ Widget saveButton({Color col = Colors.red, VoidCallback? onPressedCallBack,}) {
   );
 }
 
-Widget navigationBar({required BuildContext context,String title = ""}) {
+Widget navigationBar({required BuildContext context,
+  String title = "",
+  VoidCallback? onPressedCallBack
+}) {
   return Stack(
     children: [
       Padding(
@@ -31,7 +34,10 @@ Widget navigationBar({required BuildContext context,String title = ""}) {
               alignment: Alignment.centerLeft,
               child: GestureDetector(
                 onTap: () {
-                      Navigator.pop(context);
+                  if(onPressedCallBack != null) {
+                    onPressedCallBack!();
+                  }
+                  Navigator.pop(context);
                 },
                 child: Image.asset(
                   "images/icon_1.png", width: 30, height: 30,)
