@@ -16,10 +16,11 @@ class MonthPage extends StatefulWidget{
 
 class _MonthPage extends State<MonthPage> {
 
-  EventController controlTextField = EventController();
+  EventController controlEvent = EventController();
 
   @override
   void initState() {
+    context.read<MainPageCubit>().updateHeaderDate(date: DateTime.now());
     context.read<MainPageCubit>().initMonthPage();
     super.initState();
   }
@@ -37,7 +38,7 @@ class _MonthPage extends State<MonthPage> {
                           child: Column(
                             children: [
                               const SizedBox(height: 10,),
-                              createCalendar(),
+                              createCalendar(state: state),
                               Container(height: 2,
                                 color: const Color.fromRGBO(222, 222, 222, 1),),
                               const SizedBox(height: 2,),
@@ -77,12 +78,13 @@ class _MonthPage extends State<MonthPage> {
     );
   }
 
-  Widget createCalendar() {
+  Widget createCalendar({required MainPageState state}) {
     return Expanded(
         child: CalendarControllerProvider(
-            controller: controlTextField,
+            controller: controlEvent,
             child: Scaffold(
               body: MonthView(
+                initialMonth: state.initialDateTime,
                 headerStyle: const HeaderStyle(
                   decoration: BoxDecoration(
                       color: Color.fromRGBO(250, 250, 250, 1)
@@ -97,6 +99,16 @@ class _MonthPage extends State<MonthPage> {
                 borderColor: const Color.fromRGBO(220, 220, 220, 1),
                 borderSize: 1,
                 cellAspectRatio: 0.6,
+                /*cellBuilder: (date, events, isToday, isInMonth){
+                  return Text(date.day.toString());
+                },*/
+                onPageChange: (date, index){
+                  context.read<MainPageCubit>().updateHeaderDate(date: date);
+                },
+                onCellTap: (events, date){
+                  context.read<MainPageCubit>().updateHeaderDate(date: date);
+                  context.read<MainPageCubit>().refreshAppointmentList(date: date);
+                },
                 onEventTap: (event, date) {
                   print(event);
                 },
@@ -142,7 +154,7 @@ class _MonthPage extends State<MonthPage> {
                   Text(info.startTime, style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),),
                   //const SizedBox(height: 5,),
-                  Text(info.startTime, style: const TextStyle(
+                  Text(info.endTime, style: const TextStyle(
                       color: Color.fromRGBO(102, 102, 102, 1),
                       fontWeight: FontWeight.bold),),
                   //const SizedBox(height: 15,)

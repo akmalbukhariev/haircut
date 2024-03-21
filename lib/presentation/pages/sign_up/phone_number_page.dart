@@ -10,7 +10,7 @@ import '../../../data/dataproviders/http_service.dart';
 import '../../../data/models/http_response/response_hairdresser_info.dart';
 import '../../../data/models/http_response/response_user_info.dart';
 import '../dialog_box.dart';
-import '../hairdresser/hairdresser_main_page.dart';
+import '../hairdresser/main_page/hairdresser_main_page.dart';
 import '../loading_overlay.dart';
 import '../user/user_main_page.dart';
 import 'authentication_number_page.dart';

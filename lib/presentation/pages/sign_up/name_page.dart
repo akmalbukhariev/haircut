@@ -9,7 +9,7 @@ import '../../../data/models/http_response/response_register.dart';
 import '../../../data/models/http_models/register_user.dart';
 import '../../widgets/clean_button_textfield.dart';
 import '../dialog_box.dart';
-import '../hairdresser/hairdresser_main_page.dart';
+import '../hairdresser/main_page/hairdresser_main_page.dart';
 import '../loading_overlay.dart';
 import '../user/user_main_page.dart';
 

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haircut/constant/calendar_manager.dart';
 import 'package:haircut/constant/control_app.dart';
 import 'package:haircut/data/dataproviders/http_service.dart';
 import 'package:haircut/presentation/pages/hairdresser/main_page/main_page_state.dart';
@@ -21,11 +22,20 @@ class MainPageCubit extends Cubit<MainPageState> {
   Future<void> initMonthPage() async {
     emit(state.copyWith(isLoading: true));
     List<AppointmentInfo> tempList = [];
-    tempList = await getAppointmentList() as List<AppointmentInfo>;
+    tempList = await getAppointmentList(date: DateTime.now());
+    emit(state.copyWith(isLoading: false, appointmentList: tempList,initialDateTime: DateTime.now()));
+  }
+
+  Future<void> refreshAppointmentList({required DateTime date}) async {
+    emit(state.copyWith(isLoading: true));
+    List<AppointmentInfo> tempList = [];
+    tempList = await getAppointmentList(date: date);
     emit(state.copyWith(isLoading: false, appointmentList: tempList));
   }
 
-  Future<List<AppointmentInfo>> getAppointmentList() async {
+  Future<List<AppointmentInfo>> getAppointmentList({required DateTime date}) async {
+
+    String strDate = "${date.day}.${date.month}.${date.year}";
     List<AppointmentInfo> tempList = [];
     ResponseHairdresserBookedClient? response = await HttpService
         .getHairdresserBookedList(
@@ -34,7 +44,7 @@ class MainPageCubit extends Cubit<MainPageState> {
                 .Instance()
                 ?.appInfo
                 ?.phone ?? "",
-            date: ""
+            date: strDate
         )
     );
     if (response != null && response.resultData != null) {
@@ -99,6 +109,13 @@ class MainPageCubit extends Cubit<MainPageState> {
     }
 
     emit(state.copyWith(strServiceNo: strServiceNo, strService: strService));
+  }
+
+  updateHeaderDate({required DateTime date}){
+    String strDay = date.day.toString();
+    String strMonth = CalendarManager().getMonthName(date);
+    String strYear = date.year.toString();
+    emit(state.copyWith(strDay: strDay, strMonth: strMonth, strYear: strYear, initialDateTime: date));
   }
 
   Future<void> createAppointment({

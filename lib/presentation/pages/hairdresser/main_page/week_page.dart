@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:calendar_view/calendar_view.dart';
@@ -6,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../data/models/booked_info.dart';
 import 'main_page_cubit.dart';
 import 'main_page_state.dart';
 
@@ -68,18 +69,6 @@ List<CalendarEventData<Event>> _events = [
   ),
 ];
 
-CalendarEventData<Event> _event = CalendarEventData(
-  date: DateTime(2023, 11, 14),
-  startTime: DateTime(2023, 11, 14,2, 20,30),
-  endTime: DateTime(2023, 11, 14,5, 20,30),
-  //endDate: DateTime(2023, 11, 17),
-  event: Event(title: "Joe's Birthday"),
-  title: "PPPPP",
-  description: "Today is project meeting.",
-  //startTime: DateTime(_now.year, _now.month, _now.day, 18, 30),
-  //endTime: DateTime(_now.year, _now.month, _now.day, 22),
-);
-
 class WeekPage extends StatefulWidget{
   @override
   State<WeekPage> createState()  => _WeekPage();
@@ -90,6 +79,32 @@ class _WeekPage extends State<WeekPage> {
   EventController controller = EventController();
 
   @override
+  void initState() {
+    List<AppointmentInfo>? appointmentList = context.read<MainPageCubit>().state.appointmentList;
+    if(appointmentList != null) {
+      for (AppointmentInfo item in appointmentList) {
+        String format = 'dd.MM.yyyy HH:mm';
+        String startTime = "${item.date} ${item.startTime}";
+        String endTime = "${item.date} ${item.endTime}";
+        Color color = Color(0xff2196f3);
+        if(item.services.length > 0){
+          color = item.services[0];
+        }
+        final event = CalendarEventData(
+          date: DateFormat(format).parse(startTime),
+          startTime: DateFormat(format).parse(startTime),
+          endTime: DateFormat(format).parse(endTime),
+          event: item.name[0],
+          title: item.name[0],
+          color: color
+        );
+        controller.add(event);
+      }
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainPageCubit, MainPageState>(
       builder: (context, state) {
@@ -97,8 +112,8 @@ class _WeekPage extends State<WeekPage> {
             child: CalendarControllerProvider(
               controller: controller,
               child: WeekView(
-                initialDay: DateTime(2023, 11, 12),
-                headerStyle: HeaderStyle(
+                initialDay: state.initialDateTime,
+                headerStyle: const HeaderStyle(
                   decoration: BoxDecoration(
                       color: Color.fromRGBO(250, 250, 250, 1)
                   ),
@@ -130,6 +145,9 @@ class _WeekPage extends State<WeekPage> {
                 },
                 liveTimeIndicatorSettings: const HourIndicatorSettings(color: Colors.red),
                 showLiveTimeLineInAllDays: true,
+                onPageChange: (date, index){
+                  context.read<MainPageCubit>().updateHeaderDate(date: date);
+                },
                 //heightPerMinute: 1.5,
               ),
             )

@@ -1,16 +1,19 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut/presentation/pages/hairdresser/search_page.dart';
 import 'package:haircut/presentation/pages/hairdresser/main_page/week_page.dart';
 
-import '../custom_page_route.dart';
-import 'main_page/create_customer_page.dart';
-import 'main_page/day_page.dart';
-import 'menu_page.dart';
-import 'main_page/month_page.dart';
-import 'my_page/customer_my_page.dart';
-import 'notification_page.dart';
+import '../../custom_page_route.dart';
+import 'create_customer_page.dart';
+import 'day_page.dart';
+import '../menu_page.dart';
+import 'main_page_cubit.dart';
+import 'main_page_state.dart';
+import 'month_page.dart';
+import '../my_page/customer_my_page.dart';
+import '../notification_page.dart';
 
 class HairdresserMainPage extends StatefulWidget{
   const HairdresserMainPage({super.key});
@@ -43,17 +46,27 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
   }
 
   @override
+  void initState() {
+    context.read<MainPageCubit>().updateHeaderDate(date: DateTime.now());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: Column(
-              children: [
-                createHeader(),
-                Expanded(
-                    child: _widgetOptions.elementAt(_selectedIndex)
-                ),
-              ],
-            )
+        body: BlocBuilder<MainPageCubit, MainPageState>(
+          builder: (context, state){
+            return SafeArea(
+                child: Column(
+                  children: [
+                    createHeader(state: state),
+                    Expanded(
+                        child: _widgetOptions.elementAt(_selectedIndex)
+                    ),
+                  ],
+                )
+            );
+          }
         ),
         bottomNavigationBar: Container(
             decoration: const BoxDecoration(
@@ -102,9 +115,7 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
     return Image.asset(image, width: 30, height: 30,);
   }
 
-  Widget createHeader() {
-    final String strMonth = "yanvar";
-    final String strYear = "2023";
+  Widget createHeader({required MainPageState state}) {
     return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Row(
@@ -120,7 +131,15 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
             ),
             Row(
               children: [
-                Text(strMonth,
+                Text(state.strDay ?? "",//strMonth,
+                  style: const TextStyle(
+                      color: Color.fromRGBO(17, 138, 138, 1),
+                      fontWeight: FontWeight.normal,
+                      fontSize: 20
+                  ),
+                ),
+                const SizedBox(width: 5,),
+                Text(state.strMonth ?? "",//strMonth,
                   style: const TextStyle(
                       color: Color.fromRGBO(17, 138, 138, 1),
                       fontWeight: FontWeight.bold,
@@ -128,7 +147,7 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
                   ),
                 ),
                 const SizedBox(width: 10,),
-                Text(strYear,
+                Text(state.strYear ?? "",
                   style: const TextStyle(
                       color: Color.fromRGBO(17, 138, 138, 1),
                       fontWeight: FontWeight.normal,
@@ -175,93 +194,3 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
     return Image.asset(image, width: 30, height: 30,);
   }
 }
-
-/*class _MainPage extends State<MainPage>{
-
-  late List<Map<String, Widget>> _pages;
-  int _selectedPageIndex = 0;
-
-  @override
-  void initState(){
-    _pages = [
-      {
-        'page': Cart(),
-      },
-      {
-        'page': Cart1(),
-      },
-      {
-        'page': Cart2(),
-      },
-    ];
-
-    super.initState();
-  }
-
-  void _selectPage(int index) {
-    setState(() {
-      _selectedPageIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedPageIndex]['page'],
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 0.01,
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          height: kBottomNavigationBarHeight * 0.98,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                top: BorderSide(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
-              ),
-            ),
-            child: BottomNavigationBar(
-              onTap: _selectPage,
-              backgroundColor: Theme.of(context).primaryColor,
-              unselectedItemColor: Theme.of(context).highlightColor,
-              selectedItemColor: Colors.purple,
-              currentIndex: _selectedPageIndex,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Cart',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.rss_feed),
-                  label: 'Cart1',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: null,
-                  icon: Icon(null),
-                  label: 'Cart2',
-                ),
-              ],
-              )
-          )
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(2),
-       child: FloatingActionButton(
-         hoverElevation: 10,
-         splashColor: Colors.grey,
-         tooltip: 'Search',
-         elevation: 8,
-         child: Icon(Icons.search),
-         onPressed: () => setState(() {
-           _selectedPageIndex = 2;
-         }),
-        )
-      )
-    );
-  }
-}*/

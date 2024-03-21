@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut/constant/control_app.dart';
 import 'package:haircut/data/models/app_info.dart';
 import 'package:haircut/presentation/pages/choose_service/choose_service_page.dart';
-import 'package:haircut/presentation/pages/hairdresser/hairdresser_main_page.dart';
+import 'package:haircut/presentation/pages/hairdresser/main_page/hairdresser_main_page.dart';
 import 'package:haircut/presentation/pages/hairdresser/main_page/main_page_cubit.dart';
 import 'package:haircut/presentation/pages/user/appointment_list/appointment_list_cubit.dart';
 import 'package:haircut/presentation/pages/user/favorite_list/favorite_hairdresser_cubit.dart';
