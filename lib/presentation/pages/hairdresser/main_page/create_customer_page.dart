@@ -179,7 +179,7 @@ class _AddCustomerPage extends State<AddCustomerPage> {
         ),
         child: Column(
           children: [
-            ListTile(
+            /*ListTile(
               title: Text("To'liq kun",
                 style: TextStyle(color: Colors.grey),
               ),
@@ -197,7 +197,7 @@ class _AddCustomerPage extends State<AddCustomerPage> {
             const Padding(
               padding: EdgeInsets.only(left: 15),
               child: Divider(height: 2, color: Colors.grey,),
-            ),
+            ),*/
             GestureDetector(
               onTap: () {
                 _showDialog(

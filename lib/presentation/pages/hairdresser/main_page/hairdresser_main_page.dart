@@ -12,7 +12,7 @@ import '../menu_page.dart';
 import 'main_page_cubit.dart';
 import 'main_page_state.dart';
 import 'month_page.dart';
-import '../my_page/customer_my_page.dart';
+import '../my_page/hairdresser_my_page.dart';
 import '../notification_page.dart';
 
 class HairdresserMainPage extends StatefulWidget{
@@ -71,7 +71,9 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
         bottomNavigationBar: Container(
             decoration: const BoxDecoration(
                 border: Border(
-                    top: BorderSide(color: Colors.grey, width: 1.5))),
+                    top: BorderSide(color: Colors.grey, width: 1.5)
+                )
+            ),
             child: BottomNavigationBar(
               backgroundColor: const Color.fromRGBO(240, 244, 249, 1),
               type: BottomNavigationBarType.fixed,
@@ -180,7 +182,7 @@ class _HairdresserMainPage extends State<HairdresserMainPage> {
               onTap: (){
                 Navigator.push(
                   context,
-                  CupertinoPageRoute(builder: (context) => const CustomerMyPage()),
+                  CupertinoPageRoute(builder: (context) => const HairdresserMyPage()),
                 );
               },
               child: headerImage(image: "images/avatar.png"),

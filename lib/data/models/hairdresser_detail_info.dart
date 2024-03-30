@@ -41,6 +41,48 @@ class HairdresserDetailInfo {
     this.percentageScore
   });
 
+  HairdresserDetailInfo copyWith({
+    String? name,
+    String? surname,
+    String? phone,
+    String? address,
+    String? location,
+    String? language,
+    String? notification,
+    String? workingHour,
+    String? scores,
+    List<ServiceInfo>? services,
+    String? imageUri,
+    String? imageName,
+    String? document,
+    String? awards,
+    String? profession,
+    String? allScores,
+    String? averageScores,
+    String? percentageScore
+  }){
+    return HairdresserDetailInfo(
+        name : name ?? this.name,
+        surname: surname ?? this.surname,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        location: location ?? this.location,
+        language: language ?? this.language,
+        notification: notification ?? this.notification,
+        workingHour: workingHour ?? this.workingHour,
+        scores: scores ?? this.scores,
+        services: services ?? this.services,
+        imageUri: imageUri ?? this.imageUri,
+        imageName: imageName ?? this.imageName,
+        document: document ?? this.document,
+        awards: awards ?? this.awards,
+        profession: profession ?? this.profession,
+        allScores: allScores ?? this.allScores,
+        averageScores: averageScores ?? this.averageScores,
+        percentageScore: percentageScore ?? this.percentageScore
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'name': name,

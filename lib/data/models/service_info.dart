@@ -11,7 +11,21 @@ class ServiceInfo{
     this.color,
     this.name,
     this.price
-});
+  });
+
+  ServiceInfo copyWith({
+    String? no,
+    String? color,
+    String? name,
+    String? price
+  }){
+    return ServiceInfo(
+      no: no ?? this.no,
+      color: color ?? this.color,
+      name: name ?? this.name,
+      price: price ?? this.price
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

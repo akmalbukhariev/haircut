@@ -5,16 +5,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut/constant/calendar_manager.dart';
 import 'package:haircut/constant/control_app.dart';
 import 'package:haircut/data/dataproviders/http_service.dart';
+import 'package:haircut/data/models/hairdresser_detail_info.dart';
 import 'package:haircut/presentation/pages/hairdresser/main_page/main_page_state.dart';
 
+import '../../../../data/models/app_info.dart';
 import '../../../../data/models/booked_info.dart';
 import '../../../../data/models/hairdresser_booked_client_himself.dart';
 import '../../../../data/models/hairdresser_client_book.dart';
+import '../../../../data/models/http_response/response_detail_hairdresser.dart';
 import '../../../../data/models/http_response/response_hairdresser_booked_clients.dart';
+import '../../../../data/models/http_response/response_hairdresser_detail.dart';
 import '../../../../data/models/http_response/response_hairdresser_service.dart';
 import '../../../../data/models/http_response/response_order_client.dart';
 import '../../../../data/models/my_service.dart';
+import '../../../widgets/app_alert_dialog.dart';
+import '../../choose_service/choose_service_page.dart';
 import '../../dialog_box.dart';
+import '../../user/hairdresser_list/hairdresser_list_state.dart';
 
 class MainPageCubit extends Cubit<MainPageState> {
   MainPageCubit() : super(MainPageState());
@@ -34,7 +41,6 @@ class MainPageCubit extends Cubit<MainPageState> {
   }
 
   Future<List<AppointmentInfo>> getAppointmentList({required DateTime date}) async {
-
     String strDate = "${date.day}.${date.month}.${date.year}";
     List<AppointmentInfo> tempList = [];
     ResponseHairdresserBookedClient? response = await HttpService
@@ -118,6 +124,17 @@ class MainPageCubit extends Cubit<MainPageState> {
     emit(state.copyWith(strDay: strDay, strMonth: strMonth, strYear: strYear, initialDateTime: date));
   }
 
+  Future<void> getDetailData() async {
+    emit(state.copyWith(isLoading: true));
+    ResponseDetailHairdresser? response = await HttpService.getDetailHairdresserInfo(
+        phone: ControlApp.Instance()?.appInfo?.phone ?? ""
+    );
+    if (response != null && response.resultData != null) {
+       emit(state.copyWith(hairdresserDetailInfo: response.resultData));
+    }
+    emit(state.copyWith(isLoading: false));
+  }
+  
   Future<void> createAppointment({
     required BuildContext context,
     required String name,
@@ -147,5 +164,39 @@ class MainPageCubit extends Cubit<MainPageState> {
       Navigator.pop(context);
     },
     );
+  }
+
+  updateDetailHairdresserInfoState({required HairdresserDetailInfo info}){
+    emit(state.copyWith(hairdresserDetailInfo: info));
+  }
+
+  Future<void> updateDetailHairdresserInfo({required BuildContext context}) async{
+    emit(state.copyWith(isLoading: true));
+    ResponseHairdresserDetail? response = await HttpService.updateDetailHairdresserInfo(
+        data: state.hairdresserDetailInfo
+    );
+    AppAlertDialog.showAlert(
+      context,
+      "Buyurtma qilish",
+      response!.resultMsg!, () {
+      emit(state.copyWith(isLoading: false));
+      Navigator.pop(context);
+    },
+    );
+  }
+
+  Future<void> exitApp(BuildContext context) async {
+    bool? result = await AppAlertDialogYesNo.showAlert(
+      context: context,
+      title: 'Shaxsiy kabinet',
+      content: 'Haqiqatan chiqmoqchimisiz?',
+    );
+    if (result != null && result == false) return;
+
+    await ControlApp.Instance()?.SetAppInfo(appInfo: AppInfo());
+
+    await Navigator.pushAndRemoveUntil( context,
+      CupertinoPageRoute(builder: (BuildContext context) => ChooseServicePage()),
+          (Route<dynamic> route) => false,);
   }
 }

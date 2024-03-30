@@ -2,9 +2,14 @@
 import 'package:flutter/cupertino.dart';
 
 class DatePickerWidget extends StatefulWidget{
-   const DatePickerWidget({super.key, required this.title});
+    DatePickerWidget({
+     super.key,
+     required this.title,
+     required this.onDateTimeChanged,
+   });
 
    final String title;
+   final void Function(DateTime) onDateTimeChanged;
    
   @override
   State<StatefulWidget> createState() => _DatePickerWidget();
@@ -30,7 +35,8 @@ class _DatePickerWidget extends State<DatePickerWidget> {
                 use24hFormat: true,
                 onDateTimeChanged: (DateTime newTime) {
                   setState(() {
-                    _selectedTime = newTime;
+                    widget.onDateTimeChanged.call(newTime);
+                    //_selectedTime = newTime;
                   });
                 },
               )

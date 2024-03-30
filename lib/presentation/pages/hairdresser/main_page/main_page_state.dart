@@ -1,4 +1,5 @@
 import '../../../../data/models/booked_info.dart';
+import '../../../../data/models/hairdresser_detail_info.dart';
 import '../../../../data/models/my_service.dart';
 
 class MainPageState{
@@ -12,6 +13,7 @@ class MainPageState{
   DateTime? initialDateTime;
   List<MyService>? serviceList;
   List<AppointmentInfo>? appointmentList;
+  HairdresserDetailInfo? hairdresserDetailInfo;
 
   MainPageState({
     this.isLoading = false,
@@ -24,6 +26,7 @@ class MainPageState{
     this.initialDateTime,
     this.serviceList = const [],
     this.appointmentList = const [],
+    this.hairdresserDetailInfo
   });
 
   MainPageState copyWith({
@@ -37,6 +40,7 @@ class MainPageState{
     DateTime? initialDateTime,
     List<MyService>? serviceList,
     List<AppointmentInfo>? appointmentList,
+    HairdresserDetailInfo? hairdresserDetailInfo
   }){
     return MainPageState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,6 +53,7 @@ class MainPageState{
       initialDateTime: initialDateTime ?? this.initialDateTime,
       serviceList: serviceList ?? this.serviceList,
       appointmentList: appointmentList ?? this.appointmentList,
+      hairdresserDetailInfo: hairdresserDetailInfo ?? this.hairdresserDetailInfo
     );
   }
 }
